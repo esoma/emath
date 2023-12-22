@@ -18,7 +18,7 @@ from setuptools.command.build_ext import build_ext
 
 _coverage_compile_args = []
 _coverage_links_args = []
-if os.environ.get("EMATH_BUILD_WITH_COVERAGE", False):
+if os.environ.get("EMATH_BUILD_WITH_COVERAGE", "0") == "1":
     if os.name == "nt":
         print("Cannot build with coverage on windows.")
         sys.exit(1)

@@ -1,0 +1,56 @@
+
+name: release
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build:
+
+    defaults:
+      run:
+        shell: bash
+
+    environment: CI
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: ['3.12']
+        python-arch: [x64]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Python ${{ matrix.python-version }}-${{ matrix.python-arch }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+        architecture: ${{ matrix.python-arch }}
+
+    - name: Install Poetry
+      uses: snok/install-poetry@v1
+
+    - name: Initialize Submodules
+      run: |
+        git submodule update --init --recursive
+
+    - name: Build
+      run: |
+        poetry build
+
+    - name: Upload Github Release Artifact
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: ./dist/*.whl
+        tag: ${{ github.ref }}
+
+    - name: Upload to PyPi
+      run: |
+        poetry publish --skip-existing
+      env:
+        POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PYPI_TOKEN }}

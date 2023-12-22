@@ -10,6 +10,9 @@ on:
 jobs:
   test:
 
+    defaults:
+      run:
+        shell: bash
     environment: CI
     runs-on: ${{ matrix.os }}
 

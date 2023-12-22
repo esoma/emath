@@ -98,7 +98,7 @@ class QuaternionTest:
             assert str(excinfo.value) == (
                 f"invalid number of arguments supplied to "
                 f"{self.cls.__name__}, expected 0, 1 or "
-                f"4 (got { count })"
+                f"4 (got {count})"
             )
 
     def test_array_init_invalid_type(self):

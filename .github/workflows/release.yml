@@ -15,7 +15,6 @@ jobs:
       run:
         shell: bash
 
-    environment: CI
     runs-on: ${{ matrix.os }}
 
     strategy:

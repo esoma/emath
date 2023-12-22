@@ -179,10 +179,10 @@ class QuaternionTest:
 
     def test_component_attributes(self) -> None:
         quat = self.cls(*range(4))
-        assert quat.w == 0
-        assert quat.x == 1
-        assert quat.y == 2
-        assert quat.z == 3
+        assert quat.x == 0
+        assert quat.y == 1
+        assert quat.z == 2
+        assert quat.w == 3
 
         with pytest.raises(AttributeError):
             quat.w = 99
@@ -571,14 +571,14 @@ class QuaternionTest:
 
     def test_cross(self) -> None:
         vector3_cls = globals()[f"{self.cls.__name__[0]}Vector3"]
-        result = self.cls(1, 2, 3, 4).cross(self.cls(5, 6, 7, 8))
+        result = self.cls(2, 3, 4, 1).cross(self.cls(6, 7, 8, 5))
         assert result == self.cls(
-            1 * 5 - (vector3_cls(2, 3, 4) @ vector3_cls(6, 7, 8)),
             *(
                 1 * vector3_cls(6, 7, 8)
                 + 5 * vector3_cls(2, 3, 4)
                 + (vector3_cls(2, 3, 4).cross(vector3_cls(6, 7, 8)))
             ),
+            1 * 5 - (vector3_cls(2, 3, 4) @ vector3_cls(6, 7, 8)),
         )
 
         with pytest.raises(TypeError) as excinfo:
@@ -633,7 +633,7 @@ class QuaternionTest:
             array.pointer[i] == i
 
     def test_inverse(self) -> None:
-        assert self.cls(1).inverse() == self.cls(1, -0, -0, -0)
+        assert self.cls(1).inverse() == self.cls(-0, -0, -0, 1)
 
     def test_rotate(self) -> None:
         vector3_cls = globals()[f"{self.cls.__name__[0]}Vector3"]

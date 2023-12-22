@@ -88,7 +88,7 @@ class QuaternionTest:
             quat = self.cls(*range(5))
         assert str(excinfo.value) == (
             f"invalid number of arguments supplied to "
-            f"{ self.cls.__name__ }, expected 0, 1 or "
+            f"{self.cls.__name__}, expected 0, 1 or "
             f"4 (got 5)"
         )
 
@@ -97,7 +97,7 @@ class QuaternionTest:
                 quat = self.cls(*range(count))
             assert str(excinfo.value) == (
                 f"invalid number of arguments supplied to "
-                f"{ self.cls.__name__ }, expected 0, 1 or "
+                f"{self.cls.__name__}, expected 0, 1 or "
                 f"4 (got { count })"
             )
 

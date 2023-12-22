@@ -205,8 +205,8 @@ class VectorTest:
             vector = self.cls(*range(self.component_count + 1))
         assert str(excinfo.value) == (
             f"invalid number of arguments supplied to "
-            f"{ self.cls.__name__ }, expected 0, 1 or "
-            f"{ self.component_count } (got { self.component_count + 1 })"
+            f"{self.cls.__name__}, expected 0, 1 or "
+            f"{self.component_count} (got {self.component_count + 1})"
         )
 
         for count in range(2, self.component_count):
@@ -214,8 +214,8 @@ class VectorTest:
                 vector = self.cls(*range(count))
             assert str(excinfo.value) == (
                 f"invalid number of arguments supplied to "
-                f"{ self.cls.__name__ }, expected 0, 1 or "
-                f"{ self.component_count } (got { count })"
+                f"{self.cls.__name__}, expected 0, 1 or "
+                f"{self.component_count} (got {count})"
             )
 
     def test_array_init_invalid_type(self):

@@ -168,8 +168,8 @@ class MatrixTest:
             self.cls(*range(self.component_count + 1))
         assert str(excinfo.value) == (
             f"invalid number of arguments supplied to "
-            f"{ self.cls.__name__ }, expected 0, 1, { self.row_size} or "
-            f"{ self.component_count } (got { self.component_count + 1 })"
+            f"{self.cls.__name__}, expected 0, 1, {self.row_size} or "
+            f"{self.component_count} (got {self.component_count + 1})"
         )
 
         for count in range(2, self.component_count):
@@ -179,8 +179,8 @@ class MatrixTest:
                 self.cls(*range(count))
             assert str(excinfo.value) == (
                 f"invalid number of arguments supplied to "
-                f"{ self.cls.__name__ }, expected 0, 1, { self.row_size} or "
-                f"{ self.component_count } (got { count })"
+                f"{self.cls.__name__}, expected 0, 1, {self.row_size} or "
+                f"{self.component_count} (got {count})"
             )
 
     def test_array_init_invalid_type(self):
@@ -521,9 +521,9 @@ class MatrixTest:
 
     def test_matrix_multiply(self) -> None:
         for c in range(2, 5):
-            other_name = f"{self.cls.__name__[0]}Matrix{c}x{ self.row_size }"
+            other_name = f"{self.cls.__name__[0]}Matrix{c}x{self.row_size}"
             other_cls = globals()[other_name]
-            result_name = f"{self.cls.__name__[0]}Matrix{c}x{ self.column_size }"
+            result_name = f"{self.cls.__name__[0]}Matrix{c}x{self.column_size}"
             result_cls = globals()[result_name]
             assert isinstance(self.cls() @ other_cls(), result_cls)
 
@@ -725,9 +725,7 @@ class MatrixTest:
         assert all(isnan(c) for v in self.cls().inverse() for c in v)
 
     def test_transpose(self) -> None:
-        transpose_cls_name = (
-            f"{self.cls.__name__[0]}Matrix" f"{ self.column_size }x{ self.row_size }"
-        )
+        transpose_cls_name = f"{self.cls.__name__[0]}Matrix" f"{self.column_size}x{self.row_size}"
         transpose_cls = globals()[transpose_cls_name]
 
         mat = self.cls(*range(self.component_count))

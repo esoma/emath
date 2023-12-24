@@ -43,6 +43,7 @@ jobs:
       run: |
         poetry install
       env:
+        EMATH_GENERATE_MATH_FILES: 0
         EMATH_BUILD_WITH_COVERAGE: ${{ matrix.os == 'windows-latest' && '0' || '1' }}
 
     - name: Test

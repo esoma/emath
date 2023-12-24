@@ -48,13 +48,16 @@ _test_api = Extension(
 
 
 def _build() -> None:
-    generate_math_files(Path("src/emath"), Path("include"))
+    if os.environ.get("EMATH_GENERATE_MATH_FILES", "1") == "1":
+        generate_math_files(Path("src/emath"), Path("include"))
 
     cmd = build_ext(Distribution({"name": "extended", "ext_modules": [_emath, _test_api]}))
     cmd.ensure_finalized()
     cmd.run()
     for output in cmd.get_outputs():
-        shutil.copyfile(output, Path("src/emath/") / Path(output).name)
+        dest = str(Path("src/emath/") / Path(output).name)
+        print(f"copying {output} to {dest}...")
+        shutil.copyfile(output, dest)
 
 
 if __name__ == "__main__":

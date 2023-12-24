@@ -43,6 +43,8 @@ jobs:
     - name: Build
       run: |
         poetry build
+      env:
+        EMATH_GENERATE_MATH_FILES: 0
 
     - name: Upload Github Release Artifact
       uses: svenstaro/upload-release-action@v2

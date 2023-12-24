@@ -3,6 +3,10 @@ name = "emath"
 version = "0.1.2"
 description = "Fast immutable math primitives."
 authors = ["Erik Soma <stillusingirc@gmail.com>"]
+include = [
+    {path = "src/emath/*.so", format = "wheel"},
+    {path = "src/emath/*.pyd", format = "wheel"},
+]
 
 [tool.poetry.build]
 generate-setup-file = false

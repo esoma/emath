@@ -73,6 +73,7 @@ from emath._podtyping import U64
 # python
 import ctypes
 from typing import Any
+from typing import Iterator
 from typing import SupportsFloat
 from typing import SupportsInt
 from typing import final

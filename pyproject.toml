@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "emath"
-version = "0.1.4"
+version = "0.1.5"
 description = "Fast immutable math primitives."
 authors = ["Erik Soma <stillusingirc@gmail.com>"]
 include = [

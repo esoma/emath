@@ -165,7 +165,7 @@ class {{ type }}:
 
 {% for attributes in ['xyzw', 'rgba', 'stqp', 'uv'] %}
 {% for count in range(1, 5) %}
-{% for prop in itertools.permutations(attributes[:component_count] + 'ol', count) %}
+{% for prop in itertools.product(attributes[:component_count] + 'ol', repeat=count) %}
 {% if set(prop) - set ('ol') and ''.join(prop) != 'or' %}
     @property
     def {{ ''.join(prop) }}(self) -> {% if count > 1 %}{{ type[:-1] }}{{ count }}{% else %}{{ component_type }}{% endif %}: ...
@@ -175,7 +175,7 @@ class {{ type }}:
 {% endfor %}
 
 {% for count in range(1, 5) %}
-{% for prop in itertools.permutations('ol', count) %}
+{% for prop in itertools.product('ol', repeat=count) %}
 {% if len(prop) > 1 %}
     @property
     def {{ ''.join(prop) }}(self) -> {% if count > 1 %}{{ type[:-1] }}{{ count }}{% else %}{{ component_type }}{% endif %}: ...

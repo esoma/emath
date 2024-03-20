@@ -49,7 +49,7 @@ _test_api = Extension(
 
 def _build() -> None:
     if os.environ.get("EMATH_GENERATE_MATH_FILES", "1") == "1":
-        generate_math_files(Path("src/emath"), Path("include"))
+        generate_math_files(Path("src/emath"), Path("include"), Path("doc/source"))
 
     cmd = build_ext(Distribution({"name": "extended", "ext_modules": [_emath, _test_api]}))
     cmd.ensure_finalized()

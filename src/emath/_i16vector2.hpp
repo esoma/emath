@@ -1604,7 +1604,7 @@ create_I16Vector2Array(size_t length, const int16_t *value)
 }
 
 
-static int16_t *
+static const int16_t *
 get_I16Vector2_value_ptr(const PyObject *self)
 {
     if (Py_TYPE(self) != get_I16Vector2_type())
@@ -1616,7 +1616,7 @@ get_I16Vector2_value_ptr(const PyObject *self)
 }
 
 
-static int16_t *
+static const int16_t *
 get_I16Vector2Array_value_ptr(const PyObject *self)
 {
     if (Py_TYPE(self) != get_I16Vector2Array_type())

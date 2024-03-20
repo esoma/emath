@@ -1653,7 +1653,7 @@ create_UVector3Array(size_t length, const unsigned int *value)
 }
 
 
-static unsigned int *
+static const unsigned int *
 get_UVector3_value_ptr(const PyObject *self)
 {
     if (Py_TYPE(self) != get_UVector3_type())
@@ -1665,7 +1665,7 @@ get_UVector3_value_ptr(const PyObject *self)
 }
 
 
-static unsigned int *
+static const unsigned int *
 get_UVector3Array_value_ptr(const PyObject *self)
 {
     if (Py_TYPE(self) != get_UVector3Array_type())

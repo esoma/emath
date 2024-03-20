@@ -35,7 +35,7 @@ typedef size_t (*EMathApi_GetArrayLength)(const PyObject *);
 }[type[:type.find('V')]] %}
     typedef PyObject *(*EMathApi_Create{{ type }})(const {{ c_type }} *);
     typedef PyObject *(*EMathApi_Create{{ type }}Array)(size_t, const {{ c_type }} *);
-    typedef {{ c_type }} *(*EMathApi_Get{{ type }}ValuePointer)(const PyObject *);
+    typedef const {{ c_type }} *(*EMathApi_Get{{ type }}ValuePointer)(const PyObject *);
 {% endwith %}
 {% endfor %}
 

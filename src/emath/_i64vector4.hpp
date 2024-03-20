@@ -1752,7 +1752,7 @@ create_I64Vector4Array(size_t length, const int64_t *value)
 }
 
 
-static int64_t *
+static const int64_t *
 get_I64Vector4_value_ptr(const PyObject *self)
 {
     if (Py_TYPE(self) != get_I64Vector4_type())
@@ -1764,7 +1764,7 @@ get_I64Vector4_value_ptr(const PyObject *self)
 }
 
 
-static int64_t *
+static const int64_t *
 get_I64Vector4Array_value_ptr(const PyObject *self)
 {
     if (Py_TYPE(self) != get_I64Vector4Array_type())

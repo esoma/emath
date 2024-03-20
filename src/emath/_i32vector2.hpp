@@ -1604,7 +1604,7 @@ create_I32Vector2Array(size_t length, const int32_t *value)
 }
 
 
-static int32_t *
+static const int32_t *
 get_I32Vector2_value_ptr(const PyObject *self)
 {
     if (Py_TYPE(self) != get_I32Vector2_type())
@@ -1616,7 +1616,7 @@ get_I32Vector2_value_ptr(const PyObject *self)
 }
 
 
-static int32_t *
+static const int32_t *
 get_I32Vector2Array_value_ptr(const PyObject *self)
 {
     if (Py_TYPE(self) != get_I32Vector2Array_type())

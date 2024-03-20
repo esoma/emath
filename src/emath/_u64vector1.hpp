@@ -1485,7 +1485,7 @@ create_U64Vector1Array(size_t length, const uint64_t *value)
 }
 
 
-static uint64_t *
+static const uint64_t *
 get_U64Vector1_value_ptr(const PyObject *self)
 {
     if (Py_TYPE(self) != get_U64Vector1_type())
@@ -1497,7 +1497,7 @@ get_U64Vector1_value_ptr(const PyObject *self)
 }
 
 
-static uint64_t *
+static const uint64_t *
 get_U64Vector1Array_value_ptr(const PyObject *self)
 {
     if (Py_TYPE(self) != get_U64Vector1Array_type())

@@ -1678,7 +1678,7 @@ create_I32Vector3Array(size_t length, const int32_t *value)
 }
 
 
-static int32_t *
+static const int32_t *
 get_I32Vector3_value_ptr(const PyObject *self)
 {
     if (Py_TYPE(self) != get_I32Vector3_type())
@@ -1690,7 +1690,7 @@ get_I32Vector3_value_ptr(const PyObject *self)
 }
 
 
-static int32_t *
+static const int32_t *
 get_I32Vector3Array_value_ptr(const PyObject *self)
 {
     if (Py_TYPE(self) != get_I32Vector3Array_type())

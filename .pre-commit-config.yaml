@@ -27,6 +27,6 @@ repos:
     - jinja2==3.1.2
     args: []
     id: mypy
-    exclude: ^(test/)|(codegen/templates/).*
+    exclude: ^(test/)|(codegen/templates/)|(doc/).*
   repo: https://github.com/pre-commit/mirrors-mypy
   rev: v1.6.1

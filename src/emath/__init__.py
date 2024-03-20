@@ -162,6 +162,7 @@ __all__ = [
     "FQuaternionArray",
     "DQuaternion",
     "DQuaternionArray",
+    "Number",
 ]
 
 # emath
@@ -324,7 +325,11 @@ from ._emath import UVector4
 from ._emath import UVector4Array
 
 # python
+from typing import SupportsFloat
+from typing import SupportsInt
 from typing import TypeAlias
+
+Number: TypeAlias = SupportsFloat | SupportsInt
 
 FMatrix2: TypeAlias = FMatrix2x2
 FMatrix3: TypeAlias = FMatrix3x3

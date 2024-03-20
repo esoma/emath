@@ -1725,7 +1725,7 @@ create_U16Vector4Array(size_t length, const uint16_t *value)
 }
 
 
-static uint16_t *
+static const uint16_t *
 get_U16Vector4_value_ptr(const PyObject *self)
 {
     if (Py_TYPE(self) != get_U16Vector4_type())
@@ -1737,7 +1737,7 @@ get_U16Vector4_value_ptr(const PyObject *self)
 }
 
 
-static uint16_t *
+static const uint16_t *
 get_U16Vector4Array_value_ptr(const PyObject *self)
 {
     if (Py_TYPE(self) != get_U16Vector4Array_type())

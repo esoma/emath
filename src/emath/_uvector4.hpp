@@ -1725,7 +1725,7 @@ create_UVector4Array(size_t length, const unsigned int *value)
 }
 
 
-static unsigned int *
+static const unsigned int *
 get_UVector4_value_ptr(const PyObject *self)
 {
     if (Py_TYPE(self) != get_UVector4_type())
@@ -1737,7 +1737,7 @@ get_UVector4_value_ptr(const PyObject *self)
 }
 
 
-static unsigned int *
+static const unsigned int *
 get_UVector4Array_value_ptr(const PyObject *self)
 {
     if (Py_TYPE(self) != get_UVector4Array_type())

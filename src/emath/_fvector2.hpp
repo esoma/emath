@@ -1769,7 +1769,7 @@ create_FVector2Array(size_t length, const float *value)
 }
 
 
-static float *
+static const float *
 get_FVector2_value_ptr(const PyObject *self)
 {
     if (Py_TYPE(self) != get_FVector2_type())
@@ -1781,7 +1781,7 @@ get_FVector2_value_ptr(const PyObject *self)
 }
 
 
-static float *
+static const float *
 get_FVector2Array_value_ptr(const PyObject *self)
 {
     if (Py_TYPE(self) != get_FVector2Array_type())

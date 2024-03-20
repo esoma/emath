@@ -1678,7 +1678,7 @@ create_IVector3Array(size_t length, const int *value)
 }
 
 
-static int *
+static const int *
 get_IVector3_value_ptr(const PyObject *self)
 {
     if (Py_TYPE(self) != get_IVector3_type())
@@ -1690,7 +1690,7 @@ get_IVector3_value_ptr(const PyObject *self)
 }
 
 
-static int *
+static const int *
 get_IVector3Array_value_ptr(const PyObject *self)
 {
     if (Py_TYPE(self) != get_IVector3Array_type())

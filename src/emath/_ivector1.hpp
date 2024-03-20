@@ -1506,7 +1506,7 @@ create_IVector1Array(size_t length, const int *value)
 }
 
 
-static int *
+static const int *
 get_IVector1_value_ptr(const PyObject *self)
 {
     if (Py_TYPE(self) != get_IVector1_type())
@@ -1518,7 +1518,7 @@ get_IVector1_value_ptr(const PyObject *self)
 }
 
 
-static int *
+static const int *
 get_IVector1Array_value_ptr(const PyObject *self)
 {
     if (Py_TYPE(self) != get_IVector1Array_type())

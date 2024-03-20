@@ -1725,7 +1725,7 @@ create_U32Vector4Array(size_t length, const uint32_t *value)
 }
 
 
-static uint32_t *
+static const uint32_t *
 get_U32Vector4_value_ptr(const PyObject *self)
 {
     if (Py_TYPE(self) != get_U32Vector4_type())
@@ -1737,7 +1737,7 @@ get_U32Vector4_value_ptr(const PyObject *self)
 }
 
 
-static uint32_t *
+static const uint32_t *
 get_U32Vector4Array_value_ptr(const PyObject *self)
 {
     if (Py_TYPE(self) != get_U32Vector4Array_type())

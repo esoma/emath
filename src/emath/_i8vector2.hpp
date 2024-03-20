@@ -1604,7 +1604,7 @@ create_I8Vector2Array(size_t length, const int8_t *value)
 }
 
 
-static int8_t *
+static const int8_t *
 get_I8Vector2_value_ptr(const PyObject *self)
 {
     if (Py_TYPE(self) != get_I8Vector2_type())
@@ -1616,7 +1616,7 @@ get_I8Vector2_value_ptr(const PyObject *self)
 }
 
 
-static int8_t *
+static const int8_t *
 get_I8Vector2Array_value_ptr(const PyObject *self)
 {
     if (Py_TYPE(self) != get_I8Vector2Array_type())

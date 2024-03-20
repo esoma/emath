@@ -1653,7 +1653,7 @@ create_U16Vector3Array(size_t length, const uint16_t *value)
 }
 
 
-static uint16_t *
+static const uint16_t *
 get_U16Vector3_value_ptr(const PyObject *self)
 {
     if (Py_TYPE(self) != get_U16Vector3_type())
@@ -1665,7 +1665,7 @@ get_U16Vector3_value_ptr(const PyObject *self)
 }
 
 
-static uint16_t *
+static const uint16_t *
 get_U16Vector3Array_value_ptr(const PyObject *self)
 {
     if (Py_TYPE(self) != get_U16Vector3Array_type())

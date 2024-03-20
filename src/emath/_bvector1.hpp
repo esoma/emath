@@ -1435,7 +1435,7 @@ create_BVector1Array(size_t length, const bool *value)
 }
 
 
-static bool *
+static const bool *
 get_BVector1_value_ptr(const PyObject *self)
 {
     if (Py_TYPE(self) != get_BVector1_type())
@@ -1447,7 +1447,7 @@ get_BVector1_value_ptr(const PyObject *self)
 }
 
 
-static bool *
+static const bool *
 get_BVector1Array_value_ptr(const PyObject *self)
 {
     if (Py_TYPE(self) != get_BVector1Array_type())

@@ -1496,7 +1496,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            bool *value_ptr = api->BVector1_GetValuePointer(obj);
+            const bool *value_ptr = api->BVector1_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -1507,7 +1507,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        bool *value_ptr = api->BVector1_GetValuePointer(Py_None);
+        const bool *value_ptr = api->BVector1_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -1564,7 +1564,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            bool *value_ptr = api->BVector1Array_GetValuePointer(obj);
+            const bool *value_ptr = api->BVector1Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -1587,7 +1587,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        bool *value_ptr = api->BVector1Array_GetValuePointer(Py_None);
+        const bool *value_ptr = api->BVector1Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -1625,7 +1625,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            double *value_ptr = api->DVector1_GetValuePointer(obj);
+            const double *value_ptr = api->DVector1_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -1636,7 +1636,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        double *value_ptr = api->DVector1_GetValuePointer(Py_None);
+        const double *value_ptr = api->DVector1_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -1693,7 +1693,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            double *value_ptr = api->DVector1Array_GetValuePointer(obj);
+            const double *value_ptr = api->DVector1Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -1716,7 +1716,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        double *value_ptr = api->DVector1Array_GetValuePointer(Py_None);
+        const double *value_ptr = api->DVector1Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -1754,7 +1754,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            float *value_ptr = api->FVector1_GetValuePointer(obj);
+            const float *value_ptr = api->FVector1_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -1765,7 +1765,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        float *value_ptr = api->FVector1_GetValuePointer(Py_None);
+        const float *value_ptr = api->FVector1_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -1822,7 +1822,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            float *value_ptr = api->FVector1Array_GetValuePointer(obj);
+            const float *value_ptr = api->FVector1Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -1845,7 +1845,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        float *value_ptr = api->FVector1Array_GetValuePointer(Py_None);
+        const float *value_ptr = api->FVector1Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -1883,7 +1883,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            int8_t *value_ptr = api->I8Vector1_GetValuePointer(obj);
+            const int8_t *value_ptr = api->I8Vector1_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -1894,7 +1894,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        int8_t *value_ptr = api->I8Vector1_GetValuePointer(Py_None);
+        const int8_t *value_ptr = api->I8Vector1_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -1951,7 +1951,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            int8_t *value_ptr = api->I8Vector1Array_GetValuePointer(obj);
+            const int8_t *value_ptr = api->I8Vector1Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -1974,7 +1974,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        int8_t *value_ptr = api->I8Vector1Array_GetValuePointer(Py_None);
+        const int8_t *value_ptr = api->I8Vector1Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -2012,7 +2012,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            uint8_t *value_ptr = api->U8Vector1_GetValuePointer(obj);
+            const uint8_t *value_ptr = api->U8Vector1_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -2023,7 +2023,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        uint8_t *value_ptr = api->U8Vector1_GetValuePointer(Py_None);
+        const uint8_t *value_ptr = api->U8Vector1_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -2080,7 +2080,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            uint8_t *value_ptr = api->U8Vector1Array_GetValuePointer(obj);
+            const uint8_t *value_ptr = api->U8Vector1Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -2103,7 +2103,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        uint8_t *value_ptr = api->U8Vector1Array_GetValuePointer(Py_None);
+        const uint8_t *value_ptr = api->U8Vector1Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -2141,7 +2141,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            int16_t *value_ptr = api->I16Vector1_GetValuePointer(obj);
+            const int16_t *value_ptr = api->I16Vector1_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -2152,7 +2152,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        int16_t *value_ptr = api->I16Vector1_GetValuePointer(Py_None);
+        const int16_t *value_ptr = api->I16Vector1_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -2209,7 +2209,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            int16_t *value_ptr = api->I16Vector1Array_GetValuePointer(obj);
+            const int16_t *value_ptr = api->I16Vector1Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -2232,7 +2232,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        int16_t *value_ptr = api->I16Vector1Array_GetValuePointer(Py_None);
+        const int16_t *value_ptr = api->I16Vector1Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -2270,7 +2270,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            uint16_t *value_ptr = api->U16Vector1_GetValuePointer(obj);
+            const uint16_t *value_ptr = api->U16Vector1_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -2281,7 +2281,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        uint16_t *value_ptr = api->U16Vector1_GetValuePointer(Py_None);
+        const uint16_t *value_ptr = api->U16Vector1_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -2338,7 +2338,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            uint16_t *value_ptr = api->U16Vector1Array_GetValuePointer(obj);
+            const uint16_t *value_ptr = api->U16Vector1Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -2361,7 +2361,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        uint16_t *value_ptr = api->U16Vector1Array_GetValuePointer(Py_None);
+        const uint16_t *value_ptr = api->U16Vector1Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -2399,7 +2399,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            int32_t *value_ptr = api->I32Vector1_GetValuePointer(obj);
+            const int32_t *value_ptr = api->I32Vector1_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -2410,7 +2410,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        int32_t *value_ptr = api->I32Vector1_GetValuePointer(Py_None);
+        const int32_t *value_ptr = api->I32Vector1_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -2467,7 +2467,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            int32_t *value_ptr = api->I32Vector1Array_GetValuePointer(obj);
+            const int32_t *value_ptr = api->I32Vector1Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -2490,7 +2490,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        int32_t *value_ptr = api->I32Vector1Array_GetValuePointer(Py_None);
+        const int32_t *value_ptr = api->I32Vector1Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -2528,7 +2528,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            uint32_t *value_ptr = api->U32Vector1_GetValuePointer(obj);
+            const uint32_t *value_ptr = api->U32Vector1_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -2539,7 +2539,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        uint32_t *value_ptr = api->U32Vector1_GetValuePointer(Py_None);
+        const uint32_t *value_ptr = api->U32Vector1_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -2596,7 +2596,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            uint32_t *value_ptr = api->U32Vector1Array_GetValuePointer(obj);
+            const uint32_t *value_ptr = api->U32Vector1Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -2619,7 +2619,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        uint32_t *value_ptr = api->U32Vector1Array_GetValuePointer(Py_None);
+        const uint32_t *value_ptr = api->U32Vector1Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -2657,7 +2657,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            int *value_ptr = api->IVector1_GetValuePointer(obj);
+            const int *value_ptr = api->IVector1_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -2668,7 +2668,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        int *value_ptr = api->IVector1_GetValuePointer(Py_None);
+        const int *value_ptr = api->IVector1_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -2725,7 +2725,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            int *value_ptr = api->IVector1Array_GetValuePointer(obj);
+            const int *value_ptr = api->IVector1Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -2748,7 +2748,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        int *value_ptr = api->IVector1Array_GetValuePointer(Py_None);
+        const int *value_ptr = api->IVector1Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -2786,7 +2786,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            unsigned int *value_ptr = api->UVector1_GetValuePointer(obj);
+            const unsigned int *value_ptr = api->UVector1_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -2797,7 +2797,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        unsigned int *value_ptr = api->UVector1_GetValuePointer(Py_None);
+        const unsigned int *value_ptr = api->UVector1_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -2854,7 +2854,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            unsigned int *value_ptr = api->UVector1Array_GetValuePointer(obj);
+            const unsigned int *value_ptr = api->UVector1Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -2877,7 +2877,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        unsigned int *value_ptr = api->UVector1Array_GetValuePointer(Py_None);
+        const unsigned int *value_ptr = api->UVector1Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -2915,7 +2915,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            int64_t *value_ptr = api->I64Vector1_GetValuePointer(obj);
+            const int64_t *value_ptr = api->I64Vector1_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -2926,7 +2926,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        int64_t *value_ptr = api->I64Vector1_GetValuePointer(Py_None);
+        const int64_t *value_ptr = api->I64Vector1_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -2983,7 +2983,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            int64_t *value_ptr = api->I64Vector1Array_GetValuePointer(obj);
+            const int64_t *value_ptr = api->I64Vector1Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -3006,7 +3006,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        int64_t *value_ptr = api->I64Vector1Array_GetValuePointer(Py_None);
+        const int64_t *value_ptr = api->I64Vector1Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -3044,7 +3044,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            uint64_t *value_ptr = api->U64Vector1_GetValuePointer(obj);
+            const uint64_t *value_ptr = api->U64Vector1_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -3055,7 +3055,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        uint64_t *value_ptr = api->U64Vector1_GetValuePointer(Py_None);
+        const uint64_t *value_ptr = api->U64Vector1_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -3112,7 +3112,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            uint64_t *value_ptr = api->U64Vector1Array_GetValuePointer(obj);
+            const uint64_t *value_ptr = api->U64Vector1Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -3135,7 +3135,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        uint64_t *value_ptr = api->U64Vector1Array_GetValuePointer(Py_None);
+        const uint64_t *value_ptr = api->U64Vector1Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -3175,7 +3175,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            bool *value_ptr = api->BVector2_GetValuePointer(obj);
+            const bool *value_ptr = api->BVector2_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -3188,7 +3188,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        bool *value_ptr = api->BVector2_GetValuePointer(Py_None);
+        const bool *value_ptr = api->BVector2_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -3265,7 +3265,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            bool *value_ptr = api->BVector2Array_GetValuePointer(obj);
+            const bool *value_ptr = api->BVector2Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -3288,7 +3288,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        bool *value_ptr = api->BVector2Array_GetValuePointer(Py_None);
+        const bool *value_ptr = api->BVector2Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -3328,7 +3328,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            double *value_ptr = api->DVector2_GetValuePointer(obj);
+            const double *value_ptr = api->DVector2_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -3341,7 +3341,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        double *value_ptr = api->DVector2_GetValuePointer(Py_None);
+        const double *value_ptr = api->DVector2_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -3418,7 +3418,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            double *value_ptr = api->DVector2Array_GetValuePointer(obj);
+            const double *value_ptr = api->DVector2Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -3441,7 +3441,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        double *value_ptr = api->DVector2Array_GetValuePointer(Py_None);
+        const double *value_ptr = api->DVector2Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -3481,7 +3481,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            float *value_ptr = api->FVector2_GetValuePointer(obj);
+            const float *value_ptr = api->FVector2_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -3494,7 +3494,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        float *value_ptr = api->FVector2_GetValuePointer(Py_None);
+        const float *value_ptr = api->FVector2_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -3571,7 +3571,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            float *value_ptr = api->FVector2Array_GetValuePointer(obj);
+            const float *value_ptr = api->FVector2Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -3594,7 +3594,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        float *value_ptr = api->FVector2Array_GetValuePointer(Py_None);
+        const float *value_ptr = api->FVector2Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -3634,7 +3634,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            int8_t *value_ptr = api->I8Vector2_GetValuePointer(obj);
+            const int8_t *value_ptr = api->I8Vector2_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -3647,7 +3647,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        int8_t *value_ptr = api->I8Vector2_GetValuePointer(Py_None);
+        const int8_t *value_ptr = api->I8Vector2_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -3724,7 +3724,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            int8_t *value_ptr = api->I8Vector2Array_GetValuePointer(obj);
+            const int8_t *value_ptr = api->I8Vector2Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -3747,7 +3747,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        int8_t *value_ptr = api->I8Vector2Array_GetValuePointer(Py_None);
+        const int8_t *value_ptr = api->I8Vector2Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -3787,7 +3787,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            uint8_t *value_ptr = api->U8Vector2_GetValuePointer(obj);
+            const uint8_t *value_ptr = api->U8Vector2_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -3800,7 +3800,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        uint8_t *value_ptr = api->U8Vector2_GetValuePointer(Py_None);
+        const uint8_t *value_ptr = api->U8Vector2_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -3877,7 +3877,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            uint8_t *value_ptr = api->U8Vector2Array_GetValuePointer(obj);
+            const uint8_t *value_ptr = api->U8Vector2Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -3900,7 +3900,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        uint8_t *value_ptr = api->U8Vector2Array_GetValuePointer(Py_None);
+        const uint8_t *value_ptr = api->U8Vector2Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -3940,7 +3940,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            int16_t *value_ptr = api->I16Vector2_GetValuePointer(obj);
+            const int16_t *value_ptr = api->I16Vector2_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -3953,7 +3953,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        int16_t *value_ptr = api->I16Vector2_GetValuePointer(Py_None);
+        const int16_t *value_ptr = api->I16Vector2_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -4030,7 +4030,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            int16_t *value_ptr = api->I16Vector2Array_GetValuePointer(obj);
+            const int16_t *value_ptr = api->I16Vector2Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -4053,7 +4053,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        int16_t *value_ptr = api->I16Vector2Array_GetValuePointer(Py_None);
+        const int16_t *value_ptr = api->I16Vector2Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -4093,7 +4093,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            uint16_t *value_ptr = api->U16Vector2_GetValuePointer(obj);
+            const uint16_t *value_ptr = api->U16Vector2_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -4106,7 +4106,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        uint16_t *value_ptr = api->U16Vector2_GetValuePointer(Py_None);
+        const uint16_t *value_ptr = api->U16Vector2_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -4183,7 +4183,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            uint16_t *value_ptr = api->U16Vector2Array_GetValuePointer(obj);
+            const uint16_t *value_ptr = api->U16Vector2Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -4206,7 +4206,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        uint16_t *value_ptr = api->U16Vector2Array_GetValuePointer(Py_None);
+        const uint16_t *value_ptr = api->U16Vector2Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -4246,7 +4246,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            int32_t *value_ptr = api->I32Vector2_GetValuePointer(obj);
+            const int32_t *value_ptr = api->I32Vector2_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -4259,7 +4259,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        int32_t *value_ptr = api->I32Vector2_GetValuePointer(Py_None);
+        const int32_t *value_ptr = api->I32Vector2_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -4336,7 +4336,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            int32_t *value_ptr = api->I32Vector2Array_GetValuePointer(obj);
+            const int32_t *value_ptr = api->I32Vector2Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -4359,7 +4359,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        int32_t *value_ptr = api->I32Vector2Array_GetValuePointer(Py_None);
+        const int32_t *value_ptr = api->I32Vector2Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -4399,7 +4399,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            uint32_t *value_ptr = api->U32Vector2_GetValuePointer(obj);
+            const uint32_t *value_ptr = api->U32Vector2_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -4412,7 +4412,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        uint32_t *value_ptr = api->U32Vector2_GetValuePointer(Py_None);
+        const uint32_t *value_ptr = api->U32Vector2_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -4489,7 +4489,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            uint32_t *value_ptr = api->U32Vector2Array_GetValuePointer(obj);
+            const uint32_t *value_ptr = api->U32Vector2Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -4512,7 +4512,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        uint32_t *value_ptr = api->U32Vector2Array_GetValuePointer(Py_None);
+        const uint32_t *value_ptr = api->U32Vector2Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -4552,7 +4552,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            int *value_ptr = api->IVector2_GetValuePointer(obj);
+            const int *value_ptr = api->IVector2_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -4565,7 +4565,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        int *value_ptr = api->IVector2_GetValuePointer(Py_None);
+        const int *value_ptr = api->IVector2_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -4642,7 +4642,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            int *value_ptr = api->IVector2Array_GetValuePointer(obj);
+            const int *value_ptr = api->IVector2Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -4665,7 +4665,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        int *value_ptr = api->IVector2Array_GetValuePointer(Py_None);
+        const int *value_ptr = api->IVector2Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -4705,7 +4705,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            unsigned int *value_ptr = api->UVector2_GetValuePointer(obj);
+            const unsigned int *value_ptr = api->UVector2_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -4718,7 +4718,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        unsigned int *value_ptr = api->UVector2_GetValuePointer(Py_None);
+        const unsigned int *value_ptr = api->UVector2_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -4795,7 +4795,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            unsigned int *value_ptr = api->UVector2Array_GetValuePointer(obj);
+            const unsigned int *value_ptr = api->UVector2Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -4818,7 +4818,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        unsigned int *value_ptr = api->UVector2Array_GetValuePointer(Py_None);
+        const unsigned int *value_ptr = api->UVector2Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -4858,7 +4858,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            int64_t *value_ptr = api->I64Vector2_GetValuePointer(obj);
+            const int64_t *value_ptr = api->I64Vector2_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -4871,7 +4871,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        int64_t *value_ptr = api->I64Vector2_GetValuePointer(Py_None);
+        const int64_t *value_ptr = api->I64Vector2_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -4948,7 +4948,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            int64_t *value_ptr = api->I64Vector2Array_GetValuePointer(obj);
+            const int64_t *value_ptr = api->I64Vector2Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -4971,7 +4971,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        int64_t *value_ptr = api->I64Vector2Array_GetValuePointer(Py_None);
+        const int64_t *value_ptr = api->I64Vector2Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -5011,7 +5011,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            uint64_t *value_ptr = api->U64Vector2_GetValuePointer(obj);
+            const uint64_t *value_ptr = api->U64Vector2_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -5024,7 +5024,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        uint64_t *value_ptr = api->U64Vector2_GetValuePointer(Py_None);
+        const uint64_t *value_ptr = api->U64Vector2_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -5101,7 +5101,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            uint64_t *value_ptr = api->U64Vector2Array_GetValuePointer(obj);
+            const uint64_t *value_ptr = api->U64Vector2Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -5124,7 +5124,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        uint64_t *value_ptr = api->U64Vector2Array_GetValuePointer(Py_None);
+        const uint64_t *value_ptr = api->U64Vector2Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -5166,7 +5166,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            bool *value_ptr = api->BVector3_GetValuePointer(obj);
+            const bool *value_ptr = api->BVector3_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -5181,7 +5181,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        bool *value_ptr = api->BVector3_GetValuePointer(Py_None);
+        const bool *value_ptr = api->BVector3_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -5278,7 +5278,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            bool *value_ptr = api->BVector3Array_GetValuePointer(obj);
+            const bool *value_ptr = api->BVector3Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -5301,7 +5301,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        bool *value_ptr = api->BVector3Array_GetValuePointer(Py_None);
+        const bool *value_ptr = api->BVector3Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -5343,7 +5343,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            double *value_ptr = api->DVector3_GetValuePointer(obj);
+            const double *value_ptr = api->DVector3_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -5358,7 +5358,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        double *value_ptr = api->DVector3_GetValuePointer(Py_None);
+        const double *value_ptr = api->DVector3_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -5455,7 +5455,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            double *value_ptr = api->DVector3Array_GetValuePointer(obj);
+            const double *value_ptr = api->DVector3Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -5478,7 +5478,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        double *value_ptr = api->DVector3Array_GetValuePointer(Py_None);
+        const double *value_ptr = api->DVector3Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -5520,7 +5520,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            float *value_ptr = api->FVector3_GetValuePointer(obj);
+            const float *value_ptr = api->FVector3_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -5535,7 +5535,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        float *value_ptr = api->FVector3_GetValuePointer(Py_None);
+        const float *value_ptr = api->FVector3_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -5632,7 +5632,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            float *value_ptr = api->FVector3Array_GetValuePointer(obj);
+            const float *value_ptr = api->FVector3Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -5655,7 +5655,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        float *value_ptr = api->FVector3Array_GetValuePointer(Py_None);
+        const float *value_ptr = api->FVector3Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -5697,7 +5697,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            int8_t *value_ptr = api->I8Vector3_GetValuePointer(obj);
+            const int8_t *value_ptr = api->I8Vector3_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -5712,7 +5712,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        int8_t *value_ptr = api->I8Vector3_GetValuePointer(Py_None);
+        const int8_t *value_ptr = api->I8Vector3_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -5809,7 +5809,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            int8_t *value_ptr = api->I8Vector3Array_GetValuePointer(obj);
+            const int8_t *value_ptr = api->I8Vector3Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -5832,7 +5832,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        int8_t *value_ptr = api->I8Vector3Array_GetValuePointer(Py_None);
+        const int8_t *value_ptr = api->I8Vector3Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -5874,7 +5874,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            uint8_t *value_ptr = api->U8Vector3_GetValuePointer(obj);
+            const uint8_t *value_ptr = api->U8Vector3_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -5889,7 +5889,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        uint8_t *value_ptr = api->U8Vector3_GetValuePointer(Py_None);
+        const uint8_t *value_ptr = api->U8Vector3_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -5986,7 +5986,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            uint8_t *value_ptr = api->U8Vector3Array_GetValuePointer(obj);
+            const uint8_t *value_ptr = api->U8Vector3Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -6009,7 +6009,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        uint8_t *value_ptr = api->U8Vector3Array_GetValuePointer(Py_None);
+        const uint8_t *value_ptr = api->U8Vector3Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -6051,7 +6051,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            int16_t *value_ptr = api->I16Vector3_GetValuePointer(obj);
+            const int16_t *value_ptr = api->I16Vector3_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -6066,7 +6066,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        int16_t *value_ptr = api->I16Vector3_GetValuePointer(Py_None);
+        const int16_t *value_ptr = api->I16Vector3_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -6163,7 +6163,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            int16_t *value_ptr = api->I16Vector3Array_GetValuePointer(obj);
+            const int16_t *value_ptr = api->I16Vector3Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -6186,7 +6186,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        int16_t *value_ptr = api->I16Vector3Array_GetValuePointer(Py_None);
+        const int16_t *value_ptr = api->I16Vector3Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -6228,7 +6228,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            uint16_t *value_ptr = api->U16Vector3_GetValuePointer(obj);
+            const uint16_t *value_ptr = api->U16Vector3_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -6243,7 +6243,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        uint16_t *value_ptr = api->U16Vector3_GetValuePointer(Py_None);
+        const uint16_t *value_ptr = api->U16Vector3_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -6340,7 +6340,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            uint16_t *value_ptr = api->U16Vector3Array_GetValuePointer(obj);
+            const uint16_t *value_ptr = api->U16Vector3Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -6363,7 +6363,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        uint16_t *value_ptr = api->U16Vector3Array_GetValuePointer(Py_None);
+        const uint16_t *value_ptr = api->U16Vector3Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -6405,7 +6405,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            int32_t *value_ptr = api->I32Vector3_GetValuePointer(obj);
+            const int32_t *value_ptr = api->I32Vector3_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -6420,7 +6420,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        int32_t *value_ptr = api->I32Vector3_GetValuePointer(Py_None);
+        const int32_t *value_ptr = api->I32Vector3_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -6517,7 +6517,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            int32_t *value_ptr = api->I32Vector3Array_GetValuePointer(obj);
+            const int32_t *value_ptr = api->I32Vector3Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -6540,7 +6540,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        int32_t *value_ptr = api->I32Vector3Array_GetValuePointer(Py_None);
+        const int32_t *value_ptr = api->I32Vector3Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -6582,7 +6582,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            uint32_t *value_ptr = api->U32Vector3_GetValuePointer(obj);
+            const uint32_t *value_ptr = api->U32Vector3_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -6597,7 +6597,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        uint32_t *value_ptr = api->U32Vector3_GetValuePointer(Py_None);
+        const uint32_t *value_ptr = api->U32Vector3_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -6694,7 +6694,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            uint32_t *value_ptr = api->U32Vector3Array_GetValuePointer(obj);
+            const uint32_t *value_ptr = api->U32Vector3Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -6717,7 +6717,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        uint32_t *value_ptr = api->U32Vector3Array_GetValuePointer(Py_None);
+        const uint32_t *value_ptr = api->U32Vector3Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -6759,7 +6759,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            int *value_ptr = api->IVector3_GetValuePointer(obj);
+            const int *value_ptr = api->IVector3_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -6774,7 +6774,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        int *value_ptr = api->IVector3_GetValuePointer(Py_None);
+        const int *value_ptr = api->IVector3_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -6871,7 +6871,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            int *value_ptr = api->IVector3Array_GetValuePointer(obj);
+            const int *value_ptr = api->IVector3Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -6894,7 +6894,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        int *value_ptr = api->IVector3Array_GetValuePointer(Py_None);
+        const int *value_ptr = api->IVector3Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -6936,7 +6936,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            unsigned int *value_ptr = api->UVector3_GetValuePointer(obj);
+            const unsigned int *value_ptr = api->UVector3_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -6951,7 +6951,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        unsigned int *value_ptr = api->UVector3_GetValuePointer(Py_None);
+        const unsigned int *value_ptr = api->UVector3_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -7048,7 +7048,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            unsigned int *value_ptr = api->UVector3Array_GetValuePointer(obj);
+            const unsigned int *value_ptr = api->UVector3Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -7071,7 +7071,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        unsigned int *value_ptr = api->UVector3Array_GetValuePointer(Py_None);
+        const unsigned int *value_ptr = api->UVector3Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -7113,7 +7113,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            int64_t *value_ptr = api->I64Vector3_GetValuePointer(obj);
+            const int64_t *value_ptr = api->I64Vector3_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -7128,7 +7128,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        int64_t *value_ptr = api->I64Vector3_GetValuePointer(Py_None);
+        const int64_t *value_ptr = api->I64Vector3_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -7225,7 +7225,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            int64_t *value_ptr = api->I64Vector3Array_GetValuePointer(obj);
+            const int64_t *value_ptr = api->I64Vector3Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -7248,7 +7248,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        int64_t *value_ptr = api->I64Vector3Array_GetValuePointer(Py_None);
+        const int64_t *value_ptr = api->I64Vector3Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -7290,7 +7290,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            uint64_t *value_ptr = api->U64Vector3_GetValuePointer(obj);
+            const uint64_t *value_ptr = api->U64Vector3_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -7305,7 +7305,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        uint64_t *value_ptr = api->U64Vector3_GetValuePointer(Py_None);
+        const uint64_t *value_ptr = api->U64Vector3_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -7402,7 +7402,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            uint64_t *value_ptr = api->U64Vector3Array_GetValuePointer(obj);
+            const uint64_t *value_ptr = api->U64Vector3Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -7425,7 +7425,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        uint64_t *value_ptr = api->U64Vector3Array_GetValuePointer(Py_None);
+        const uint64_t *value_ptr = api->U64Vector3Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -7469,7 +7469,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            bool *value_ptr = api->BVector4_GetValuePointer(obj);
+            const bool *value_ptr = api->BVector4_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -7486,7 +7486,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        bool *value_ptr = api->BVector4_GetValuePointer(Py_None);
+        const bool *value_ptr = api->BVector4_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -7603,7 +7603,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            bool *value_ptr = api->BVector4Array_GetValuePointer(obj);
+            const bool *value_ptr = api->BVector4Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -7626,7 +7626,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        bool *value_ptr = api->BVector4Array_GetValuePointer(Py_None);
+        const bool *value_ptr = api->BVector4Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -7670,7 +7670,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            double *value_ptr = api->DVector4_GetValuePointer(obj);
+            const double *value_ptr = api->DVector4_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -7687,7 +7687,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        double *value_ptr = api->DVector4_GetValuePointer(Py_None);
+        const double *value_ptr = api->DVector4_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -7804,7 +7804,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            double *value_ptr = api->DVector4Array_GetValuePointer(obj);
+            const double *value_ptr = api->DVector4Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -7827,7 +7827,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        double *value_ptr = api->DVector4Array_GetValuePointer(Py_None);
+        const double *value_ptr = api->DVector4Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -7871,7 +7871,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            float *value_ptr = api->FVector4_GetValuePointer(obj);
+            const float *value_ptr = api->FVector4_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -7888,7 +7888,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        float *value_ptr = api->FVector4_GetValuePointer(Py_None);
+        const float *value_ptr = api->FVector4_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -8005,7 +8005,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            float *value_ptr = api->FVector4Array_GetValuePointer(obj);
+            const float *value_ptr = api->FVector4Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -8028,7 +8028,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        float *value_ptr = api->FVector4Array_GetValuePointer(Py_None);
+        const float *value_ptr = api->FVector4Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -8072,7 +8072,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            int8_t *value_ptr = api->I8Vector4_GetValuePointer(obj);
+            const int8_t *value_ptr = api->I8Vector4_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -8089,7 +8089,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        int8_t *value_ptr = api->I8Vector4_GetValuePointer(Py_None);
+        const int8_t *value_ptr = api->I8Vector4_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -8206,7 +8206,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            int8_t *value_ptr = api->I8Vector4Array_GetValuePointer(obj);
+            const int8_t *value_ptr = api->I8Vector4Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -8229,7 +8229,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        int8_t *value_ptr = api->I8Vector4Array_GetValuePointer(Py_None);
+        const int8_t *value_ptr = api->I8Vector4Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -8273,7 +8273,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            uint8_t *value_ptr = api->U8Vector4_GetValuePointer(obj);
+            const uint8_t *value_ptr = api->U8Vector4_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -8290,7 +8290,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        uint8_t *value_ptr = api->U8Vector4_GetValuePointer(Py_None);
+        const uint8_t *value_ptr = api->U8Vector4_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -8407,7 +8407,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            uint8_t *value_ptr = api->U8Vector4Array_GetValuePointer(obj);
+            const uint8_t *value_ptr = api->U8Vector4Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -8430,7 +8430,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        uint8_t *value_ptr = api->U8Vector4Array_GetValuePointer(Py_None);
+        const uint8_t *value_ptr = api->U8Vector4Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -8474,7 +8474,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            int16_t *value_ptr = api->I16Vector4_GetValuePointer(obj);
+            const int16_t *value_ptr = api->I16Vector4_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -8491,7 +8491,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        int16_t *value_ptr = api->I16Vector4_GetValuePointer(Py_None);
+        const int16_t *value_ptr = api->I16Vector4_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -8608,7 +8608,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            int16_t *value_ptr = api->I16Vector4Array_GetValuePointer(obj);
+            const int16_t *value_ptr = api->I16Vector4Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -8631,7 +8631,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        int16_t *value_ptr = api->I16Vector4Array_GetValuePointer(Py_None);
+        const int16_t *value_ptr = api->I16Vector4Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -8675,7 +8675,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            uint16_t *value_ptr = api->U16Vector4_GetValuePointer(obj);
+            const uint16_t *value_ptr = api->U16Vector4_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -8692,7 +8692,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        uint16_t *value_ptr = api->U16Vector4_GetValuePointer(Py_None);
+        const uint16_t *value_ptr = api->U16Vector4_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -8809,7 +8809,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            uint16_t *value_ptr = api->U16Vector4Array_GetValuePointer(obj);
+            const uint16_t *value_ptr = api->U16Vector4Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -8832,7 +8832,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        uint16_t *value_ptr = api->U16Vector4Array_GetValuePointer(Py_None);
+        const uint16_t *value_ptr = api->U16Vector4Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -8876,7 +8876,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            int32_t *value_ptr = api->I32Vector4_GetValuePointer(obj);
+            const int32_t *value_ptr = api->I32Vector4_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -8893,7 +8893,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        int32_t *value_ptr = api->I32Vector4_GetValuePointer(Py_None);
+        const int32_t *value_ptr = api->I32Vector4_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -9010,7 +9010,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            int32_t *value_ptr = api->I32Vector4Array_GetValuePointer(obj);
+            const int32_t *value_ptr = api->I32Vector4Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -9033,7 +9033,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        int32_t *value_ptr = api->I32Vector4Array_GetValuePointer(Py_None);
+        const int32_t *value_ptr = api->I32Vector4Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -9077,7 +9077,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            uint32_t *value_ptr = api->U32Vector4_GetValuePointer(obj);
+            const uint32_t *value_ptr = api->U32Vector4_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -9094,7 +9094,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        uint32_t *value_ptr = api->U32Vector4_GetValuePointer(Py_None);
+        const uint32_t *value_ptr = api->U32Vector4_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -9211,7 +9211,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            uint32_t *value_ptr = api->U32Vector4Array_GetValuePointer(obj);
+            const uint32_t *value_ptr = api->U32Vector4Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -9234,7 +9234,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        uint32_t *value_ptr = api->U32Vector4Array_GetValuePointer(Py_None);
+        const uint32_t *value_ptr = api->U32Vector4Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -9278,7 +9278,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            int *value_ptr = api->IVector4_GetValuePointer(obj);
+            const int *value_ptr = api->IVector4_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -9295,7 +9295,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        int *value_ptr = api->IVector4_GetValuePointer(Py_None);
+        const int *value_ptr = api->IVector4_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -9412,7 +9412,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            int *value_ptr = api->IVector4Array_GetValuePointer(obj);
+            const int *value_ptr = api->IVector4Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -9435,7 +9435,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        int *value_ptr = api->IVector4Array_GetValuePointer(Py_None);
+        const int *value_ptr = api->IVector4Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -9479,7 +9479,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            unsigned int *value_ptr = api->UVector4_GetValuePointer(obj);
+            const unsigned int *value_ptr = api->UVector4_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -9496,7 +9496,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        unsigned int *value_ptr = api->UVector4_GetValuePointer(Py_None);
+        const unsigned int *value_ptr = api->UVector4_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -9613,7 +9613,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            unsigned int *value_ptr = api->UVector4Array_GetValuePointer(obj);
+            const unsigned int *value_ptr = api->UVector4Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -9636,7 +9636,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        unsigned int *value_ptr = api->UVector4Array_GetValuePointer(Py_None);
+        const unsigned int *value_ptr = api->UVector4Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -9680,7 +9680,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            int64_t *value_ptr = api->I64Vector4_GetValuePointer(obj);
+            const int64_t *value_ptr = api->I64Vector4_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -9697,7 +9697,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        int64_t *value_ptr = api->I64Vector4_GetValuePointer(Py_None);
+        const int64_t *value_ptr = api->I64Vector4_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -9814,7 +9814,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            int64_t *value_ptr = api->I64Vector4Array_GetValuePointer(obj);
+            const int64_t *value_ptr = api->I64Vector4Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -9837,7 +9837,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        int64_t *value_ptr = api->I64Vector4Array_GetValuePointer(Py_None);
+        const int64_t *value_ptr = api->I64Vector4Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -9881,7 +9881,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            uint64_t *value_ptr = api->U64Vector4_GetValuePointer(obj);
+            const uint64_t *value_ptr = api->U64Vector4_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
 
@@ -9898,7 +9898,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        uint64_t *value_ptr = api->U64Vector4_GetValuePointer(Py_None);
+        const uint64_t *value_ptr = api->U64Vector4_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -10015,7 +10015,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            uint64_t *value_ptr = api->U64Vector4Array_GetValuePointer(obj);
+            const uint64_t *value_ptr = api->U64Vector4Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -10038,7 +10038,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        uint64_t *value_ptr = api->U64Vector4Array_GetValuePointer(Py_None);
+        const uint64_t *value_ptr = api->U64Vector4Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();

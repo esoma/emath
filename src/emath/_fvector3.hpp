@@ -1885,7 +1885,7 @@ create_FVector3Array(size_t length, const float *value)
 }
 
 
-static float *
+static const float *
 get_FVector3_value_ptr(const PyObject *self)
 {
     if (Py_TYPE(self) != get_FVector3_type())
@@ -1897,7 +1897,7 @@ get_FVector3_value_ptr(const PyObject *self)
 }
 
 
-static float *
+static const float *
 get_FVector3Array_value_ptr(const PyObject *self)
 {
     if (Py_TYPE(self) != get_FVector3Array_type())

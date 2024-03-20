@@ -13,8 +13,8 @@ from pathlib import Path
 from typing import Sequence
 
 
-def generate_math_files(build_dir: Path, include_dir: Path) -> None:
-    vector_types = list(generate_vector_files(build_dir))
+def generate_math_files(build_dir: Path, include_dir: Path, doc_dir: Path) -> None:
+    vector_types = list(generate_vector_files(build_dir, doc_dir))
     matrix_types = list(generate_matrix_files(build_dir))
     quaternion_types = list(generate_quaternion_files(build_dir))
     pod_types = list(generate_pod_files(build_dir))
@@ -23,6 +23,26 @@ def generate_math_files(build_dir: Path, include_dir: Path) -> None:
     generate_api_file(include_dir, vector_types, matrix_types, quaternion_types, pod_types)
     generate_typestubs(build_dir, vector_types, matrix_types, quaternion_types, pod_types)
     generate_test_api_file(build_dir, vector_types, matrix_types, quaternion_types, pod_types)
+    generate_api_doc_file(doc_dir, vector_types, matrix_types, quaternion_types, pod_types)
+
+
+def generate_api_doc_file(
+    doc_dir: Path,
+    vector_types: Sequence[str],
+    matrix_types: Sequence[str],
+    quaternion_types: Sequence[str],
+    pod_types: Sequence[str],
+) -> None:
+    template = get_template("api.rst")
+    with open(doc_dir / f"api.rst", "w") as f:
+        f.write(
+            template.render(
+                vector_types=vector_types,
+                matrix_types=matrix_types,
+                quaternion_types=quaternion_types,
+                pod_types=pod_types,
+            )
+        )
 
 
 def generate_test_api_file(

@@ -21,313 +21,313 @@ typedef size_t (*EMathApi_GetArrayLength)(const PyObject *);
 
     typedef PyObject *(*EMathApi_CreateBVector1)(const bool *);
     typedef PyObject *(*EMathApi_CreateBVector1Array)(size_t, const bool *);
-    typedef bool *(*EMathApi_GetBVector1ValuePointer)(const PyObject *);
+    typedef const bool *(*EMathApi_GetBVector1ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateDVector1)(const double *);
     typedef PyObject *(*EMathApi_CreateDVector1Array)(size_t, const double *);
-    typedef double *(*EMathApi_GetDVector1ValuePointer)(const PyObject *);
+    typedef const double *(*EMathApi_GetDVector1ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateFVector1)(const float *);
     typedef PyObject *(*EMathApi_CreateFVector1Array)(size_t, const float *);
-    typedef float *(*EMathApi_GetFVector1ValuePointer)(const PyObject *);
+    typedef const float *(*EMathApi_GetFVector1ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateI8Vector1)(const int8_t *);
     typedef PyObject *(*EMathApi_CreateI8Vector1Array)(size_t, const int8_t *);
-    typedef int8_t *(*EMathApi_GetI8Vector1ValuePointer)(const PyObject *);
+    typedef const int8_t *(*EMathApi_GetI8Vector1ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateU8Vector1)(const uint8_t *);
     typedef PyObject *(*EMathApi_CreateU8Vector1Array)(size_t, const uint8_t *);
-    typedef uint8_t *(*EMathApi_GetU8Vector1ValuePointer)(const PyObject *);
+    typedef const uint8_t *(*EMathApi_GetU8Vector1ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateI16Vector1)(const int16_t *);
     typedef PyObject *(*EMathApi_CreateI16Vector1Array)(size_t, const int16_t *);
-    typedef int16_t *(*EMathApi_GetI16Vector1ValuePointer)(const PyObject *);
+    typedef const int16_t *(*EMathApi_GetI16Vector1ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateU16Vector1)(const uint16_t *);
     typedef PyObject *(*EMathApi_CreateU16Vector1Array)(size_t, const uint16_t *);
-    typedef uint16_t *(*EMathApi_GetU16Vector1ValuePointer)(const PyObject *);
+    typedef const uint16_t *(*EMathApi_GetU16Vector1ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateI32Vector1)(const int32_t *);
     typedef PyObject *(*EMathApi_CreateI32Vector1Array)(size_t, const int32_t *);
-    typedef int32_t *(*EMathApi_GetI32Vector1ValuePointer)(const PyObject *);
+    typedef const int32_t *(*EMathApi_GetI32Vector1ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateU32Vector1)(const uint32_t *);
     typedef PyObject *(*EMathApi_CreateU32Vector1Array)(size_t, const uint32_t *);
-    typedef uint32_t *(*EMathApi_GetU32Vector1ValuePointer)(const PyObject *);
+    typedef const uint32_t *(*EMathApi_GetU32Vector1ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateIVector1)(const int *);
     typedef PyObject *(*EMathApi_CreateIVector1Array)(size_t, const int *);
-    typedef int *(*EMathApi_GetIVector1ValuePointer)(const PyObject *);
+    typedef const int *(*EMathApi_GetIVector1ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateUVector1)(const unsigned int *);
     typedef PyObject *(*EMathApi_CreateUVector1Array)(size_t, const unsigned int *);
-    typedef unsigned int *(*EMathApi_GetUVector1ValuePointer)(const PyObject *);
+    typedef const unsigned int *(*EMathApi_GetUVector1ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateI64Vector1)(const int64_t *);
     typedef PyObject *(*EMathApi_CreateI64Vector1Array)(size_t, const int64_t *);
-    typedef int64_t *(*EMathApi_GetI64Vector1ValuePointer)(const PyObject *);
+    typedef const int64_t *(*EMathApi_GetI64Vector1ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateU64Vector1)(const uint64_t *);
     typedef PyObject *(*EMathApi_CreateU64Vector1Array)(size_t, const uint64_t *);
-    typedef uint64_t *(*EMathApi_GetU64Vector1ValuePointer)(const PyObject *);
+    typedef const uint64_t *(*EMathApi_GetU64Vector1ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateBVector2)(const bool *);
     typedef PyObject *(*EMathApi_CreateBVector2Array)(size_t, const bool *);
-    typedef bool *(*EMathApi_GetBVector2ValuePointer)(const PyObject *);
+    typedef const bool *(*EMathApi_GetBVector2ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateDVector2)(const double *);
     typedef PyObject *(*EMathApi_CreateDVector2Array)(size_t, const double *);
-    typedef double *(*EMathApi_GetDVector2ValuePointer)(const PyObject *);
+    typedef const double *(*EMathApi_GetDVector2ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateFVector2)(const float *);
     typedef PyObject *(*EMathApi_CreateFVector2Array)(size_t, const float *);
-    typedef float *(*EMathApi_GetFVector2ValuePointer)(const PyObject *);
+    typedef const float *(*EMathApi_GetFVector2ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateI8Vector2)(const int8_t *);
     typedef PyObject *(*EMathApi_CreateI8Vector2Array)(size_t, const int8_t *);
-    typedef int8_t *(*EMathApi_GetI8Vector2ValuePointer)(const PyObject *);
+    typedef const int8_t *(*EMathApi_GetI8Vector2ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateU8Vector2)(const uint8_t *);
     typedef PyObject *(*EMathApi_CreateU8Vector2Array)(size_t, const uint8_t *);
-    typedef uint8_t *(*EMathApi_GetU8Vector2ValuePointer)(const PyObject *);
+    typedef const uint8_t *(*EMathApi_GetU8Vector2ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateI16Vector2)(const int16_t *);
     typedef PyObject *(*EMathApi_CreateI16Vector2Array)(size_t, const int16_t *);
-    typedef int16_t *(*EMathApi_GetI16Vector2ValuePointer)(const PyObject *);
+    typedef const int16_t *(*EMathApi_GetI16Vector2ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateU16Vector2)(const uint16_t *);
     typedef PyObject *(*EMathApi_CreateU16Vector2Array)(size_t, const uint16_t *);
-    typedef uint16_t *(*EMathApi_GetU16Vector2ValuePointer)(const PyObject *);
+    typedef const uint16_t *(*EMathApi_GetU16Vector2ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateI32Vector2)(const int32_t *);
     typedef PyObject *(*EMathApi_CreateI32Vector2Array)(size_t, const int32_t *);
-    typedef int32_t *(*EMathApi_GetI32Vector2ValuePointer)(const PyObject *);
+    typedef const int32_t *(*EMathApi_GetI32Vector2ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateU32Vector2)(const uint32_t *);
     typedef PyObject *(*EMathApi_CreateU32Vector2Array)(size_t, const uint32_t *);
-    typedef uint32_t *(*EMathApi_GetU32Vector2ValuePointer)(const PyObject *);
+    typedef const uint32_t *(*EMathApi_GetU32Vector2ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateIVector2)(const int *);
     typedef PyObject *(*EMathApi_CreateIVector2Array)(size_t, const int *);
-    typedef int *(*EMathApi_GetIVector2ValuePointer)(const PyObject *);
+    typedef const int *(*EMathApi_GetIVector2ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateUVector2)(const unsigned int *);
     typedef PyObject *(*EMathApi_CreateUVector2Array)(size_t, const unsigned int *);
-    typedef unsigned int *(*EMathApi_GetUVector2ValuePointer)(const PyObject *);
+    typedef const unsigned int *(*EMathApi_GetUVector2ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateI64Vector2)(const int64_t *);
     typedef PyObject *(*EMathApi_CreateI64Vector2Array)(size_t, const int64_t *);
-    typedef int64_t *(*EMathApi_GetI64Vector2ValuePointer)(const PyObject *);
+    typedef const int64_t *(*EMathApi_GetI64Vector2ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateU64Vector2)(const uint64_t *);
     typedef PyObject *(*EMathApi_CreateU64Vector2Array)(size_t, const uint64_t *);
-    typedef uint64_t *(*EMathApi_GetU64Vector2ValuePointer)(const PyObject *);
+    typedef const uint64_t *(*EMathApi_GetU64Vector2ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateBVector3)(const bool *);
     typedef PyObject *(*EMathApi_CreateBVector3Array)(size_t, const bool *);
-    typedef bool *(*EMathApi_GetBVector3ValuePointer)(const PyObject *);
+    typedef const bool *(*EMathApi_GetBVector3ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateDVector3)(const double *);
     typedef PyObject *(*EMathApi_CreateDVector3Array)(size_t, const double *);
-    typedef double *(*EMathApi_GetDVector3ValuePointer)(const PyObject *);
+    typedef const double *(*EMathApi_GetDVector3ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateFVector3)(const float *);
     typedef PyObject *(*EMathApi_CreateFVector3Array)(size_t, const float *);
-    typedef float *(*EMathApi_GetFVector3ValuePointer)(const PyObject *);
+    typedef const float *(*EMathApi_GetFVector3ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateI8Vector3)(const int8_t *);
     typedef PyObject *(*EMathApi_CreateI8Vector3Array)(size_t, const int8_t *);
-    typedef int8_t *(*EMathApi_GetI8Vector3ValuePointer)(const PyObject *);
+    typedef const int8_t *(*EMathApi_GetI8Vector3ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateU8Vector3)(const uint8_t *);
     typedef PyObject *(*EMathApi_CreateU8Vector3Array)(size_t, const uint8_t *);
-    typedef uint8_t *(*EMathApi_GetU8Vector3ValuePointer)(const PyObject *);
+    typedef const uint8_t *(*EMathApi_GetU8Vector3ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateI16Vector3)(const int16_t *);
     typedef PyObject *(*EMathApi_CreateI16Vector3Array)(size_t, const int16_t *);
-    typedef int16_t *(*EMathApi_GetI16Vector3ValuePointer)(const PyObject *);
+    typedef const int16_t *(*EMathApi_GetI16Vector3ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateU16Vector3)(const uint16_t *);
     typedef PyObject *(*EMathApi_CreateU16Vector3Array)(size_t, const uint16_t *);
-    typedef uint16_t *(*EMathApi_GetU16Vector3ValuePointer)(const PyObject *);
+    typedef const uint16_t *(*EMathApi_GetU16Vector3ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateI32Vector3)(const int32_t *);
     typedef PyObject *(*EMathApi_CreateI32Vector3Array)(size_t, const int32_t *);
-    typedef int32_t *(*EMathApi_GetI32Vector3ValuePointer)(const PyObject *);
+    typedef const int32_t *(*EMathApi_GetI32Vector3ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateU32Vector3)(const uint32_t *);
     typedef PyObject *(*EMathApi_CreateU32Vector3Array)(size_t, const uint32_t *);
-    typedef uint32_t *(*EMathApi_GetU32Vector3ValuePointer)(const PyObject *);
+    typedef const uint32_t *(*EMathApi_GetU32Vector3ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateIVector3)(const int *);
     typedef PyObject *(*EMathApi_CreateIVector3Array)(size_t, const int *);
-    typedef int *(*EMathApi_GetIVector3ValuePointer)(const PyObject *);
+    typedef const int *(*EMathApi_GetIVector3ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateUVector3)(const unsigned int *);
     typedef PyObject *(*EMathApi_CreateUVector3Array)(size_t, const unsigned int *);
-    typedef unsigned int *(*EMathApi_GetUVector3ValuePointer)(const PyObject *);
+    typedef const unsigned int *(*EMathApi_GetUVector3ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateI64Vector3)(const int64_t *);
     typedef PyObject *(*EMathApi_CreateI64Vector3Array)(size_t, const int64_t *);
-    typedef int64_t *(*EMathApi_GetI64Vector3ValuePointer)(const PyObject *);
+    typedef const int64_t *(*EMathApi_GetI64Vector3ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateU64Vector3)(const uint64_t *);
     typedef PyObject *(*EMathApi_CreateU64Vector3Array)(size_t, const uint64_t *);
-    typedef uint64_t *(*EMathApi_GetU64Vector3ValuePointer)(const PyObject *);
+    typedef const uint64_t *(*EMathApi_GetU64Vector3ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateBVector4)(const bool *);
     typedef PyObject *(*EMathApi_CreateBVector4Array)(size_t, const bool *);
-    typedef bool *(*EMathApi_GetBVector4ValuePointer)(const PyObject *);
+    typedef const bool *(*EMathApi_GetBVector4ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateDVector4)(const double *);
     typedef PyObject *(*EMathApi_CreateDVector4Array)(size_t, const double *);
-    typedef double *(*EMathApi_GetDVector4ValuePointer)(const PyObject *);
+    typedef const double *(*EMathApi_GetDVector4ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateFVector4)(const float *);
     typedef PyObject *(*EMathApi_CreateFVector4Array)(size_t, const float *);
-    typedef float *(*EMathApi_GetFVector4ValuePointer)(const PyObject *);
+    typedef const float *(*EMathApi_GetFVector4ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateI8Vector4)(const int8_t *);
     typedef PyObject *(*EMathApi_CreateI8Vector4Array)(size_t, const int8_t *);
-    typedef int8_t *(*EMathApi_GetI8Vector4ValuePointer)(const PyObject *);
+    typedef const int8_t *(*EMathApi_GetI8Vector4ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateU8Vector4)(const uint8_t *);
     typedef PyObject *(*EMathApi_CreateU8Vector4Array)(size_t, const uint8_t *);
-    typedef uint8_t *(*EMathApi_GetU8Vector4ValuePointer)(const PyObject *);
+    typedef const uint8_t *(*EMathApi_GetU8Vector4ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateI16Vector4)(const int16_t *);
     typedef PyObject *(*EMathApi_CreateI16Vector4Array)(size_t, const int16_t *);
-    typedef int16_t *(*EMathApi_GetI16Vector4ValuePointer)(const PyObject *);
+    typedef const int16_t *(*EMathApi_GetI16Vector4ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateU16Vector4)(const uint16_t *);
     typedef PyObject *(*EMathApi_CreateU16Vector4Array)(size_t, const uint16_t *);
-    typedef uint16_t *(*EMathApi_GetU16Vector4ValuePointer)(const PyObject *);
+    typedef const uint16_t *(*EMathApi_GetU16Vector4ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateI32Vector4)(const int32_t *);
     typedef PyObject *(*EMathApi_CreateI32Vector4Array)(size_t, const int32_t *);
-    typedef int32_t *(*EMathApi_GetI32Vector4ValuePointer)(const PyObject *);
+    typedef const int32_t *(*EMathApi_GetI32Vector4ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateU32Vector4)(const uint32_t *);
     typedef PyObject *(*EMathApi_CreateU32Vector4Array)(size_t, const uint32_t *);
-    typedef uint32_t *(*EMathApi_GetU32Vector4ValuePointer)(const PyObject *);
+    typedef const uint32_t *(*EMathApi_GetU32Vector4ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateIVector4)(const int *);
     typedef PyObject *(*EMathApi_CreateIVector4Array)(size_t, const int *);
-    typedef int *(*EMathApi_GetIVector4ValuePointer)(const PyObject *);
+    typedef const int *(*EMathApi_GetIVector4ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateUVector4)(const unsigned int *);
     typedef PyObject *(*EMathApi_CreateUVector4Array)(size_t, const unsigned int *);
-    typedef unsigned int *(*EMathApi_GetUVector4ValuePointer)(const PyObject *);
+    typedef const unsigned int *(*EMathApi_GetUVector4ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateI64Vector4)(const int64_t *);
     typedef PyObject *(*EMathApi_CreateI64Vector4Array)(size_t, const int64_t *);
-    typedef int64_t *(*EMathApi_GetI64Vector4ValuePointer)(const PyObject *);
+    typedef const int64_t *(*EMathApi_GetI64Vector4ValuePointer)(const PyObject *);
 
 
 
     typedef PyObject *(*EMathApi_CreateU64Vector4)(const uint64_t *);
     typedef PyObject *(*EMathApi_CreateU64Vector4Array)(size_t, const uint64_t *);
-    typedef uint64_t *(*EMathApi_GetU64Vector4ValuePointer)(const PyObject *);
+    typedef const uint64_t *(*EMathApi_GetU64Vector4ValuePointer)(const PyObject *);
 
 
 

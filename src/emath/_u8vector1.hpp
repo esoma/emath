@@ -1485,7 +1485,7 @@ create_U8Vector1Array(size_t length, const uint8_t *value)
 }
 
 
-static uint8_t *
+static const uint8_t *
 get_U8Vector1_value_ptr(const PyObject *self)
 {
     if (Py_TYPE(self) != get_U8Vector1_type())
@@ -1497,7 +1497,7 @@ get_U8Vector1_value_ptr(const PyObject *self)
 }
 
 
-static uint8_t *
+static const uint8_t *
 get_U8Vector1Array_value_ptr(const PyObject *self)
 {
     if (Py_TYPE(self) != get_U8Vector1Array_type())

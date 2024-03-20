@@ -1769,7 +1769,7 @@ create_DVector2Array(size_t length, const double *value)
 }
 
 
-static double *
+static const double *
 get_DVector2_value_ptr(const PyObject *self)
 {
     if (Py_TYPE(self) != get_DVector2_type())
@@ -1781,7 +1781,7 @@ get_DVector2_value_ptr(const PyObject *self)
 }
 
 
-static double *
+static const double *
 get_DVector2Array_value_ptr(const PyObject *self)
 {
     if (Py_TYPE(self) != get_DVector2Array_type())

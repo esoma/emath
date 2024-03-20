@@ -1681,7 +1681,7 @@ create_{{ name }}Array(size_t length, const {{ c_type }} *value)
 }
 
 
-static {{ c_type }} *
+static const {{ c_type }} *
 get_{{ name }}_value_ptr(const PyObject *self)
 {
     if (Py_TYPE(self) != get_{{ name }}_type())
@@ -1693,7 +1693,7 @@ get_{{ name }}_value_ptr(const PyObject *self)
 }
 
 
-static {{ c_type }} *
+static const {{ c_type }} *
 get_{{ name }}Array_value_ptr(const PyObject *self)
 {
     if (Py_TYPE(self) != get_{{ name }}Array_type())

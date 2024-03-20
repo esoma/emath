@@ -1669,7 +1669,7 @@ create_FVector1Array(size_t length, const float *value)
 }
 
 
-static float *
+static const float *
 get_FVector1_value_ptr(const PyObject *self)
 {
     if (Py_TYPE(self) != get_FVector1_type())
@@ -1681,7 +1681,7 @@ get_FVector1_value_ptr(const PyObject *self)
 }
 
 
-static float *
+static const float *
 get_FVector1Array_value_ptr(const PyObject *self)
 {
     if (Py_TYPE(self) != get_FVector1Array_type())

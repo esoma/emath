@@ -1604,7 +1604,7 @@ create_IVector2Array(size_t length, const int *value)
 }
 
 
-static int *
+static const int *
 get_IVector2_value_ptr(const PyObject *self)
 {
     if (Py_TYPE(self) != get_IVector2_type())
@@ -1616,7 +1616,7 @@ get_IVector2_value_ptr(const PyObject *self)
 }
 
 
-static int *
+static const int *
 get_IVector2Array_value_ptr(const PyObject *self)
 {
     if (Py_TYPE(self) != get_IVector2Array_type())

@@ -1921,7 +1921,7 @@ create_DVector4Array(size_t length, const double *value)
 }
 
 
-static double *
+static const double *
 get_DVector4_value_ptr(const PyObject *self)
 {
     if (Py_TYPE(self) != get_DVector4_type())
@@ -1933,7 +1933,7 @@ get_DVector4_value_ptr(const PyObject *self)
 }
 
 
-static double *
+static const double *
 get_DVector4Array_value_ptr(const PyObject *self)
 {
     if (Py_TYPE(self) != get_DVector4Array_type())

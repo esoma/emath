@@ -722,7 +722,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(!PyErr_Occurred());
             TEST(Py_TYPE(obj) == type);
 
-            {{ c_type }} *value_ptr = api->{{ type }}_GetValuePointer(obj);
+            const {{ c_type }} *value_ptr = api->{{ type }}_GetValuePointer(obj);
             TEST(value_ptr != 0);
             TEST(!PyErr_Occurred());
             {% for i in range(component_count) %}
@@ -733,7 +733,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         }
 
         Py_INCREF(Py_None);
-        {{ c_type }} *value_ptr = api->{{ type }}_GetValuePointer(Py_None);
+        const {{ c_type }} *value_ptr = api->{{ type }}_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
@@ -772,7 +772,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
             TEST(length == i);
             TEST(!PyErr_Occurred());
 
-            {{ c_type }} *value_ptr = api->{{ type }}Array_GetValuePointer(obj);
+            const {{ c_type }} *value_ptr = api->{{ type }}Array_GetValuePointer(obj);
             if (i == 0)
             {
                 TEST(value_ptr == 0);
@@ -795,7 +795,7 @@ test_EMathApi_Get(PyObject *self, PyObject *args)
         TEST(length == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();
-        {{ c_type }} *value_ptr = api->{{ type }}Array_GetValuePointer(Py_None);
+        const {{ c_type }} *value_ptr = api->{{ type }}Array_GetValuePointer(Py_None);
         TEST(value_ptr == 0);
         TEST(PyErr_Occurred());
         PyErr_Clear();

@@ -1527,7 +1527,7 @@ create_BVector2Array(size_t length, const bool *value)
 }
 
 
-static bool *
+static const bool *
 get_BVector2_value_ptr(const PyObject *self)
 {
     if (Py_TYPE(self) != get_BVector2_type())
@@ -1539,7 +1539,7 @@ get_BVector2_value_ptr(const PyObject *self)
 }
 
 
-static bool *
+static const bool *
 get_BVector2Array_value_ptr(const PyObject *self)
 {
     if (Py_TYPE(self) != get_BVector2Array_type())

@@ -11,4 +11,5 @@ API Reference
 
 {% for type in vector_types %}
    api_{{ type.lower() }}
+   api_{{ type.lower() }}_array
 {% endfor %}

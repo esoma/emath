@@ -66,4 +66,14 @@ def _generate_vector_files(
                 struct_format=struct_format,
             )
         )
+    template = get_template("api_vector_array.rst")
+    with open(doc_dir / f"api_{name.lower()}_array.rst", "w") as f:
+        f.write(
+            template.render(
+                name=name,
+                component_count=component_count,
+                c_type=c_type,
+                struct_format=struct_format,
+            )
+        )
     return name, component_count, c_type

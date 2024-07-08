@@ -2,8 +2,11 @@ from __future__ import annotations
 
 __all__ = ()
 
-# codegen
-from codegen import generate_math_files
+try:
+    # codegen
+    from codegen import generate_math_files
+except ImportError:
+    generate_math_files = None  # type: ignore
 
 # python
 import os
@@ -48,7 +51,7 @@ _test_api = Extension(
 
 
 def _build() -> None:
-    if os.environ.get("EMATH_GENERATE_MATH_FILES", "0") == "1":
+    if os.environ.get("EMATH_GENERATE_MATH_FILES", "0") == "1" and generate_math_files is not None:
         generate_math_files(Path("src/emath"), Path("include"), Path("doc/source"))
 
     cmd = build_ext(Distribution({"name": "extended", "ext_modules": [_emath, _test_api]}))

@@ -34,10 +34,10 @@ jobs:
         architecture: ${{ matrix.python-arch }}
 
     - name: Set up QEMU
-        if: runner.os == 'Linux'
-        uses: docker/setup-qemu-action@v3
-        with:
-          platforms: all
+      if: runner.os == 'Linux'
+      uses: docker/setup-qemu-action@v3
+      with:
+        platforms: all
 
     - name: Initialize Submodules
       run: |

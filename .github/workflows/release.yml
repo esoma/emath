@@ -44,7 +44,7 @@ jobs:
         git submodule update --init --recursive
 
     - name: Build
-        uses: pypa/cibuildwheel@v2.19.2
+      uses: pypa/cibuildwheel@v2.19.2
 
     - name: Upload Github Release Artifact
       uses: svenstaro/upload-release-action@v2

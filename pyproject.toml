@@ -4,6 +4,7 @@ version = "0.1.10"
 description = "Fast immutable math primitives."
 authors = ["Erik Soma <stillusingirc@gmail.com>"]
 include = [
+    {path = "codegen/*", format = "sdist"},
     {path = "src/emath/*.so", format = "wheel"},
     {path = "src/emath/*.pyd", format = "wheel"},
 ]

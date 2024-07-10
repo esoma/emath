@@ -39,7 +39,7 @@ _bool = bool
 
 {% for type in vector_types %}
 {% with component_count=int(type[-1]) %}
-{% with component_type='float' if type.startswith('F') else ('_bool' if type.startswith('B') else 'int') %}
+{% with component_type='float' if type.startswith('F') or type.startswith('D') else ('_bool' if type.startswith('B') else 'int') %}
 {% with is_unsigned=type.startswith('U') %}
 {% with ctypes_type={
     "B": 'ctypes.c_bool',
@@ -579,7 +579,7 @@ class {{ type }}Array:
 
 
 {% for type in pod_types %}
-{% with pod_type='float' if type.startswith('F') else ('_bool' if type.startswith('B') else 'int') %}
+{% with pod_type='float' if type.startswith('F') or type.startswith('D') else ('_bool' if type.startswith('B') else 'int') %}
 {% with ctypes_type={
     "B": 'ctypes.c_bool',
     "D": 'ctypes.c_double',

@@ -36,6 +36,7 @@ jobs:
       uses: snok/install-poetry@v1
 
     - name: Initialize Submodules
+      if: runner.os == 'Linux'
       run: |
         git submodule update --init --recursive
 

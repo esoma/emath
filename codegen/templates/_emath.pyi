@@ -156,7 +156,7 @@ class {{ type }}:
     def __rtruediv__(self, other: Number) -> {{ type }}: ...
 {% endif %}
 
-{% if is_unsigned %}
+{% if not is_unsigned %}
     def __neg__(self) -> {{ type }}: ...
 {% endif %}
 

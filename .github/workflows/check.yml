@@ -38,7 +38,6 @@ jobs:
         version: 1.8.5
 
     - name: Initialize Submodules
-      if: runner.os == 'Linux'
       run: |
         git submodule update --init --recursive
 

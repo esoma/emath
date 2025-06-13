@@ -215,6 +215,3 @@ C API
 .. c:function:: PyTypeObject *I8Vector1_GetType()
 
     Returns the type object of :py:class:`I8Vector1`.
-
-
-

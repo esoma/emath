@@ -1,4 +1,16 @@
 # emath
+# python
+import ctypes
+import struct
+from math import inf
+from math import isclose as _isclose
+from math import isnan
+from math import radians
+from weakref import ref
+
+# pytest
+import pytest
+
 from emath import DMatrix2
 from emath import DMatrix2Array
 from emath import DMatrix2x2
@@ -61,18 +73,6 @@ from emath import FVector3
 from emath import FVector3Array
 from emath import FVector4
 from emath import FVector4Array
-
-# pytest
-import pytest
-
-# python
-import ctypes
-from math import inf
-from math import isclose as _isclose
-from math import isnan
-from math import radians
-import struct
-from weakref import ref
 
 
 def isclose(a, b):
@@ -222,20 +222,10 @@ class MatrixTest:
             assert array[i - 10] == self.cls(i)
 
         assert isinstance(array[1:3], self.array_cls)
-        assert array[1:3] == self.array_cls(
-            self.cls(1),
-            self.cls(2),
-        )
-        assert array[-3:-1] == self.array_cls(
-            self.cls(7),
-            self.cls(8),
-        )
+        assert array[1:3] == self.array_cls(self.cls(1), self.cls(2))
+        assert array[-3:-1] == self.array_cls(self.cls(7), self.cls(8))
         assert array[::2] == self.array_cls(
-            self.cls(0),
-            self.cls(2),
-            self.cls(4),
-            self.cls(6),
-            self.cls(8),
+            self.cls(0), self.cls(2), self.cls(4), self.cls(6), self.cls(8)
         )
 
         with pytest.raises(IndexError) as excinfo:
@@ -690,11 +680,7 @@ class MatrixTest:
     def test_array_buffer(self) -> None:
         assert bytes(self.array_cls()) == b""
 
-        array = self.array_cls(
-            self.cls(1),
-            self.cls(*range(self.component_count)),
-            self.cls(0),
-        )
+        array = self.array_cls(self.cls(1), self.cls(*range(self.component_count)), self.cls(0))
         assert bytes(array) == struct.pack(
             self.struct_format * 3 * self.component_count,
             *(v for c in self.cls(1) for v in c),
@@ -756,24 +742,7 @@ class MatrixTest:
                 isclose(r, e)
                 for r, e in zip(
                     (v for c in result for v in c),
-                    [
-                        1,
-                        0,
-                        0,
-                        0,
-                        0,
-                        -4.37114e-08,
-                        1,
-                        0,
-                        0,
-                        -1,
-                        -4.37114e-08,
-                        0,
-                        0,
-                        0,
-                        0,
-                        1,
-                    ],
+                    [1, 0, 0, 0, 0, -4.37114e-08, 1, 0, 0, -1, -4.37114e-08, 0, 0, 0, 0, 1],
                 )
             )
         else:
@@ -781,24 +750,7 @@ class MatrixTest:
                 isclose(r, e)
                 for r, e in zip(
                     (v for c in result for v in c),
-                    [
-                        1,
-                        0,
-                        0,
-                        0,
-                        0,
-                        6.12323e-17,
-                        1,
-                        0,
-                        0,
-                        -1,
-                        6.12323e-17,
-                        0,
-                        0,
-                        0,
-                        0,
-                        1,
-                    ],
+                    [1, 0, 0, 0, 0, 6.12323e-17, 1, 0, 0, -1, 6.12323e-17, 0, 0, 0, 0, 1],
                 )
             )
 
@@ -816,22 +768,7 @@ class MatrixTest:
         scale_cls = globals()[f"{self.cls.__name__[0]}Vector3"]
         assert self.cls(1).scale(scale_cls(1)) == self.cls(1)
         assert self.cls(1).scale(scale_cls(1, 2, 3)) == self.cls(
-            1,
-            0,
-            0,
-            0,
-            0,
-            2,
-            0,
-            0,
-            0,
-            0,
-            3,
-            0,
-            0,
-            0,
-            0,
-            1,
+            1, 0, 0, 0, 0, 2, 0, 0, 0, 0, 3, 0, 0, 0, 0, 1
         )
 
     def test_translate(self) -> None:
@@ -848,43 +785,19 @@ class MatrixTest:
         translate_cls = globals()[f"{self.cls.__name__[0]}Vector3"]
         assert self.cls(1).translate(translate_cls(0)) == self.cls(1)
         assert self.cls(1).translate(translate_cls(1, 2, 3)) == self.cls(
-            1,
-            0,
-            0,
-            0,
-            0,
-            1,
-            0,
-            0,
-            0,
-            0,
-            1,
-            0,
-            1,
-            2,
-            3,
-            1,
+            1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 2, 3, 1
         )
 
     def test_pointer(self) -> None:
-        real_type = {
-            "d": ctypes.c_double,
-            "f": ctypes.c_float,
-        }[self.struct_format]
+        real_type = {"d": ctypes.c_double, "f": ctypes.c_float}[self.struct_format]
         matrix = self.cls(*range(self.component_count))
         assert isinstance(matrix.pointer, ctypes.POINTER(real_type))
         for i in range(self.component_count):
             matrix.pointer[i] == self.type(i)
 
     def test_array_pointer(self) -> None:
-        real_type = {
-            "d": ctypes.c_double,
-            "f": ctypes.c_float,
-        }[self.struct_format]
-        array = self.array_cls(
-            self.cls(*range(self.component_count)),
-            self.cls(0),
-        )
+        real_type = {"d": ctypes.c_double, "f": ctypes.c_float}[self.struct_format]
+        array = self.array_cls(self.cls(*range(self.component_count)), self.cls(0))
         assert isinstance(array.pointer, ctypes.POINTER(real_type))
         for i in (*range(self.component_count), *(0 for _ in range(self.component_count))):
             array.pointer[i] == self.type(i)

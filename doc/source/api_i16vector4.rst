@@ -224,6 +224,3 @@ C API
 .. c:function:: PyTypeObject *I16Vector4_GetType()
 
     Returns the type object of :py:class:`I16Vector4`.
-
-
-

@@ -121,6 +121,3 @@ C API
 .. c:function:: PyTypeObject *I8Vector2Array_GetType()
 
     Returns the type object of :py:class:`I8Vector2Array`.
-
-
-

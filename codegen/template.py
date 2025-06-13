@@ -1,17 +1,13 @@
 __all__ = ["get_template"]
 
-# jinja2
+import itertools
+from pathlib import Path
+
 from jinja2 import Environment
 from jinja2 import FileSystemLoader
 from jinja2 import Template
 
-# python
-import itertools
-from pathlib import Path
-
-env = Environment(
-    loader=FileSystemLoader(Path(__file__).resolve().parent / "templates"),
-)
+env = Environment(loader=FileSystemLoader(Path(__file__).resolve().parent / "templates"))
 env.globals["len"] = len
 env.globals["set"] = set
 env.globals["str"] = str

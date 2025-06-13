@@ -121,6 +121,3 @@ C API
 .. c:function:: PyTypeObject *I64Vector1Array_GetType()
 
     Returns the type object of :py:class:`I64Vector1Array`.
-
-
-

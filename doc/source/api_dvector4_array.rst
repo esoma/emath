@@ -121,6 +121,3 @@ C API
 .. c:function:: PyTypeObject *DVector4Array_GetType()
 
     Returns the type object of :py:class:`DVector4Array`.
-
-
-

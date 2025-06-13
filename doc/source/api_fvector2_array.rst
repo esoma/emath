@@ -121,6 +121,3 @@ C API
 .. c:function:: PyTypeObject *FVector2Array_GetType()
 
     Returns the type object of :py:class:`FVector2Array`.
-
-
-

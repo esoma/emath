@@ -214,6 +214,3 @@ C API
 .. c:function:: PyTypeObject *BVector3_GetType()
 
     Returns the type object of :py:class:`BVector3`.
-
-
-

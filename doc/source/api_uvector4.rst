@@ -228,6 +228,3 @@ C API
 .. c:function:: PyTypeObject *UVector4_GetType()
 
     Returns the type object of :py:class:`UVector4`.
-
-
-

@@ -1,4 +1,18 @@
 # emath
+# python
+import ctypes
+import struct
+from math import inf
+from math import isclose as _isclose
+from math import isnan
+from math import radians
+from math import sqrt
+from typing import Final
+from weakref import ref
+
+# pytest
+import pytest
+
 from emath import DMatrix3x3
 from emath import DMatrix4x4
 from emath import DQuaternion
@@ -11,20 +25,6 @@ from emath import FQuaternion
 from emath import FQuaternionArray
 from emath import FVector3
 from emath import FVector4
-
-# pytest
-import pytest
-
-# python
-import ctypes
-from math import inf
-from math import isclose as _isclose
-from math import isnan
-from math import radians
-from math import sqrt
-import struct
-from typing import Final
-from weakref import ref
 
 
 def isclose(a, b):
@@ -140,20 +140,10 @@ class QuaternionTest:
             assert array[i - 10] == self.cls(i)
 
         assert isinstance(array[1:3], self.array_cls)
-        assert array[1:3] == self.array_cls(
-            self.cls(1),
-            self.cls(2),
-        )
-        assert array[-3:-1] == self.array_cls(
-            self.cls(7),
-            self.cls(8),
-        )
+        assert array[1:3] == self.array_cls(self.cls(1), self.cls(2))
+        assert array[-3:-1] == self.array_cls(self.cls(7), self.cls(8))
         assert array[::2] == self.array_cls(
-            self.cls(0),
-            self.cls(2),
-            self.cls(4),
-            self.cls(6),
-            self.cls(8),
+            self.cls(0), self.cls(2), self.cls(4), self.cls(6), self.cls(8)
         )
 
         with pytest.raises(IndexError) as excinfo:
@@ -543,16 +533,9 @@ class QuaternionTest:
     def test_array_buffer(self) -> None:
         assert bytes(self.array_cls()) == b""
 
-        array = self.array_cls(
-            self.cls(1, 1, 1, 1),
-            self.cls(*range(4)),
-            self.cls(0),
-        )
+        array = self.array_cls(self.cls(1, 1, 1, 1), self.cls(*range(4)), self.cls(0))
         assert bytes(array) == struct.pack(
-            self.struct_format * 3 * 4,
-            *(1 for _ in range(4)),
-            *range(4),
-            *(0 for _ in range(4)),
+            self.struct_format * 3 * 4, *(1 for _ in range(4)), *range(4), *(0 for _ in range(4))
         )
         memory_view = memoryview(array)
         assert memory_view.readonly
@@ -610,24 +593,15 @@ class QuaternionTest:
         assert quat.normalize() == quat / quat.magnitude
 
     def test_pointer(self) -> None:
-        real_type = {
-            "d": ctypes.c_double,
-            "f": ctypes.c_float,
-        }[self.struct_format]
+        real_type = {"d": ctypes.c_double, "f": ctypes.c_float}[self.struct_format]
         quat = self.cls(*range(4))
         assert isinstance(quat.pointer, ctypes.POINTER(real_type))
         for i in range(4):
             quat.pointer[i] == i
 
     def test_array_pointer(self) -> None:
-        real_type = {
-            "d": ctypes.c_double,
-            "f": ctypes.c_float,
-        }[self.struct_format]
-        array = self.array_cls(
-            self.cls(*range(4)),
-            self.cls(0),
-        )
+        real_type = {"d": ctypes.c_double, "f": ctypes.c_float}[self.struct_format]
+        array = self.array_cls(self.cls(*range(4)), self.cls(0))
         assert isinstance(array.pointer, ctypes.POINTER(real_type))
         for i in (*range(4), *(0 for _ in range(4))):
             array.pointer[i] == i

@@ -166,6 +166,11 @@ __all__ = [
 ]
 
 # emath
+# python
+from typing import SupportsFloat
+from typing import SupportsInt
+from typing import TypeAlias
+
 from ._emath import BArray
 from ._emath import BVector1
 from ._emath import BVector1Array
@@ -323,11 +328,6 @@ from ._emath import UVector3
 from ._emath import UVector3Array
 from ._emath import UVector4
 from ._emath import UVector4Array
-
-# python
-from typing import SupportsFloat
-from typing import SupportsInt
-from typing import TypeAlias
 
 Number: TypeAlias = SupportsFloat | SupportsInt
 

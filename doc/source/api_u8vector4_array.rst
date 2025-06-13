@@ -121,6 +121,3 @@ C API
 .. c:function:: PyTypeObject *U8Vector4Array_GetType()
 
     Returns the type object of :py:class:`U8Vector4Array`.
-
-
-

@@ -121,6 +121,3 @@ C API
 .. c:function:: PyTypeObject *UVector2Array_GetType()
 
     Returns the type object of :py:class:`UVector2Array`.
-
-
-

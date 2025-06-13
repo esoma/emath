@@ -1,13 +1,11 @@
 __all__ = ["generate_matrix_files"]
 
-# codegen
-from codegen.template import get_template
-
-# python
 from datetime import datetime
 from pathlib import Path
 from typing import Generator
 from typing import Sequence
+
+from codegen.template import get_template
 
 
 def generate_matrix_files(build_dir: Path) -> Generator[str, None, None]:

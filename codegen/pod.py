@@ -1,13 +1,11 @@
 __all__ = ["generate_pod_files"]
 
-# codegen
-from codegen.template import get_template
-
-# python
 from datetime import datetime
 from pathlib import Path
 from typing import Generator
 from typing import Sequence
+
+from codegen.template import get_template
 
 
 def generate_pod_files(build_dir: Path) -> Generator[str, None, None]:
@@ -37,10 +35,7 @@ def generate_pod_type_file(build_dir: Path, types: Sequence[tuple[str, str]]) ->
 
 
 def generate_pod_file(
-    build_dir: Path,
-    c_type: str,
-    name: str,
-    struct_format: str,
+    build_dir: Path, c_type: str, name: str, struct_format: str
 ) -> tuple[str, str]:
     template = get_template("_pod.hpp")
     with open(build_dir / f"_{name.lower()}.hpp", "w") as f:

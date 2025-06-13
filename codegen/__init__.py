@@ -1,16 +1,14 @@
 __all__ = ["generate_math_files"]
 
-# codegen
+from datetime import datetime
+from pathlib import Path
+from typing import Sequence
+
 from codegen.matrix import generate_matrix_files
 from codegen.pod import generate_pod_files
 from codegen.quaternion import generate_quaternion_files
 from codegen.template import get_template
 from codegen.vector import generate_vector_files
-
-# python
-from datetime import datetime
-from pathlib import Path
-from typing import Sequence
 
 
 def generate_math_files(build_dir: Path, include_dir: Path, doc_dir: Path) -> None:

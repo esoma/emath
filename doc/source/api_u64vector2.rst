@@ -228,6 +228,3 @@ C API
 .. c:function:: PyTypeObject *U64Vector2_GetType()
 
     Returns the type object of :py:class:`U64Vector2`.
-
-
-

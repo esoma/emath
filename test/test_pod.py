@@ -1,4 +1,13 @@
 # emath
+# python
+import ctypes
+import struct
+from math import isclose as _isclose
+from weakref import ref
+
+# pytest
+import pytest
+
 from emath import BArray
 from emath import DArray
 from emath import FArray
@@ -12,15 +21,6 @@ from emath import U16Array
 from emath import U32Array
 from emath import U64Array
 from emath import UArray
-
-# pytest
-import pytest
-
-# python
-import ctypes
-from math import isclose as _isclose
-import struct
-from weakref import ref
 
 
 def isclose(a, b):
@@ -81,20 +81,10 @@ class PodTest:
             assert array[i - 10] == self.type(i)
 
         assert isinstance(array[1:3], self.array_cls)
-        assert array[1:3] == self.array_cls(
-            self.type(1),
-            self.type(2),
-        )
-        assert array[-3:-1] == self.array_cls(
-            self.type(7),
-            self.type(8),
-        )
+        assert array[1:3] == self.array_cls(self.type(1), self.type(2))
+        assert array[-3:-1] == self.array_cls(self.type(7), self.type(8))
         assert array[::2] == self.array_cls(
-            self.type(0),
-            self.type(2),
-            self.type(4),
-            self.type(6),
-            self.type(8),
+            self.type(0), self.type(2), self.type(4), self.type(6), self.type(8)
         )
 
         with pytest.raises(IndexError) as excinfo:
@@ -169,11 +159,7 @@ class PodTest:
     def test_array_buffer(self) -> None:
         assert bytes(self.array_cls()) == b""
 
-        array = self.array_cls(
-            self.type(1),
-            self.type(5),
-            self.type(0),
-        )
+        array = self.array_cls(self.type(1), self.type(5), self.type(0))
         assert bytes(array) == struct.pack(
             self.struct_byte_order + (self.struct_format * 3), 1, 5, 0
         )
@@ -218,11 +204,7 @@ class PodTest:
         assert self.array_cls(1, 2).size == (struct.calcsize("=" + self.struct_format) * 2)
 
     def test_from_array_buffer(self) -> None:
-        for a in (
-            self.array_cls(),
-            self.array_cls(1),
-            self.array_cls(1, 2),
-        ):
+        for a in (self.array_cls(), self.array_cls(1), self.array_cls(1, 2)):
             ba = self.array_cls.from_buffer(a)
             assert isinstance(ba, self.array_cls)
             assert ba == a

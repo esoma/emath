@@ -121,6 +121,3 @@ C API
 .. c:function:: PyTypeObject *U16Vector2Array_GetType()
 
     Returns the type object of :py:class:`U16Vector2Array`.
-
-
-

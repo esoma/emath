@@ -273,6 +273,3 @@ C API
 .. c:function:: PyTypeObject *FVector4_GetType()
 
     Returns the type object of :py:class:`FVector4`.
-
-
-

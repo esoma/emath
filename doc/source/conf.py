@@ -6,6 +6,7 @@
 # python
 from datetime import datetime
 from pathlib import Path
+
 import tomllib
 
 _PROJECT_DIRECTORY = Path(__file__).parent.parent.parent

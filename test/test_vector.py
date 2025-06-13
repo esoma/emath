@@ -1,4 +1,19 @@
 # emath
+# python
+import ctypes
+import itertools
+import struct
+from math import inf
+from math import isclose as _isclose
+from math import isnan
+from math import radians
+from math import sqrt
+from typing import Final
+from weakref import ref
+
+# pytest
+import pytest
+
 from emath import BVector1
 from emath import BVector1Array
 from emath import BVector2
@@ -105,21 +120,6 @@ from emath import UVector3
 from emath import UVector3Array
 from emath import UVector4
 from emath import UVector4Array
-
-# pytest
-import pytest
-
-# python
-import ctypes
-import itertools
-from math import inf
-from math import isclose as _isclose
-from math import isnan
-from math import radians
-from math import sqrt
-import struct
-from typing import Final
-from weakref import ref
 
 
 def isclose(a, b):
@@ -257,20 +257,10 @@ class VectorTest:
             assert array[i - 10] == self.cls(i)
 
         assert isinstance(array[1:3], self.array_cls)
-        assert array[1:3] == self.array_cls(
-            self.cls(1),
-            self.cls(2),
-        )
-        assert array[-3:-1] == self.array_cls(
-            self.cls(7),
-            self.cls(8),
-        )
+        assert array[1:3] == self.array_cls(self.cls(1), self.cls(2))
+        assert array[-3:-1] == self.array_cls(self.cls(7), self.cls(8))
         assert array[::2] == self.array_cls(
-            self.cls(0),
-            self.cls(2),
-            self.cls(4),
-            self.cls(6),
-            self.cls(8),
+            self.cls(0), self.cls(2), self.cls(4), self.cls(6), self.cls(8)
         )
 
         with pytest.raises(IndexError) as excinfo:
@@ -342,17 +332,7 @@ class VectorTest:
                 assert isinstance(result, swizzle_type)
                 assert all(isinstance(c, self.type) for c in result)
                 assert result == swizzle_type(
-                    *(
-                        getattr(
-                            vector,
-                            attr,
-                            {
-                                "o": 0,
-                                "l": 1,
-                            }.get(attr, None),
-                        )
-                        for attr in attrs
-                    )
+                    *(getattr(vector, attr, {"o": 0, "l": 1}.get(attr, None)) for attr in attrs)
                 )
 
         for i in range(2, 5):
@@ -1018,11 +998,7 @@ class VectorTest:
     def test_array_buffer(self) -> None:
         assert bytes(self.array_cls()) == b""
 
-        array = self.array_cls(
-            self.cls(1),
-            self.cls(*range(self.component_count)),
-            self.cls(0),
-        )
+        array = self.array_cls(self.cls(1), self.cls(*range(self.component_count)), self.cls(0))
         assert bytes(array) == struct.pack(
             self.struct_byte_order + (self.struct_format * 3 * self.component_count),
             *(1 for _ in range(self.component_count)),
@@ -1075,15 +1051,11 @@ class VectorTest:
         assert isclose(
             self.cls(-1).magnitude, sqrt(sum(1**2 for _ in range(self.component_count)))
         )
-        assert isclose(
-            self.cls(1).magnitude, sqrt(sum(1**2 for _ in range(self.component_count)))
-        )
+        assert isclose(self.cls(1).magnitude, sqrt(sum(1**2 for _ in range(self.component_count))))
         assert isclose(
             self.cls(-2).magnitude, sqrt(sum(2**2 for _ in range(self.component_count)))
         )
-        assert isclose(
-            self.cls(2).magnitude, sqrt(sum(2**2 for _ in range(self.component_count)))
-        )
+        assert isclose(self.cls(2).magnitude, sqrt(sum(2**2 for _ in range(self.component_count))))
         assert isclose(
             self.cls(*range(self.component_count)).magnitude,
             sqrt(sum(i**2 for i in range(self.component_count))),
@@ -1177,10 +1149,7 @@ class VectorTest:
             "i": ctypes.c_int,
             "I": ctypes.c_uint,
         }[self.struct_byte_order + self.struct_format]
-        array = self.array_cls(
-            self.cls(*range(self.component_count)),
-            self.cls(0),
-        )
+        array = self.array_cls(self.cls(*range(self.component_count)), self.cls(0))
         assert isinstance(array.pointer, ctypes.POINTER(real_type))
         for i in (*range(self.component_count), *(0 for _ in range(self.component_count))):
             array.pointer[i] == self.type(i)

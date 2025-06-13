@@ -224,6 +224,3 @@ C API
 .. c:function:: PyTypeObject *I32Vector3_GetType()
 
     Returns the type object of :py:class:`I32Vector3`.
-
-
-

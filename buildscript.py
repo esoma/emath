@@ -3,18 +3,15 @@ from __future__ import annotations
 __all__ = ()
 
 try:
-    # codegen
     from codegen import generate_math_files
 except ImportError:
     generate_math_files = None  # type: ignore
 
-# python
 import os
-from pathlib import Path
 import shutil
 import sys
+from pathlib import Path
 
-# setuptools
 from setuptools import Distribution
 from setuptools import Extension
 from setuptools.command.build_ext import build_ext

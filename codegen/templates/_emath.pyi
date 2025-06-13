@@ -1,5 +1,6 @@
 
 # generated from codegen/templates/_emath.pyi
+# pyright: reportGeneralTypeIssues=false
 
 __all__ = [
     {% for type in vector_types %}
@@ -7,7 +8,6 @@ __all__ = [
     {% endfor %}
 ]
 
-# emath
 from emath._podtyping import B
 from emath._podtyping import D
 from emath._podtyping import F
@@ -22,7 +22,6 @@ from emath._podtyping import U16
 from emath._podtyping import U32
 from emath._podtyping import U64
 
-# python
 from collections.abc import Buffer
 import ctypes
 from typing import Any
@@ -207,7 +206,7 @@ class {{ type }}:
     def pointer(self) -> ctypes._Pointer[{{ ctypes_type }}]: ...
 
     @classmethod
-    def get_size(self) -> int: ...
+    def get_size(cls) -> int: ...
 
     @classmethod
     def get_array_type(cls) -> type[{{ type }}Array]: ...
@@ -395,7 +394,7 @@ class {{ type }}:
     @property
     def pointer(self) -> ctypes._Pointer[{{ ctypes_type }}]: ...
     @classmethod
-    def get_size(self) -> int: ...
+    def get_size(cls) -> int: ...
     @classmethod
     def get_array_type(cls) -> {{ type }}Array: ...
     @classmethod
@@ -536,7 +535,7 @@ class {{ type }}:
     def pointer(self) -> ctypes._Pointer[{{ ctypes_type }}]: ...
 
     @classmethod
-    def get_size(self) -> int: ...
+    def get_size(cls) -> int: ...
     @classmethod
     def get_array_type(cls) -> {{ type }}Array: ...
     @classmethod

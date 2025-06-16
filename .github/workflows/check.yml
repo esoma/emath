@@ -68,11 +68,14 @@ jobs:
         python-version: 3.12
         architecture: x64
 
-
     - name: Install Poetry
       uses: snok/install-poetry@v1.4.1
       with:
         virtualenvs-in-project: true
+
+    - name: Initialize Submodules
+      run: |
+        git submodule update --init --recursive
 
     - name: Upgrade pip & setuptools
       run: |

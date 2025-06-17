@@ -21,17 +21,9 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-13, macos-14]
-        python-version: ['3.12', '3.13', '3.14.0-beta.2']
-        python-arch: [x64]
 
     steps:
     - uses: actions/checkout@v2
-
-    - name: Set up Python ${{ matrix.python-version }}-${{ matrix.python-arch }}
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
-        architecture: ${{ matrix.python-arch }}
 
     - name: Set up QEMU
       if: runner.os == 'Linux'
@@ -44,7 +36,7 @@ jobs:
         git submodule update --init --recursive
 
     - name: Build Wheels
-      uses: pypa/cibuildwheel@v2.19.2
+      uses: pypa/cibuildwheel@v3.0.0
 
     - name: Upload Github Wheel Release Artifact
       uses: svenstaro/upload-release-action@v2

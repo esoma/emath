@@ -150,6 +150,23 @@ class VectorTest:
         this_cls.struct_format = struct_format
         this_cls.unsigned = unsigned
 
+        prefix = cls.__name__[: cls.__name__.find("V")]
+        this_cls.other_prefixes = {
+            "B",
+            "D",
+            "F",
+            "I8",
+            "U8",
+            "I16",
+            "U16",
+            "I32",
+            "U32",
+            "I64",
+            "U64",
+            "I",
+            "U",
+        } - {prefix}
+
     def test_empty_init(self) -> None:
         vector = self.cls()
         for i in range(self.component_count):
@@ -1260,6 +1277,16 @@ class VectorTest:
 
     def test_array_get_component_type(self) -> None:
         assert self.array_cls.get_component_type() is self.cls
+
+    def test_to_prefix(self) -> None:
+        for other_prefix in self.other_prefixes:
+            other_type = globals()[f"{other_prefix}Vector{self.component_count}"]
+
+            to_prefix = getattr(self.cls(0), f"to_{other_prefix.lower()}")
+            assert to_prefix() == other_type(0)
+
+            to_prefix = getattr(self.cls(1), f"to_{other_prefix.lower()}")
+            assert to_prefix() == other_type(1)
 
 
 class TestBVector1(VectorTest, cls=BVector1, component_count=1, type=bool, struct_format="?"):

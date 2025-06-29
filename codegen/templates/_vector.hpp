@@ -1070,6 +1070,20 @@ static PyObject *
     return (PyObject *)array_type;
 }
 
+{% for other_prefix in other_prefixes %}
+static PyObject *
+{{ name }}_to_{{ other_prefix.lower() }}({{ name }} *self, void *)
+{
+    auto module_state = get_module_state();
+    if (!module_state){ return 0; }
+    auto cls = module_state->{{ other_prefix }}Vector{{component_count}}_PyTypeObject;
+    auto *result = ({{ other_prefix }}Vector{{component_count}} *)cls->tp_alloc(cls, 0);
+    if (!result){ return 0; }
+    result->glm = new {{ other_prefix }}Vector{{component_count}}Glm(*self->glm);
+    return (PyObject *)result;
+}
+{% endfor %}
+
 
 static PyMethodDef {{ name }}_PyMethodDef[] = {
     {% if c_type in ['float', 'double'] %}
@@ -1088,6 +1102,9 @@ static PyMethodDef {{ name }}_PyMethodDef[] = {
     {"get_size", (PyCFunction){{ name }}_get_size, METH_NOARGS | METH_STATIC, 0},
     {"get_array_type", (PyCFunction){{ name }}_get_array_type, METH_NOARGS | METH_STATIC, 0},
     {"from_buffer", (PyCFunction){{ name }}_from_buffer, METH_O | METH_CLASS, 0},
+    {% for other_prefix in other_prefixes %}
+        {"to_{{ other_prefix.lower() }}", (PyCFunction){{ name }}_to_{{ other_prefix.lower() }}, METH_NOARGS, 0},
+    {% endfor %}
     {0, 0, 0, 0}
 };
 

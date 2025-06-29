@@ -1168,6 +1168,152 @@ I64Vector4_get_array_type(PyTypeObject *cls, void*)
 }
 
 
+static PyObject *
+I64Vector4_to_b(I64Vector4 *self, void *)
+{
+    auto module_state = get_module_state();
+    if (!module_state){ return 0; }
+    auto cls = module_state->BVector4_PyTypeObject;
+    auto *result = (BVector4 *)cls->tp_alloc(cls, 0);
+    if (!result){ return 0; }
+    result->glm = new BVector4Glm(*self->glm);
+    return (PyObject *)result;
+}
+
+static PyObject *
+I64Vector4_to_d(I64Vector4 *self, void *)
+{
+    auto module_state = get_module_state();
+    if (!module_state){ return 0; }
+    auto cls = module_state->DVector4_PyTypeObject;
+    auto *result = (DVector4 *)cls->tp_alloc(cls, 0);
+    if (!result){ return 0; }
+    result->glm = new DVector4Glm(*self->glm);
+    return (PyObject *)result;
+}
+
+static PyObject *
+I64Vector4_to_f(I64Vector4 *self, void *)
+{
+    auto module_state = get_module_state();
+    if (!module_state){ return 0; }
+    auto cls = module_state->FVector4_PyTypeObject;
+    auto *result = (FVector4 *)cls->tp_alloc(cls, 0);
+    if (!result){ return 0; }
+    result->glm = new FVector4Glm(*self->glm);
+    return (PyObject *)result;
+}
+
+static PyObject *
+I64Vector4_to_i8(I64Vector4 *self, void *)
+{
+    auto module_state = get_module_state();
+    if (!module_state){ return 0; }
+    auto cls = module_state->I8Vector4_PyTypeObject;
+    auto *result = (I8Vector4 *)cls->tp_alloc(cls, 0);
+    if (!result){ return 0; }
+    result->glm = new I8Vector4Glm(*self->glm);
+    return (PyObject *)result;
+}
+
+static PyObject *
+I64Vector4_to_u8(I64Vector4 *self, void *)
+{
+    auto module_state = get_module_state();
+    if (!module_state){ return 0; }
+    auto cls = module_state->U8Vector4_PyTypeObject;
+    auto *result = (U8Vector4 *)cls->tp_alloc(cls, 0);
+    if (!result){ return 0; }
+    result->glm = new U8Vector4Glm(*self->glm);
+    return (PyObject *)result;
+}
+
+static PyObject *
+I64Vector4_to_i16(I64Vector4 *self, void *)
+{
+    auto module_state = get_module_state();
+    if (!module_state){ return 0; }
+    auto cls = module_state->I16Vector4_PyTypeObject;
+    auto *result = (I16Vector4 *)cls->tp_alloc(cls, 0);
+    if (!result){ return 0; }
+    result->glm = new I16Vector4Glm(*self->glm);
+    return (PyObject *)result;
+}
+
+static PyObject *
+I64Vector4_to_u16(I64Vector4 *self, void *)
+{
+    auto module_state = get_module_state();
+    if (!module_state){ return 0; }
+    auto cls = module_state->U16Vector4_PyTypeObject;
+    auto *result = (U16Vector4 *)cls->tp_alloc(cls, 0);
+    if (!result){ return 0; }
+    result->glm = new U16Vector4Glm(*self->glm);
+    return (PyObject *)result;
+}
+
+static PyObject *
+I64Vector4_to_i32(I64Vector4 *self, void *)
+{
+    auto module_state = get_module_state();
+    if (!module_state){ return 0; }
+    auto cls = module_state->I32Vector4_PyTypeObject;
+    auto *result = (I32Vector4 *)cls->tp_alloc(cls, 0);
+    if (!result){ return 0; }
+    result->glm = new I32Vector4Glm(*self->glm);
+    return (PyObject *)result;
+}
+
+static PyObject *
+I64Vector4_to_u32(I64Vector4 *self, void *)
+{
+    auto module_state = get_module_state();
+    if (!module_state){ return 0; }
+    auto cls = module_state->U32Vector4_PyTypeObject;
+    auto *result = (U32Vector4 *)cls->tp_alloc(cls, 0);
+    if (!result){ return 0; }
+    result->glm = new U32Vector4Glm(*self->glm);
+    return (PyObject *)result;
+}
+
+static PyObject *
+I64Vector4_to_i(I64Vector4 *self, void *)
+{
+    auto module_state = get_module_state();
+    if (!module_state){ return 0; }
+    auto cls = module_state->IVector4_PyTypeObject;
+    auto *result = (IVector4 *)cls->tp_alloc(cls, 0);
+    if (!result){ return 0; }
+    result->glm = new IVector4Glm(*self->glm);
+    return (PyObject *)result;
+}
+
+static PyObject *
+I64Vector4_to_u(I64Vector4 *self, void *)
+{
+    auto module_state = get_module_state();
+    if (!module_state){ return 0; }
+    auto cls = module_state->UVector4_PyTypeObject;
+    auto *result = (UVector4 *)cls->tp_alloc(cls, 0);
+    if (!result){ return 0; }
+    result->glm = new UVector4Glm(*self->glm);
+    return (PyObject *)result;
+}
+
+static PyObject *
+I64Vector4_to_u64(I64Vector4 *self, void *)
+{
+    auto module_state = get_module_state();
+    if (!module_state){ return 0; }
+    auto cls = module_state->U64Vector4_PyTypeObject;
+    auto *result = (U64Vector4 *)cls->tp_alloc(cls, 0);
+    if (!result){ return 0; }
+    result->glm = new U64Vector4Glm(*self->glm);
+    return (PyObject *)result;
+}
+
+
+
 static PyMethodDef I64Vector4_PyMethodDef[] = {
 
     {"min", (PyCFunction)I64Vector4_min, METH_O, 0},
@@ -1177,6 +1323,31 @@ static PyMethodDef I64Vector4_PyMethodDef[] = {
     {"get_size", (PyCFunction)I64Vector4_get_size, METH_NOARGS | METH_STATIC, 0},
     {"get_array_type", (PyCFunction)I64Vector4_get_array_type, METH_NOARGS | METH_STATIC, 0},
     {"from_buffer", (PyCFunction)I64Vector4_from_buffer, METH_O | METH_CLASS, 0},
+
+        {"to_b", (PyCFunction)I64Vector4_to_b, METH_NOARGS, 0},
+
+        {"to_d", (PyCFunction)I64Vector4_to_d, METH_NOARGS, 0},
+
+        {"to_f", (PyCFunction)I64Vector4_to_f, METH_NOARGS, 0},
+
+        {"to_i8", (PyCFunction)I64Vector4_to_i8, METH_NOARGS, 0},
+
+        {"to_u8", (PyCFunction)I64Vector4_to_u8, METH_NOARGS, 0},
+
+        {"to_i16", (PyCFunction)I64Vector4_to_i16, METH_NOARGS, 0},
+
+        {"to_u16", (PyCFunction)I64Vector4_to_u16, METH_NOARGS, 0},
+
+        {"to_i32", (PyCFunction)I64Vector4_to_i32, METH_NOARGS, 0},
+
+        {"to_u32", (PyCFunction)I64Vector4_to_u32, METH_NOARGS, 0},
+
+        {"to_i", (PyCFunction)I64Vector4_to_i, METH_NOARGS, 0},
+
+        {"to_u", (PyCFunction)I64Vector4_to_u, METH_NOARGS, 0},
+
+        {"to_u64", (PyCFunction)I64Vector4_to_u64, METH_NOARGS, 0},
+
     {0, 0, 0, 0}
 };
 

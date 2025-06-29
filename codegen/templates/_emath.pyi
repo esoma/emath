@@ -36,6 +36,8 @@ Number = SupportsFloat | SupportsInt
 # use _bool instead of bool because it can be shadowed by swizzles
 _bool = bool
 
+{% with all_prefixes=set(["B", "D", "F", "I8", "U8", "I16", "U16", "I32", "U32", "I64", "U64", "I", "U"]) %}
+
 {% for type in vector_types %}
 {% with component_count=int(type[-1]) %}
 {% with component_type='float' if type.startswith('F') or type.startswith('D') else ('_bool' if type.startswith('B') else 'int') %}
@@ -55,6 +57,7 @@ _bool = bool
     "I": 'ctypes.c_int',
     "U": 'ctypes.c_uint',
 }[type[:type.find('V')]] %}
+{% with other_prefixes=all_prefixes - set([type[:type.find('V')]]) %}
 
 @final
 class {{ type }}:
@@ -214,6 +217,12 @@ class {{ type }}:
     @classmethod
     def from_buffer(cls, buffer: Buffer, /) -> {{ type }}: ...
 
+{% for other_prefix in other_prefixes %}
+
+    def to_{{ other_prefix.lower() }}(self) -> {{ other_prefix }}Vector{{ component_count }}:
+        ...
+
+{% endfor %}
 
 @final
 class {{ type }}Array:
@@ -245,6 +254,7 @@ class {{ type }}Array:
     @classmethod
     def get_component_type(cls) -> type[{{ type }}]: ...
 
+{% endwith %}
 {% endwith %}
 {% endwith %}
 {% endwith %}
@@ -628,3 +638,5 @@ class {{ type }}Array:
 {% endwith %}
 {% endwith %}
 {% endfor %}
+
+{% endwith %}

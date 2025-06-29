@@ -1071,6 +1071,152 @@ U16Vector3_get_array_type(PyTypeObject *cls, void*)
 }
 
 
+static PyObject *
+U16Vector3_to_b(U16Vector3 *self, void *)
+{
+    auto module_state = get_module_state();
+    if (!module_state){ return 0; }
+    auto cls = module_state->BVector3_PyTypeObject;
+    auto *result = (BVector3 *)cls->tp_alloc(cls, 0);
+    if (!result){ return 0; }
+    result->glm = new BVector3Glm(*self->glm);
+    return (PyObject *)result;
+}
+
+static PyObject *
+U16Vector3_to_d(U16Vector3 *self, void *)
+{
+    auto module_state = get_module_state();
+    if (!module_state){ return 0; }
+    auto cls = module_state->DVector3_PyTypeObject;
+    auto *result = (DVector3 *)cls->tp_alloc(cls, 0);
+    if (!result){ return 0; }
+    result->glm = new DVector3Glm(*self->glm);
+    return (PyObject *)result;
+}
+
+static PyObject *
+U16Vector3_to_f(U16Vector3 *self, void *)
+{
+    auto module_state = get_module_state();
+    if (!module_state){ return 0; }
+    auto cls = module_state->FVector3_PyTypeObject;
+    auto *result = (FVector3 *)cls->tp_alloc(cls, 0);
+    if (!result){ return 0; }
+    result->glm = new FVector3Glm(*self->glm);
+    return (PyObject *)result;
+}
+
+static PyObject *
+U16Vector3_to_i8(U16Vector3 *self, void *)
+{
+    auto module_state = get_module_state();
+    if (!module_state){ return 0; }
+    auto cls = module_state->I8Vector3_PyTypeObject;
+    auto *result = (I8Vector3 *)cls->tp_alloc(cls, 0);
+    if (!result){ return 0; }
+    result->glm = new I8Vector3Glm(*self->glm);
+    return (PyObject *)result;
+}
+
+static PyObject *
+U16Vector3_to_u8(U16Vector3 *self, void *)
+{
+    auto module_state = get_module_state();
+    if (!module_state){ return 0; }
+    auto cls = module_state->U8Vector3_PyTypeObject;
+    auto *result = (U8Vector3 *)cls->tp_alloc(cls, 0);
+    if (!result){ return 0; }
+    result->glm = new U8Vector3Glm(*self->glm);
+    return (PyObject *)result;
+}
+
+static PyObject *
+U16Vector3_to_i16(U16Vector3 *self, void *)
+{
+    auto module_state = get_module_state();
+    if (!module_state){ return 0; }
+    auto cls = module_state->I16Vector3_PyTypeObject;
+    auto *result = (I16Vector3 *)cls->tp_alloc(cls, 0);
+    if (!result){ return 0; }
+    result->glm = new I16Vector3Glm(*self->glm);
+    return (PyObject *)result;
+}
+
+static PyObject *
+U16Vector3_to_i32(U16Vector3 *self, void *)
+{
+    auto module_state = get_module_state();
+    if (!module_state){ return 0; }
+    auto cls = module_state->I32Vector3_PyTypeObject;
+    auto *result = (I32Vector3 *)cls->tp_alloc(cls, 0);
+    if (!result){ return 0; }
+    result->glm = new I32Vector3Glm(*self->glm);
+    return (PyObject *)result;
+}
+
+static PyObject *
+U16Vector3_to_u32(U16Vector3 *self, void *)
+{
+    auto module_state = get_module_state();
+    if (!module_state){ return 0; }
+    auto cls = module_state->U32Vector3_PyTypeObject;
+    auto *result = (U32Vector3 *)cls->tp_alloc(cls, 0);
+    if (!result){ return 0; }
+    result->glm = new U32Vector3Glm(*self->glm);
+    return (PyObject *)result;
+}
+
+static PyObject *
+U16Vector3_to_i(U16Vector3 *self, void *)
+{
+    auto module_state = get_module_state();
+    if (!module_state){ return 0; }
+    auto cls = module_state->IVector3_PyTypeObject;
+    auto *result = (IVector3 *)cls->tp_alloc(cls, 0);
+    if (!result){ return 0; }
+    result->glm = new IVector3Glm(*self->glm);
+    return (PyObject *)result;
+}
+
+static PyObject *
+U16Vector3_to_u(U16Vector3 *self, void *)
+{
+    auto module_state = get_module_state();
+    if (!module_state){ return 0; }
+    auto cls = module_state->UVector3_PyTypeObject;
+    auto *result = (UVector3 *)cls->tp_alloc(cls, 0);
+    if (!result){ return 0; }
+    result->glm = new UVector3Glm(*self->glm);
+    return (PyObject *)result;
+}
+
+static PyObject *
+U16Vector3_to_i64(U16Vector3 *self, void *)
+{
+    auto module_state = get_module_state();
+    if (!module_state){ return 0; }
+    auto cls = module_state->I64Vector3_PyTypeObject;
+    auto *result = (I64Vector3 *)cls->tp_alloc(cls, 0);
+    if (!result){ return 0; }
+    result->glm = new I64Vector3Glm(*self->glm);
+    return (PyObject *)result;
+}
+
+static PyObject *
+U16Vector3_to_u64(U16Vector3 *self, void *)
+{
+    auto module_state = get_module_state();
+    if (!module_state){ return 0; }
+    auto cls = module_state->U64Vector3_PyTypeObject;
+    auto *result = (U64Vector3 *)cls->tp_alloc(cls, 0);
+    if (!result){ return 0; }
+    result->glm = new U64Vector3Glm(*self->glm);
+    return (PyObject *)result;
+}
+
+
+
 static PyMethodDef U16Vector3_PyMethodDef[] = {
 
     {"min", (PyCFunction)U16Vector3_min, METH_O, 0},
@@ -1080,6 +1226,31 @@ static PyMethodDef U16Vector3_PyMethodDef[] = {
     {"get_size", (PyCFunction)U16Vector3_get_size, METH_NOARGS | METH_STATIC, 0},
     {"get_array_type", (PyCFunction)U16Vector3_get_array_type, METH_NOARGS | METH_STATIC, 0},
     {"from_buffer", (PyCFunction)U16Vector3_from_buffer, METH_O | METH_CLASS, 0},
+
+        {"to_b", (PyCFunction)U16Vector3_to_b, METH_NOARGS, 0},
+
+        {"to_d", (PyCFunction)U16Vector3_to_d, METH_NOARGS, 0},
+
+        {"to_f", (PyCFunction)U16Vector3_to_f, METH_NOARGS, 0},
+
+        {"to_i8", (PyCFunction)U16Vector3_to_i8, METH_NOARGS, 0},
+
+        {"to_u8", (PyCFunction)U16Vector3_to_u8, METH_NOARGS, 0},
+
+        {"to_i16", (PyCFunction)U16Vector3_to_i16, METH_NOARGS, 0},
+
+        {"to_i32", (PyCFunction)U16Vector3_to_i32, METH_NOARGS, 0},
+
+        {"to_u32", (PyCFunction)U16Vector3_to_u32, METH_NOARGS, 0},
+
+        {"to_i", (PyCFunction)U16Vector3_to_i, METH_NOARGS, 0},
+
+        {"to_u", (PyCFunction)U16Vector3_to_u, METH_NOARGS, 0},
+
+        {"to_i64", (PyCFunction)U16Vector3_to_i64, METH_NOARGS, 0},
+
+        {"to_u64", (PyCFunction)U16Vector3_to_u64, METH_NOARGS, 0},
+
     {0, 0, 0, 0}
 };
 

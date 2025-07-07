@@ -71,7 +71,7 @@ static PyObject *
             {% endfor %}
             glm = new {{ name }}Glm(
                 {% for i in range(row_size) %}
-                    *(({{ column_type }} *)p_{{ i }})->glm{% if i != row_size - 1 %}, {% endif %}
+                    (({{ column_type }} *)p_{{ i }})->glm{% if i != row_size - 1 %}, {% endif %}
                 {% endfor %}
             );
 
@@ -424,9 +424,9 @@ static PyObject *
             {
                 auto result = ({{ name[0] }}Vector3 *)vector3_cls->tp_alloc(vector3_cls, 0);
                 if (!result){ return 0; }
-                result->glm = new {{ name[0] }}Vector3Glm(
+                result->glm = {{ name[0] }}Vector3Glm(
                     (*(({{ name }} *)left)->glm) * {{ name[0] }}Vector4Glm(
-                        *(({{ name[0] }}Vector3 *)right)->glm,
+                        (({{ name[0] }}Vector3 *)right)->glm,
                         1
                     )
                 );
@@ -442,8 +442,8 @@ static PyObject *
             {
                 {{ column_type }} *result = ({{ column_type }} *)column_cls->tp_alloc(column_cls, 0);
                 if (!result){ return 0; }
-                result->glm = new {{ column_type }}Glm(
-                    (*(({{ name }} *)left)->glm) * (*(({{ row_type }} *)right)->glm)
+                result->glm = {{ column_type }}Glm(
+                    (*(({{ name }} *)left)->glm) * ((({{ row_type }} *)right)->glm)
                 );
                 return (PyObject *)result;
             }
@@ -458,9 +458,9 @@ static PyObject *
             {
                 auto result = ({{ name[0] }}Vector3 *)vector3_cls->tp_alloc(vector3_cls, 0);
                 if (!result){ return 0; }
-                result->glm = new {{ name[0] }}Vector3Glm(
+                result->glm = {{ name[0] }}Vector3Glm(
                      {{ name[0] }}Vector4Glm(
-                        *(({{ name[0] }}Vector3 *)left)->glm,
+                        (({{ name[0] }}Vector3 *)left)->glm,
                         1
                     ) * (*(({{ name }} *)right)->glm)
                 );
@@ -475,8 +475,8 @@ static PyObject *
         {
             {{ row_type }} *result = ({{ row_type }} *)row_cls->tp_alloc(row_cls, 0);
             if (!result){ return 0; }
-            result->glm = new {{ row_type }}Glm(
-                (*(({{ column_type }} *)left)->glm) * (*(({{ name }} *)right)->glm)
+            result->glm = {{ row_type }}Glm(
+                ((({{ column_type }} *)left)->glm) * (*(({{ name }} *)right)->glm)
             );
             return (PyObject *)result;
         }
@@ -512,8 +512,8 @@ static PyObject *
             {
                 {{ row_type }} *result = ({{ row_type }} *)row_cls->tp_alloc(row_cls, 0);
                 if (!result){ return 0; }
-                result->glm = new {{ row_type }}Glm(
-                    (*(({{ name }} *)left)->glm) / (*(({{ row_type }} *)right)->glm)
+                result->glm = {{ row_type }}Glm(
+                    (*(({{ name }} *)left)->glm) / ((({{ row_type }} *)right)->glm)
                 );
                 return (PyObject *)result;
             }
@@ -533,8 +533,8 @@ static PyObject *
             {
                 {{ row_type }} *result = ({{ row_type }} *)row_cls->tp_alloc(row_cls, 0);
                 if (!result){ return 0; }
-                result->glm = new {{ row_type }}Glm(
-                    (*(({{ row_type }} *)left)->glm) / (*(({{ name }} *)right)->glm)
+                result->glm = {{ row_type }}Glm(
+                    ((({{ row_type }} *)left)->glm) / (*(({{ name }} *)right)->glm)
                 );
                 return (PyObject *)result;
             }
@@ -683,7 +683,7 @@ static PyGetSetDef {{ name }}_PyGetSetDef[] = {
         }
         {{ name[0] }}Vector3 *vector = ({{ name[0] }}Vector3 *)args[1];
 
-        auto matrix = glm::rotate(*self->glm, angle, *vector->glm);
+        auto matrix = glm::rotate(*self->glm, angle, vector->glm);
 
         auto cls = Py_TYPE(self);
         auto *result = ({{ name }} *)cls->tp_alloc(cls, 0);
@@ -711,7 +711,7 @@ static PyGetSetDef {{ name }}_PyGetSetDef[] = {
         }
         {{ name[0] }}Vector3 *vector = ({{ name[0] }}Vector3 *)args[0];
 
-        auto matrix = glm::scale(*self->glm, *vector->glm);
+        auto matrix = glm::scale(*self->glm, vector->glm);
 
         auto cls = Py_TYPE(self);
         auto *result = ({{ name }} *)cls->tp_alloc(cls, 0);
@@ -739,7 +739,7 @@ static PyGetSetDef {{ name }}_PyGetSetDef[] = {
         }
         {{ name[0] }}Vector3 *vector = ({{ name[0] }}Vector3 *)args[0];
 
-        auto matrix = glm::translate(*self->glm, *vector->glm);
+        auto matrix = glm::translate(*self->glm, vector->glm);
 
         auto cls = Py_TYPE(self);
         auto *result = ({{ name }} *)cls->tp_alloc(cls, 0);
@@ -834,7 +834,7 @@ static PyGetSetDef {{ name }}_PyGetSetDef[] = {
 
         auto *result = ({{ name }} *)cls->tp_alloc(cls, 0);
         if (!result){ return 0; }
-        result->glm = new {{ name }}Glm(glm::lookAt(*eye->glm, *center->glm, *up->glm));
+        result->glm = new {{ name }}Glm(glm::lookAt(eye->glm, center->glm, up->glm));
         return result;
     }
 
@@ -893,7 +893,7 @@ static {{ row_type }} *
     auto *result = ({{ row_type }} *)row_cls->tp_alloc(row_cls, 0);
     if (!result){ return 0; }
     auto row = glm::row(*self->glm, index);
-    result->glm = new {{ row_type }}Glm(row);
+    result->glm = {{ row_type }}Glm(row);
     return result;
 }
 

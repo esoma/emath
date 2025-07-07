@@ -86,6 +86,26 @@ PyInit__emath()
         PyObject *ctypes = PyImport_ImportModule("ctypes");
         if (!ctypes){ goto error; }
 
+        {
+            auto c_cast = PyObject_GetAttrString(ctypes, "cast");
+            if (!c_cast)
+            {
+                Py_DECREF(ctypes);
+                goto error;
+            }
+            state->ctypes_cast = c_cast;
+        }
+
+        {
+            auto c_type = PyObject_GetAttrString(ctypes, "c_void_p");
+            if (!c_type)
+            {
+                Py_DECREF(ctypes);
+                goto error;
+            }
+            state->ctypes_c_void_p = c_type;
+        }
+
         PyObject *ctypes_pointer = PyObject_GetAttrString(ctypes, "POINTER");
         if (!ctypes_pointer)
         {

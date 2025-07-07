@@ -95,11 +95,11 @@ FMatrix3x4__new__(PyTypeObject *cls, PyObject *args, PyObject *kwds)
 
             glm = new FMatrix3x4Glm(
 
-                    *((FVector4 *)p_0)->glm,
+                    ((FVector4 *)p_0)->glm,
 
-                    *((FVector4 *)p_1)->glm,
+                    ((FVector4 *)p_1)->glm,
 
-                    *((FVector4 *)p_2)->glm
+                    ((FVector4 *)p_2)->glm
 
             );
 
@@ -808,8 +808,8 @@ FMatrix3x4__matmul__(PyObject *left, PyObject *right)
             {
                 FVector4 *result = (FVector4 *)column_cls->tp_alloc(column_cls, 0);
                 if (!result){ return 0; }
-                result->glm = new FVector4Glm(
-                    (*((FMatrix3x4 *)left)->glm) * (*((FVector3 *)right)->glm)
+                result->glm = FVector4Glm(
+                    (*((FMatrix3x4 *)left)->glm) * (((FVector3 *)right)->glm)
                 );
                 return (PyObject *)result;
             }
@@ -825,8 +825,8 @@ FMatrix3x4__matmul__(PyObject *left, PyObject *right)
         {
             FVector3 *result = (FVector3 *)row_cls->tp_alloc(row_cls, 0);
             if (!result){ return 0; }
-            result->glm = new FVector3Glm(
-                (*((FVector4 *)left)->glm) * (*((FMatrix3x4 *)right)->glm)
+            result->glm = FVector3Glm(
+                (((FVector4 *)left)->glm) * (*((FMatrix3x4 *)right)->glm)
             );
             return (PyObject *)result;
         }
@@ -993,7 +993,7 @@ FMatrix3x4_get_row(FMatrix3x4 *self, PyObject *const *args, Py_ssize_t nargs)
     auto *result = (FVector3 *)row_cls->tp_alloc(row_cls, 0);
     if (!result){ return 0; }
     auto row = glm::row(*self->glm, index);
-    result->glm = new FVector3Glm(row);
+    result->glm = FVector3Glm(row);
     return result;
 }
 

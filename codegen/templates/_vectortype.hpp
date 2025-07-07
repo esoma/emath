@@ -19,7 +19,7 @@ struct {{ name }}
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    {{ name }}Glm *glm;
+    {{ name }}Glm glm;
 };
 
 static {{ name }} *

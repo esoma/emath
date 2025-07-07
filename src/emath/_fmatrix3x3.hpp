@@ -95,11 +95,11 @@ FMatrix3x3__new__(PyTypeObject *cls, PyObject *args, PyObject *kwds)
 
             glm = new FMatrix3x3Glm(
 
-                    *((FVector3 *)p_0)->glm,
+                    ((FVector3 *)p_0)->glm,
 
-                    *((FVector3 *)p_1)->glm,
+                    ((FVector3 *)p_1)->glm,
 
-                    *((FVector3 *)p_2)->glm
+                    ((FVector3 *)p_2)->glm
 
             );
 
@@ -704,8 +704,8 @@ FMatrix3x3__matmul__(PyObject *left, PyObject *right)
             {
                 FVector3 *result = (FVector3 *)column_cls->tp_alloc(column_cls, 0);
                 if (!result){ return 0; }
-                result->glm = new FVector3Glm(
-                    (*((FMatrix3x3 *)left)->glm) * (*((FVector3 *)right)->glm)
+                result->glm = FVector3Glm(
+                    (*((FMatrix3x3 *)left)->glm) * (((FVector3 *)right)->glm)
                 );
                 return (PyObject *)result;
             }
@@ -721,8 +721,8 @@ FMatrix3x3__matmul__(PyObject *left, PyObject *right)
         {
             FVector3 *result = (FVector3 *)row_cls->tp_alloc(row_cls, 0);
             if (!result){ return 0; }
-            result->glm = new FVector3Glm(
-                (*((FVector3 *)left)->glm) * (*((FMatrix3x3 *)right)->glm)
+            result->glm = FVector3Glm(
+                (((FVector3 *)left)->glm) * (*((FMatrix3x3 *)right)->glm)
             );
             return (PyObject *)result;
         }
@@ -758,8 +758,8 @@ FMatrix3x3__truediv__(PyObject *left, PyObject *right)
             {
                 FVector3 *result = (FVector3 *)row_cls->tp_alloc(row_cls, 0);
                 if (!result){ return 0; }
-                result->glm = new FVector3Glm(
-                    (*((FMatrix3x3 *)left)->glm) / (*((FVector3 *)right)->glm)
+                result->glm = FVector3Glm(
+                    (*((FMatrix3x3 *)left)->glm) / (((FVector3 *)right)->glm)
                 );
                 return (PyObject *)result;
             }
@@ -779,8 +779,8 @@ FMatrix3x3__truediv__(PyObject *left, PyObject *right)
             {
                 FVector3 *result = (FVector3 *)row_cls->tp_alloc(row_cls, 0);
                 if (!result){ return 0; }
-                result->glm = new FVector3Glm(
-                    (*((FVector3 *)left)->glm) / (*((FMatrix3x3 *)right)->glm)
+                result->glm = FVector3Glm(
+                    (((FVector3 *)left)->glm) / (*((FMatrix3x3 *)right)->glm)
                 );
                 return (PyObject *)result;
             }
@@ -949,7 +949,7 @@ FMatrix3x3_get_row(FMatrix3x3 *self, PyObject *const *args, Py_ssize_t nargs)
     auto *result = (FVector3 *)row_cls->tp_alloc(row_cls, 0);
     if (!result){ return 0; }
     auto row = glm::row(*self->glm, index);
-    result->glm = new FVector3Glm(row);
+    result->glm = FVector3Glm(row);
     return result;
 }
 

@@ -325,8 +325,8 @@ DQuaternion__matmul__(PyObject *left, PyObject *right)
         {
             auto result = (DVector3 *)vector3_cls->tp_alloc(vector3_cls, 0);
             if (!result){ return 0; }
-            result->glm = new DVector3Glm(
-                (*((DQuaternion *)left)->glm) * (*((DVector3 *)right)->glm)
+            result->glm = DVector3Glm(
+                (*((DQuaternion *)left)->glm) * (((DVector3 *)right)->glm)
             );
             return (PyObject *)result;
         }
@@ -334,8 +334,8 @@ DQuaternion__matmul__(PyObject *left, PyObject *right)
         {
             auto result = (DVector4 *)vector4_cls->tp_alloc(vector4_cls, 0);
             if (!result){ return 0; }
-            result->glm = new DVector4Glm(
-                (*((DQuaternion *)left)->glm) * (*((DVector4 *)right)->glm)
+            result->glm = DVector4Glm(
+                (*((DQuaternion *)left)->glm) * (((DVector4 *)right)->glm)
             );
             return (PyObject *)result;
         }
@@ -346,8 +346,8 @@ DQuaternion__matmul__(PyObject *left, PyObject *right)
         {
             auto result = (DVector3 *)vector3_cls->tp_alloc(vector3_cls, 0);
             if (!result){ return 0; }
-            result->glm = new DVector3Glm(
-                (*((DVector3 *)left)->glm) * (*((DQuaternion *)right)->glm)
+            result->glm = DVector3Glm(
+                (((DVector3 *)left)->glm) * (*((DQuaternion *)right)->glm)
             );
             return (PyObject *)result;
         }
@@ -355,8 +355,8 @@ DQuaternion__matmul__(PyObject *left, PyObject *right)
         {
             auto result = (DVector4 *)vector4_cls->tp_alloc(vector4_cls, 0);
             if (!result){ return 0; }
-            result->glm = new DVector4Glm(
-                (*((DVector4 *)left)->glm) * (*((DQuaternion *)right)->glm)
+            result->glm = DVector4Glm(
+                (((DVector4 *)left)->glm) * (*((DQuaternion *)right)->glm)
             );
             return (PyObject *)result;
         }
@@ -553,7 +553,7 @@ DQuaternion_rotate(DQuaternion *self, PyObject *const *args, Py_ssize_t nargs)
     }
     DVector3 *vector = (DVector3 *)args[1];
 
-    auto quat = glm::rotate(*self->glm, angle, *vector->glm);
+    auto quat = glm::rotate(*self->glm, angle, vector->glm);
 
     auto cls = Py_TYPE(self);
     auto *result = (DQuaternion *)cls->tp_alloc(cls, 0);

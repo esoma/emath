@@ -12,6 +12,8 @@
 
 struct ModuleState
 {
+    PyObject *ctypes_cast;
+    PyObject *ctypes_c_void_p;
     PyObject *ctypes_c_bool_p;
     PyObject *ctypes_c_int8_t_p;
     PyObject *ctypes_c_uint8_t_p;
@@ -42,6 +44,8 @@ ModuleState_traverse(
     void *arg
 )
 {
+    Py_VISIT(self->ctypes_cast);
+    Py_VISIT(self->ctypes_c_void_p);
     Py_VISIT(self->ctypes_c_bool_p);
     Py_VISIT(self->ctypes_c_int8_t_p);
     Py_VISIT(self->ctypes_c_uint8_t_p);
@@ -69,6 +73,8 @@ ModuleState_traverse(
 static int
 ModuleState_clear(struct ModuleState *self)
 {
+    Py_CLEAR(self->ctypes_cast);
+    Py_CLEAR(self->ctypes_c_void_p);
     Py_CLEAR(self->ctypes_c_bool_p);
     Py_CLEAR(self->ctypes_c_int8_t_p);
     Py_CLEAR(self->ctypes_c_uint8_t_p);

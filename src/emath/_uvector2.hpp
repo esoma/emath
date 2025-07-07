@@ -94,7 +94,7 @@ UVector2__new__(PyTypeObject *cls, PyObject *args, PyObject *kwds)
 
     UVector2 *self = (UVector2*)cls->tp_alloc(cls, 0);
     if (!self){ return 0; }
-    self->glm = new UVector2Glm(
+    self->glm = UVector2Glm(
 
             c_0,
 
@@ -113,8 +113,6 @@ UVector2__dealloc__(UVector2 *self)
     {
         PyObject_ClearWeakRefs((PyObject *)self);
     }
-
-    delete self->glm;
 
     PyTypeObject *type = Py_TYPE(self);
     type->tp_free(self);
@@ -142,7 +140,7 @@ UVector2__hash__(UVector2 *self)
     Py_uhash_t acc = _HASH_XXPRIME_5;
     for (UVector2Glm::length_type i = 0; i < len; i++)
     {
-        Py_uhash_t lane = std::hash<unsigned int>{}((*self->glm)[i]);
+        Py_uhash_t lane = std::hash<unsigned int>{}(self->glm[i]);
         acc += lane * _HASH_XXPRIME_2;
         acc = _HASH_XXROTATE(acc);
         acc *= _HASH_XXPRIME_1;
@@ -167,10 +165,10 @@ UVector2__repr__(UVector2 *self)
 
 
 
-        py_0 = c_unsigned_int_to_pyobject((*self->glm)[0]);
+        py_0 = c_unsigned_int_to_pyobject(self->glm[0]);
         if (!py_0){ goto cleanup; }
 
-        py_1 = c_unsigned_int_to_pyobject((*self->glm)[1]);
+        py_1 = c_unsigned_int_to_pyobject(self->glm[1]);
         if (!py_1){ goto cleanup; }
 
     result = PyUnicode_FromFormat(
@@ -212,7 +210,7 @@ UVector2__getitem__(UVector2 *self, Py_ssize_t index)
         PyErr_Format(PyExc_IndexError, "index out of range");
         return 0;
     }
-    auto c = (*self->glm)[(UVector2Glm::length_type)index];
+    auto c = self->glm[(UVector2Glm::length_type)index];
     return c_unsigned_int_to_pyobject(c);
 }
 
@@ -231,11 +229,11 @@ UVector2__richcmp__(UVector2 *self, UVector2 *other, int op)
         {
             for (UVector2Glm::length_type i = 0; i < 2; i++)
             {
-                if ((*self->glm)[i] < (*other->glm)[i])
+                if (self->glm[i] < other->glm[i])
                 {
                     Py_RETURN_TRUE;
                 }
-                if ((*self->glm)[i] != (*other->glm)[i])
+                if (self->glm[i] != other->glm[i])
                 {
                     Py_RETURN_FALSE;
                 }
@@ -246,11 +244,11 @@ UVector2__richcmp__(UVector2 *self, UVector2 *other, int op)
         {
             for (UVector2Glm::length_type i = 0; i < 2; i++)
             {
-                if ((*self->glm)[i] < (*other->glm)[i])
+                if (self->glm[i] < other->glm[i])
                 {
                     Py_RETURN_TRUE;
                 }
-                if ((*self->glm)[i] != (*other->glm)[i])
+                if (self->glm[i] != other->glm[i])
                 {
                     Py_RETURN_FALSE;
                 }
@@ -259,7 +257,7 @@ UVector2__richcmp__(UVector2 *self, UVector2 *other, int op)
         }
         case Py_EQ:
         {
-            if ((*self->glm) == (*other->glm))
+            if (self->glm == other->glm)
             {
                 Py_RETURN_TRUE;
             }
@@ -270,7 +268,7 @@ UVector2__richcmp__(UVector2 *self, UVector2 *other, int op)
         }
         case Py_NE:
         {
-            if ((*self->glm) != (*other->glm))
+            if (self->glm != other->glm)
             {
                 Py_RETURN_TRUE;
             }
@@ -283,11 +281,11 @@ UVector2__richcmp__(UVector2 *self, UVector2 *other, int op)
         {
             for (UVector2Glm::length_type i = 0; i < 2; i++)
             {
-                if ((*self->glm)[i] > (*other->glm)[i])
+                if (self->glm[i] > other->glm[i])
                 {
                     Py_RETURN_TRUE;
                 }
-                if ((*self->glm)[i] != (*other->glm)[i])
+                if (self->glm[i] != other->glm[i])
                 {
                     Py_RETURN_FALSE;
                 }
@@ -298,11 +296,11 @@ UVector2__richcmp__(UVector2 *self, UVector2 *other, int op)
         {
             for (UVector2Glm::length_type i = 0; i < 2; i++)
             {
-                if ((*self->glm)[i] > (*other->glm)[i])
+                if (self->glm[i] > other->glm[i])
                 {
                     Py_RETURN_TRUE;
                 }
-                if ((*self->glm)[i] != (*other->glm)[i])
+                if (self->glm[i] != other->glm[i])
                 {
                     Py_RETURN_FALSE;
                 }
@@ -324,7 +322,7 @@ UVector2__add__(PyObject *left, PyObject *right)
     UVector2Glm vector;
     if (Py_TYPE(left) == Py_TYPE(right))
     {
-        vector = (*((UVector2 *)left)->glm) + (*((UVector2 *)right)->glm);
+        vector = ((UVector2 *)left)->glm + ((UVector2 *)right)->glm;
     }
     else
     {
@@ -332,19 +330,19 @@ UVector2__add__(PyObject *left, PyObject *right)
         {
             auto c_right = pyobject_to_c_unsigned_int(right);
             if (PyErr_Occurred()){ PyErr_Clear(); Py_RETURN_NOTIMPLEMENTED; }
-            vector = (*((UVector2 *)left)->glm) + c_right;
+            vector = ((UVector2 *)left)->glm + c_right;
         }
         else
         {
             auto c_left = pyobject_to_c_unsigned_int(left);
             if (PyErr_Occurred()){ PyErr_Clear(); Py_RETURN_NOTIMPLEMENTED; }
-            vector = c_left + (*((UVector2 *)right)->glm);
+            vector = c_left + ((UVector2 *)right)->glm;
         }
     }
 
     UVector2 *result = (UVector2 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new UVector2Glm(
+    result->glm = UVector2Glm(
 
             vector[0],
 
@@ -366,7 +364,7 @@ UVector2__sub__(PyObject *left, PyObject *right)
     UVector2Glm vector;
     if (Py_TYPE(left) == Py_TYPE(right))
     {
-        vector = (*((UVector2 *)left)->glm) - (*((UVector2 *)right)->glm);
+        vector = ((UVector2 *)left)->glm - ((UVector2 *)right)->glm;
     }
     else
     {
@@ -374,19 +372,19 @@ UVector2__sub__(PyObject *left, PyObject *right)
         {
             auto c_right = pyobject_to_c_unsigned_int(right);
             if (PyErr_Occurred()){ PyErr_Clear(); Py_RETURN_NOTIMPLEMENTED; }
-            vector = (*((UVector2 *)left)->glm) - c_right;
+            vector = ((UVector2 *)left)->glm - c_right;
         }
         else
         {
             auto c_left = pyobject_to_c_unsigned_int(left);
             if (PyErr_Occurred()){ PyErr_Clear(); Py_RETURN_NOTIMPLEMENTED; }
-            vector = c_left - (*((UVector2 *)right)->glm);
+            vector = c_left - ((UVector2 *)right)->glm;
         }
     }
 
     UVector2 *result = (UVector2 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new UVector2Glm(
+    result->glm = UVector2Glm(
 
             vector[0],
 
@@ -408,7 +406,7 @@ UVector2__mul__(PyObject *left, PyObject *right)
     UVector2Glm vector;
     if (Py_TYPE(left) == Py_TYPE(right))
     {
-        vector = (*((UVector2 *)left)->glm) * (*((UVector2 *)right)->glm);
+        vector = ((UVector2 *)left)->glm * ((UVector2 *)right)->glm;
     }
     else
     {
@@ -416,19 +414,19 @@ UVector2__mul__(PyObject *left, PyObject *right)
         {
             auto c_right = pyobject_to_c_unsigned_int(right);
             if (PyErr_Occurred()){ PyErr_Clear(); Py_RETURN_NOTIMPLEMENTED; }
-            vector = (*((UVector2 *)left)->glm) * c_right;
+            vector = ((UVector2 *)left)->glm * c_right;
         }
         else
         {
             auto c_left = pyobject_to_c_unsigned_int(left);
             if (PyErr_Occurred()){ PyErr_Clear(); Py_RETURN_NOTIMPLEMENTED; }
-            vector = c_left * (*((UVector2 *)right)->glm);
+            vector = c_left * ((UVector2 *)right)->glm;
         }
     }
 
     UVector2 *result = (UVector2 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new UVector2Glm(
+    result->glm = UVector2Glm(
 
             vector[0],
 
@@ -458,9 +456,9 @@ UVector2__mul__(PyObject *left, PyObject *right)
 
                 if (
 
-                        (*((UVector2 *)right)->glm)[0] == 0 ||
+                        ((UVector2 *)right)->glm[0] == 0 ||
 
-                        (*((UVector2 *)right)->glm)[1] == 0
+                        ((UVector2 *)right)->glm[1] == 0
 
                 )
                 {
@@ -468,7 +466,7 @@ UVector2__mul__(PyObject *left, PyObject *right)
                     return 0;
                 }
 
-            vector = (*((UVector2 *)left)->glm) / (*((UVector2 *)right)->glm);
+            vector = ((UVector2 *)left)->glm / ((UVector2 *)right)->glm;
         }
         else
         {
@@ -483,7 +481,7 @@ UVector2__mul__(PyObject *left, PyObject *right)
                         return 0;
                     }
 
-                vector = (*((UVector2 *)left)->glm) / c_right;
+                vector = ((UVector2 *)left)->glm / c_right;
             }
             else
             {
@@ -492,9 +490,9 @@ UVector2__mul__(PyObject *left, PyObject *right)
 
                     if (
 
-                            (*((UVector2 *)right)->glm)[0] == 0 ||
+                            ((UVector2 *)right)->glm[0] == 0 ||
 
-                            (*((UVector2 *)right)->glm)[1] == 0
+                            ((UVector2 *)right)->glm[1] == 0
 
                     )
                     {
@@ -502,13 +500,13 @@ UVector2__mul__(PyObject *left, PyObject *right)
                         return 0;
                     }
 
-                vector = c_left / (*((UVector2 *)right)->glm);
+                vector = c_left / ((UVector2 *)right)->glm;
             }
         }
 
         UVector2 *result = (UVector2 *)cls->tp_alloc(cls, 0);
         if (!result){ return 0; }
-        result->glm = new UVector2Glm(
+        result->glm = UVector2Glm(
 
                 vector[0],
 
@@ -528,11 +526,11 @@ static PyObject *
 UVector2__abs__(UVector2 *self)
 {
     auto cls = Py_TYPE(self);
-    UVector2Glm vector = glm::abs(*self->glm);
+    UVector2Glm vector = glm::abs(self->glm);
 
     UVector2 *result = (UVector2 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new UVector2Glm(
+    result->glm = UVector2Glm(
 
             vector[0],
 
@@ -548,12 +546,12 @@ static int
 UVector2__bool__(UVector2 *self)
 {
 
-        if ((*self->glm)[0] == 0)
+        if (self->glm[0] == 0)
         {
             return 0;
         }
 
-        if ((*self->glm)[1] == 0)
+        if (self->glm[1] == 0)
         {
             return 0;
         }
@@ -571,7 +569,7 @@ UVector2_getbufferproc(UVector2 *self, Py_buffer *view, int flags)
         view->obj = 0;
         return -1;
     }
-    view->buf = self->glm;
+    view->buf = &self->glm;
     view->obj = (PyObject *)self;
     view->len = sizeof(unsigned int) * 2;
     view->readonly = 1;
@@ -613,14 +611,14 @@ UVector2_getbufferproc(UVector2 *self, Py_buffer *view, int flags)
     static PyObject *
     UVector2_Getter_0(UVector2 *self, void *)
     {
-        auto c = (*self->glm)[0];
+        auto c = self->glm[0];
         return c_unsigned_int_to_pyobject(c);
     }
 
     static PyObject *
     UVector2_Getter_1(UVector2 *self, void *)
     {
-        auto c = (*self->glm)[1];
+        auto c = self->glm[1];
         return c_unsigned_int_to_pyobject(c);
     }
 
@@ -634,8 +632,15 @@ UVector2_pointer(UVector2 *self, void *)
 {
     auto module_state = get_module_state();
     if (!module_state){ return 0; }
+
+    auto void_p_cls = module_state->ctypes_c_void_p;
+    auto void_p = PyObject_CallFunction(void_p_cls, "n", (Py_ssize_t)&self->glm);
+    if (!void_p){ return 0; }
+
     auto c_p = module_state->ctypes_c_unsigned_int_p;
-    return PyObject_CallMethod(c_p, "from_address", "n", (Py_ssize_t)&self->glm);
+    auto result = PyObject_CallFunction(module_state->ctypes_cast, "OO", void_p, c_p);
+    Py_DECREF(void_p);
+    return result;
 }
 
 
@@ -703,7 +708,7 @@ static PyGetSetDef UVector2_PyGetSetDef[] = {
                     return 0;
                 }
             }
-            vec[i] = (*self->glm)[glm_index];
+            vec[i] = self->glm[glm_index];
         }
 
         auto module_state = get_module_state();
@@ -712,7 +717,7 @@ static PyGetSetDef UVector2_PyGetSetDef[] = {
 
         UVector2 *result = (UVector2 *)cls->tp_alloc(cls, 0);
         if (!result){ return 0; }
-        result->glm = new UVector2Glm(vec);
+        result->glm = UVector2Glm(vec);
 
         return (PyObject *)result;
     }
@@ -763,7 +768,7 @@ static PyGetSetDef UVector2_PyGetSetDef[] = {
                     return 0;
                 }
             }
-            vec[i] = (*self->glm)[glm_index];
+            vec[i] = self->glm[glm_index];
         }
 
         auto module_state = get_module_state();
@@ -772,7 +777,7 @@ static PyGetSetDef UVector2_PyGetSetDef[] = {
 
         UVector3 *result = (UVector3 *)cls->tp_alloc(cls, 0);
         if (!result){ return 0; }
-        result->glm = new UVector3Glm(vec);
+        result->glm = UVector3Glm(vec);
 
         return (PyObject *)result;
     }
@@ -823,7 +828,7 @@ static PyGetSetDef UVector2_PyGetSetDef[] = {
                     return 0;
                 }
             }
-            vec[i] = (*self->glm)[glm_index];
+            vec[i] = self->glm[glm_index];
         }
 
         auto module_state = get_module_state();
@@ -832,7 +837,7 @@ static PyGetSetDef UVector2_PyGetSetDef[] = {
 
         UVector4 *result = (UVector4 *)cls->tp_alloc(cls, 0);
         if (!result){ return 0; }
-        result->glm = new UVector4Glm(vec);
+        result->glm = UVector4Glm(vec);
 
         return (PyObject *)result;
     }
@@ -884,10 +889,10 @@ UVector2_min(UVector2 *self, PyObject *min)
     auto c_min = pyobject_to_c_unsigned_int(min);
     if (PyErr_Occurred()){ return 0; }
     auto cls = Py_TYPE(self);
-    auto vector = glm::min(*self->glm, c_min);
+    auto vector = glm::min(self->glm, c_min);
     UVector2 *result = (UVector2 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new UVector2Glm(vector);
+    result->glm = UVector2Glm(vector);
     return (PyObject *)result;
 }
 
@@ -898,10 +903,10 @@ UVector2_max(UVector2 *self, PyObject *max)
     auto c_max = pyobject_to_c_unsigned_int(max);
     if (PyErr_Occurred()){ return 0; }
     auto cls = Py_TYPE(self);
-    auto vector = glm::max(*self->glm, c_max);
+    auto vector = glm::max(self->glm, c_max);
     UVector2 *result = (UVector2 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new UVector2Glm(vector);
+    result->glm = UVector2Glm(vector);
     return (PyObject *)result;
 }
 
@@ -920,10 +925,10 @@ UVector2_clamp(UVector2 *self, PyObject *const *args, Py_ssize_t nargs)
     if (PyErr_Occurred()){ return 0; }
 
     auto cls = Py_TYPE(self);
-    auto vector = glm::clamp(*self->glm, c_min, c_max);
+    auto vector = glm::clamp(self->glm, c_min, c_max);
     UVector2 *result = (UVector2 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new UVector2Glm(vector);
+    result->glm = UVector2Glm(vector);
     return (PyObject *)result;
 }
 
@@ -981,8 +986,7 @@ UVector2_from_buffer(PyTypeObject *cls, PyObject *buffer)
         PyBuffer_Release(&view);
         return 0;
     }
-    result->glm = new UVector2Glm();
-    std::memcpy(result->glm, view.buf, expected_size);
+    std::memcpy(&result->glm, view.buf, expected_size);
     PyBuffer_Release(&view);
     return (PyObject *)result;
 }
@@ -1007,7 +1011,7 @@ UVector2_to_b(UVector2 *self, void *)
     auto cls = module_state->BVector2_PyTypeObject;
     auto *result = (BVector2 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new BVector2Glm(*self->glm);
+    result->glm = BVector2Glm(self->glm);
     return (PyObject *)result;
 }
 
@@ -1019,7 +1023,7 @@ UVector2_to_d(UVector2 *self, void *)
     auto cls = module_state->DVector2_PyTypeObject;
     auto *result = (DVector2 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new DVector2Glm(*self->glm);
+    result->glm = DVector2Glm(self->glm);
     return (PyObject *)result;
 }
 
@@ -1031,7 +1035,7 @@ UVector2_to_f(UVector2 *self, void *)
     auto cls = module_state->FVector2_PyTypeObject;
     auto *result = (FVector2 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new FVector2Glm(*self->glm);
+    result->glm = FVector2Glm(self->glm);
     return (PyObject *)result;
 }
 
@@ -1043,7 +1047,7 @@ UVector2_to_i8(UVector2 *self, void *)
     auto cls = module_state->I8Vector2_PyTypeObject;
     auto *result = (I8Vector2 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new I8Vector2Glm(*self->glm);
+    result->glm = I8Vector2Glm(self->glm);
     return (PyObject *)result;
 }
 
@@ -1055,7 +1059,7 @@ UVector2_to_u8(UVector2 *self, void *)
     auto cls = module_state->U8Vector2_PyTypeObject;
     auto *result = (U8Vector2 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new U8Vector2Glm(*self->glm);
+    result->glm = U8Vector2Glm(self->glm);
     return (PyObject *)result;
 }
 
@@ -1067,7 +1071,7 @@ UVector2_to_i16(UVector2 *self, void *)
     auto cls = module_state->I16Vector2_PyTypeObject;
     auto *result = (I16Vector2 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new I16Vector2Glm(*self->glm);
+    result->glm = I16Vector2Glm(self->glm);
     return (PyObject *)result;
 }
 
@@ -1079,7 +1083,7 @@ UVector2_to_u16(UVector2 *self, void *)
     auto cls = module_state->U16Vector2_PyTypeObject;
     auto *result = (U16Vector2 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new U16Vector2Glm(*self->glm);
+    result->glm = U16Vector2Glm(self->glm);
     return (PyObject *)result;
 }
 
@@ -1091,7 +1095,7 @@ UVector2_to_i32(UVector2 *self, void *)
     auto cls = module_state->I32Vector2_PyTypeObject;
     auto *result = (I32Vector2 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new I32Vector2Glm(*self->glm);
+    result->glm = I32Vector2Glm(self->glm);
     return (PyObject *)result;
 }
 
@@ -1103,7 +1107,7 @@ UVector2_to_u32(UVector2 *self, void *)
     auto cls = module_state->U32Vector2_PyTypeObject;
     auto *result = (U32Vector2 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new U32Vector2Glm(*self->glm);
+    result->glm = U32Vector2Glm(self->glm);
     return (PyObject *)result;
 }
 
@@ -1115,7 +1119,7 @@ UVector2_to_i(UVector2 *self, void *)
     auto cls = module_state->IVector2_PyTypeObject;
     auto *result = (IVector2 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new IVector2Glm(*self->glm);
+    result->glm = IVector2Glm(self->glm);
     return (PyObject *)result;
 }
 
@@ -1127,7 +1131,7 @@ UVector2_to_i64(UVector2 *self, void *)
     auto cls = module_state->I64Vector2_PyTypeObject;
     auto *result = (I64Vector2 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new I64Vector2Glm(*self->glm);
+    result->glm = I64Vector2Glm(self->glm);
     return (PyObject *)result;
 }
 
@@ -1139,7 +1143,7 @@ UVector2_to_u64(UVector2 *self, void *)
     auto cls = module_state->U64Vector2_PyTypeObject;
     auto *result = (U64Vector2 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new U64Vector2Glm(*self->glm);
+    result->glm = U64Vector2Glm(self->glm);
     return (PyObject *)result;
 }
 
@@ -1278,7 +1282,7 @@ UVector2Array__new__(PyTypeObject *cls, PyObject *args, PyObject *kwds)
         auto arg = PyTuple_GET_ITEM(args, i);
         if (Py_TYPE(arg) == element_cls)
         {
-            self->glm[i] = *(((UVector2*)arg)->glm);
+            self->glm[i] = ((UVector2*)arg)->glm;
         }
         else
         {
@@ -1305,7 +1309,7 @@ UVector2Array__dealloc__(UVector2Array *self)
         PyObject_ClearWeakRefs((PyObject *)self);
     }
 
-    delete self->glm;
+    delete[] self->glm;
 
     PyTypeObject *type = Py_TYPE(self);
     type->tp_free(self);
@@ -1366,7 +1370,7 @@ UVector2Array__sq_getitem__(UVector2Array *self, Py_ssize_t index)
 
     UVector2 *result = (UVector2 *)element_cls->tp_alloc(element_cls, 0);
     if (!result){ return 0; }
-    result->glm = new UVector2Glm(self->glm[index]);
+    result->glm = UVector2Glm(self->glm[index]);
 
     return (PyObject *)result;
 }
@@ -1423,7 +1427,7 @@ UVector2Array__mp_getitem__(UVector2Array *self, PyObject *key)
 
         UVector2 *result = (UVector2 *)element_cls->tp_alloc(element_cls, 0);
         if (!result){ return 0; }
-        result->glm = new UVector2Glm(self->glm[index]);
+        result->glm = UVector2Glm(self->glm[index]);
 
         return (PyObject *)result;
     }
@@ -1724,7 +1728,7 @@ create_UVector2(const unsigned int *value)
     auto cls = get_UVector2_type();
     auto result = (UVector2 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new UVector2Glm(*(UVector2Glm *)value);
+    result->glm = *(UVector2Glm *)value;
     return (PyObject *)result;
 }
 
@@ -1760,7 +1764,7 @@ get_UVector2_value_ptr(const PyObject *self)
         PyErr_Format(PyExc_TypeError, "expected UVector2, got %R", self);
         return 0;
     }
-    return (unsigned int *)((UVector2 *)self)->glm;
+    return (unsigned int *)&((UVector2 *)self)->glm;
 }
 
 

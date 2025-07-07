@@ -325,8 +325,8 @@ static PyObject *
         {
             auto result = ({{ name[0] }}Vector3 *)vector3_cls->tp_alloc(vector3_cls, 0);
             if (!result){ return 0; }
-            result->glm = new {{ name[0] }}Vector3Glm(
-                (*(({{ name }} *)left)->glm) * (*(({{ name[0] }}Vector3 *)right)->glm)
+            result->glm = {{ name[0] }}Vector3Glm(
+                (*(({{ name }} *)left)->glm) * ((({{ name[0] }}Vector3 *)right)->glm)
             );
             return (PyObject *)result;
         }
@@ -334,8 +334,8 @@ static PyObject *
         {
             auto result = ({{ name[0] }}Vector4 *)vector4_cls->tp_alloc(vector4_cls, 0);
             if (!result){ return 0; }
-            result->glm = new {{ name[0] }}Vector4Glm(
-                (*(({{ name }} *)left)->glm) * (*(({{ name[0] }}Vector4 *)right)->glm)
+            result->glm = {{ name[0] }}Vector4Glm(
+                (*(({{ name }} *)left)->glm) * ((({{ name[0] }}Vector4 *)right)->glm)
             );
             return (PyObject *)result;
         }
@@ -346,8 +346,8 @@ static PyObject *
         {
             auto result = ({{ name[0] }}Vector3 *)vector3_cls->tp_alloc(vector3_cls, 0);
             if (!result){ return 0; }
-            result->glm = new {{ name[0] }}Vector3Glm(
-                (*(({{ name[0] }}Vector3 *)left)->glm) * (*(({{ name }} *)right)->glm)
+            result->glm = {{ name[0] }}Vector3Glm(
+                ((({{ name[0] }}Vector3 *)left)->glm) * (*(({{ name }} *)right)->glm)
             );
             return (PyObject *)result;
         }
@@ -355,8 +355,8 @@ static PyObject *
         {
             auto result = ({{ name[0] }}Vector4 *)vector4_cls->tp_alloc(vector4_cls, 0);
             if (!result){ return 0; }
-            result->glm = new {{ name[0] }}Vector4Glm(
-                (*(({{ name[0] }}Vector4 *)left)->glm) * (*(({{ name }} *)right)->glm)
+            result->glm = {{ name[0] }}Vector4Glm(
+                ((({{ name[0] }}Vector4 *)left)->glm) * (*(({{ name }} *)right)->glm)
             );
             return (PyObject *)result;
         }
@@ -553,7 +553,7 @@ static {{ name }} *
     }
     {{ name[0] }}Vector3 *vector = ({{ name[0] }}Vector3 *)args[1];
 
-    auto quat = glm::rotate(*self->glm, angle, *vector->glm);
+    auto quat = glm::rotate(*self->glm, angle, vector->glm);
 
     auto cls = Py_TYPE(self);
     auto *result = ({{ name }} *)cls->tp_alloc(cls, 0);

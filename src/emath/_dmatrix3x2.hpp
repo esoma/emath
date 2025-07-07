@@ -95,11 +95,11 @@ DMatrix3x2__new__(PyTypeObject *cls, PyObject *args, PyObject *kwds)
 
             glm = new DMatrix3x2Glm(
 
-                    *((DVector2 *)p_0)->glm,
+                    ((DVector2 *)p_0)->glm,
 
-                    *((DVector2 *)p_1)->glm,
+                    ((DVector2 *)p_1)->glm,
 
-                    *((DVector2 *)p_2)->glm
+                    ((DVector2 *)p_2)->glm
 
             );
 
@@ -640,8 +640,8 @@ DMatrix3x2__matmul__(PyObject *left, PyObject *right)
             {
                 DVector2 *result = (DVector2 *)column_cls->tp_alloc(column_cls, 0);
                 if (!result){ return 0; }
-                result->glm = new DVector2Glm(
-                    (*((DMatrix3x2 *)left)->glm) * (*((DVector3 *)right)->glm)
+                result->glm = DVector2Glm(
+                    (*((DMatrix3x2 *)left)->glm) * (((DVector3 *)right)->glm)
                 );
                 return (PyObject *)result;
             }
@@ -657,8 +657,8 @@ DMatrix3x2__matmul__(PyObject *left, PyObject *right)
         {
             DVector3 *result = (DVector3 *)row_cls->tp_alloc(row_cls, 0);
             if (!result){ return 0; }
-            result->glm = new DVector3Glm(
-                (*((DVector2 *)left)->glm) * (*((DMatrix3x2 *)right)->glm)
+            result->glm = DVector3Glm(
+                (((DVector2 *)left)->glm) * (*((DMatrix3x2 *)right)->glm)
             );
             return (PyObject *)result;
         }
@@ -825,7 +825,7 @@ DMatrix3x2_get_row(DMatrix3x2 *self, PyObject *const *args, Py_ssize_t nargs)
     auto *result = (DVector3 *)row_cls->tp_alloc(row_cls, 0);
     if (!result){ return 0; }
     auto row = glm::row(*self->glm, index);
-    result->glm = new DVector3Glm(row);
+    result->glm = DVector3Glm(row);
     return result;
 }
 

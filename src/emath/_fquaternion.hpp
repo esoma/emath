@@ -325,8 +325,8 @@ FQuaternion__matmul__(PyObject *left, PyObject *right)
         {
             auto result = (FVector3 *)vector3_cls->tp_alloc(vector3_cls, 0);
             if (!result){ return 0; }
-            result->glm = new FVector3Glm(
-                (*((FQuaternion *)left)->glm) * (*((FVector3 *)right)->glm)
+            result->glm = FVector3Glm(
+                (*((FQuaternion *)left)->glm) * (((FVector3 *)right)->glm)
             );
             return (PyObject *)result;
         }
@@ -334,8 +334,8 @@ FQuaternion__matmul__(PyObject *left, PyObject *right)
         {
             auto result = (FVector4 *)vector4_cls->tp_alloc(vector4_cls, 0);
             if (!result){ return 0; }
-            result->glm = new FVector4Glm(
-                (*((FQuaternion *)left)->glm) * (*((FVector4 *)right)->glm)
+            result->glm = FVector4Glm(
+                (*((FQuaternion *)left)->glm) * (((FVector4 *)right)->glm)
             );
             return (PyObject *)result;
         }
@@ -346,8 +346,8 @@ FQuaternion__matmul__(PyObject *left, PyObject *right)
         {
             auto result = (FVector3 *)vector3_cls->tp_alloc(vector3_cls, 0);
             if (!result){ return 0; }
-            result->glm = new FVector3Glm(
-                (*((FVector3 *)left)->glm) * (*((FQuaternion *)right)->glm)
+            result->glm = FVector3Glm(
+                (((FVector3 *)left)->glm) * (*((FQuaternion *)right)->glm)
             );
             return (PyObject *)result;
         }
@@ -355,8 +355,8 @@ FQuaternion__matmul__(PyObject *left, PyObject *right)
         {
             auto result = (FVector4 *)vector4_cls->tp_alloc(vector4_cls, 0);
             if (!result){ return 0; }
-            result->glm = new FVector4Glm(
-                (*((FVector4 *)left)->glm) * (*((FQuaternion *)right)->glm)
+            result->glm = FVector4Glm(
+                (((FVector4 *)left)->glm) * (*((FQuaternion *)right)->glm)
             );
             return (PyObject *)result;
         }
@@ -553,7 +553,7 @@ FQuaternion_rotate(FQuaternion *self, PyObject *const *args, Py_ssize_t nargs)
     }
     FVector3 *vector = (FVector3 *)args[1];
 
-    auto quat = glm::rotate(*self->glm, angle, *vector->glm);
+    auto quat = glm::rotate(*self->glm, angle, vector->glm);
 
     auto cls = Py_TYPE(self);
     auto *result = (FQuaternion *)cls->tp_alloc(cls, 0);

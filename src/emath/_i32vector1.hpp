@@ -70,7 +70,7 @@ I32Vector1__new__(PyTypeObject *cls, PyObject *args, PyObject *kwds)
 
     I32Vector1 *self = (I32Vector1*)cls->tp_alloc(cls, 0);
     if (!self){ return 0; }
-    self->glm = new I32Vector1Glm(
+    self->glm = I32Vector1Glm(
 
             c_0
 
@@ -87,8 +87,6 @@ I32Vector1__dealloc__(I32Vector1 *self)
     {
         PyObject_ClearWeakRefs((PyObject *)self);
     }
-
-    delete self->glm;
 
     PyTypeObject *type = Py_TYPE(self);
     type->tp_free(self);
@@ -116,7 +114,7 @@ I32Vector1__hash__(I32Vector1 *self)
     Py_uhash_t acc = _HASH_XXPRIME_5;
     for (I32Vector1Glm::length_type i = 0; i < len; i++)
     {
-        Py_uhash_t lane = std::hash<int32_t>{}((*self->glm)[i]);
+        Py_uhash_t lane = std::hash<int32_t>{}(self->glm[i]);
         acc += lane * _HASH_XXPRIME_2;
         acc = _HASH_XXROTATE(acc);
         acc *= _HASH_XXPRIME_1;
@@ -139,7 +137,7 @@ I32Vector1__repr__(I32Vector1 *self)
 
 
 
-        py_0 = c_int32_t_to_pyobject((*self->glm)[0]);
+        py_0 = c_int32_t_to_pyobject(self->glm[0]);
         if (!py_0){ goto cleanup; }
 
     result = PyUnicode_FromFormat(
@@ -175,7 +173,7 @@ I32Vector1__getitem__(I32Vector1 *self, Py_ssize_t index)
         PyErr_Format(PyExc_IndexError, "index out of range");
         return 0;
     }
-    auto c = (*self->glm)[(I32Vector1Glm::length_type)index];
+    auto c = self->glm[(I32Vector1Glm::length_type)index];
     return c_int32_t_to_pyobject(c);
 }
 
@@ -194,11 +192,11 @@ I32Vector1__richcmp__(I32Vector1 *self, I32Vector1 *other, int op)
         {
             for (I32Vector1Glm::length_type i = 0; i < 1; i++)
             {
-                if ((*self->glm)[i] < (*other->glm)[i])
+                if (self->glm[i] < other->glm[i])
                 {
                     Py_RETURN_TRUE;
                 }
-                if ((*self->glm)[i] != (*other->glm)[i])
+                if (self->glm[i] != other->glm[i])
                 {
                     Py_RETURN_FALSE;
                 }
@@ -209,11 +207,11 @@ I32Vector1__richcmp__(I32Vector1 *self, I32Vector1 *other, int op)
         {
             for (I32Vector1Glm::length_type i = 0; i < 1; i++)
             {
-                if ((*self->glm)[i] < (*other->glm)[i])
+                if (self->glm[i] < other->glm[i])
                 {
                     Py_RETURN_TRUE;
                 }
-                if ((*self->glm)[i] != (*other->glm)[i])
+                if (self->glm[i] != other->glm[i])
                 {
                     Py_RETURN_FALSE;
                 }
@@ -222,7 +220,7 @@ I32Vector1__richcmp__(I32Vector1 *self, I32Vector1 *other, int op)
         }
         case Py_EQ:
         {
-            if ((*self->glm) == (*other->glm))
+            if (self->glm == other->glm)
             {
                 Py_RETURN_TRUE;
             }
@@ -233,7 +231,7 @@ I32Vector1__richcmp__(I32Vector1 *self, I32Vector1 *other, int op)
         }
         case Py_NE:
         {
-            if ((*self->glm) != (*other->glm))
+            if (self->glm != other->glm)
             {
                 Py_RETURN_TRUE;
             }
@@ -246,11 +244,11 @@ I32Vector1__richcmp__(I32Vector1 *self, I32Vector1 *other, int op)
         {
             for (I32Vector1Glm::length_type i = 0; i < 1; i++)
             {
-                if ((*self->glm)[i] > (*other->glm)[i])
+                if (self->glm[i] > other->glm[i])
                 {
                     Py_RETURN_TRUE;
                 }
-                if ((*self->glm)[i] != (*other->glm)[i])
+                if (self->glm[i] != other->glm[i])
                 {
                     Py_RETURN_FALSE;
                 }
@@ -261,11 +259,11 @@ I32Vector1__richcmp__(I32Vector1 *self, I32Vector1 *other, int op)
         {
             for (I32Vector1Glm::length_type i = 0; i < 1; i++)
             {
-                if ((*self->glm)[i] > (*other->glm)[i])
+                if (self->glm[i] > other->glm[i])
                 {
                     Py_RETURN_TRUE;
                 }
-                if ((*self->glm)[i] != (*other->glm)[i])
+                if (self->glm[i] != other->glm[i])
                 {
                     Py_RETURN_FALSE;
                 }
@@ -287,7 +285,7 @@ I32Vector1__add__(PyObject *left, PyObject *right)
     I32Vector1Glm vector;
     if (Py_TYPE(left) == Py_TYPE(right))
     {
-        vector = (*((I32Vector1 *)left)->glm) + (*((I32Vector1 *)right)->glm);
+        vector = ((I32Vector1 *)left)->glm + ((I32Vector1 *)right)->glm;
     }
     else
     {
@@ -295,19 +293,19 @@ I32Vector1__add__(PyObject *left, PyObject *right)
         {
             auto c_right = pyobject_to_c_int32_t(right);
             if (PyErr_Occurred()){ PyErr_Clear(); Py_RETURN_NOTIMPLEMENTED; }
-            vector = (*((I32Vector1 *)left)->glm) + c_right;
+            vector = ((I32Vector1 *)left)->glm + c_right;
         }
         else
         {
             auto c_left = pyobject_to_c_int32_t(left);
             if (PyErr_Occurred()){ PyErr_Clear(); Py_RETURN_NOTIMPLEMENTED; }
-            vector = c_left + (*((I32Vector1 *)right)->glm);
+            vector = c_left + ((I32Vector1 *)right)->glm;
         }
     }
 
     I32Vector1 *result = (I32Vector1 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new I32Vector1Glm(
+    result->glm = I32Vector1Glm(
 
             vector[0]
 
@@ -327,7 +325,7 @@ I32Vector1__sub__(PyObject *left, PyObject *right)
     I32Vector1Glm vector;
     if (Py_TYPE(left) == Py_TYPE(right))
     {
-        vector = (*((I32Vector1 *)left)->glm) - (*((I32Vector1 *)right)->glm);
+        vector = ((I32Vector1 *)left)->glm - ((I32Vector1 *)right)->glm;
     }
     else
     {
@@ -335,19 +333,19 @@ I32Vector1__sub__(PyObject *left, PyObject *right)
         {
             auto c_right = pyobject_to_c_int32_t(right);
             if (PyErr_Occurred()){ PyErr_Clear(); Py_RETURN_NOTIMPLEMENTED; }
-            vector = (*((I32Vector1 *)left)->glm) - c_right;
+            vector = ((I32Vector1 *)left)->glm - c_right;
         }
         else
         {
             auto c_left = pyobject_to_c_int32_t(left);
             if (PyErr_Occurred()){ PyErr_Clear(); Py_RETURN_NOTIMPLEMENTED; }
-            vector = c_left - (*((I32Vector1 *)right)->glm);
+            vector = c_left - ((I32Vector1 *)right)->glm;
         }
     }
 
     I32Vector1 *result = (I32Vector1 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new I32Vector1Glm(
+    result->glm = I32Vector1Glm(
 
             vector[0]
 
@@ -367,7 +365,7 @@ I32Vector1__mul__(PyObject *left, PyObject *right)
     I32Vector1Glm vector;
     if (Py_TYPE(left) == Py_TYPE(right))
     {
-        vector = (*((I32Vector1 *)left)->glm) * (*((I32Vector1 *)right)->glm);
+        vector = ((I32Vector1 *)left)->glm * ((I32Vector1 *)right)->glm;
     }
     else
     {
@@ -375,19 +373,19 @@ I32Vector1__mul__(PyObject *left, PyObject *right)
         {
             auto c_right = pyobject_to_c_int32_t(right);
             if (PyErr_Occurred()){ PyErr_Clear(); Py_RETURN_NOTIMPLEMENTED; }
-            vector = (*((I32Vector1 *)left)->glm) * c_right;
+            vector = ((I32Vector1 *)left)->glm * c_right;
         }
         else
         {
             auto c_left = pyobject_to_c_int32_t(left);
             if (PyErr_Occurred()){ PyErr_Clear(); Py_RETURN_NOTIMPLEMENTED; }
-            vector = c_left * (*((I32Vector1 *)right)->glm);
+            vector = c_left * ((I32Vector1 *)right)->glm;
         }
     }
 
     I32Vector1 *result = (I32Vector1 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new I32Vector1Glm(
+    result->glm = I32Vector1Glm(
 
             vector[0]
 
@@ -415,7 +413,7 @@ I32Vector1__mul__(PyObject *left, PyObject *right)
 
                 if (
 
-                        (*((I32Vector1 *)right)->glm)[0] == 0
+                        ((I32Vector1 *)right)->glm[0] == 0
 
                 )
                 {
@@ -423,7 +421,7 @@ I32Vector1__mul__(PyObject *left, PyObject *right)
                     return 0;
                 }
 
-            vector = (*((I32Vector1 *)left)->glm) / (*((I32Vector1 *)right)->glm);
+            vector = ((I32Vector1 *)left)->glm / ((I32Vector1 *)right)->glm;
         }
         else
         {
@@ -438,7 +436,7 @@ I32Vector1__mul__(PyObject *left, PyObject *right)
                         return 0;
                     }
 
-                vector = (*((I32Vector1 *)left)->glm) / c_right;
+                vector = ((I32Vector1 *)left)->glm / c_right;
             }
             else
             {
@@ -447,7 +445,7 @@ I32Vector1__mul__(PyObject *left, PyObject *right)
 
                     if (
 
-                            (*((I32Vector1 *)right)->glm)[0] == 0
+                            ((I32Vector1 *)right)->glm[0] == 0
 
                     )
                     {
@@ -455,13 +453,13 @@ I32Vector1__mul__(PyObject *left, PyObject *right)
                         return 0;
                     }
 
-                vector = c_left / (*((I32Vector1 *)right)->glm);
+                vector = c_left / ((I32Vector1 *)right)->glm;
             }
         }
 
         I32Vector1 *result = (I32Vector1 *)cls->tp_alloc(cls, 0);
         if (!result){ return 0; }
-        result->glm = new I32Vector1Glm(
+        result->glm = I32Vector1Glm(
 
                 vector[0]
 
@@ -478,12 +476,12 @@ I32Vector1__mul__(PyObject *left, PyObject *right)
     {
         auto cls = Py_TYPE(self);
 
-            I32Vector1Glm vector = -(*self->glm);
+            I32Vector1Glm vector = -self->glm;
 
 
         I32Vector1 *result = (I32Vector1 *)cls->tp_alloc(cls, 0);
         if (!result){ return 0; }
-        result->glm = new I32Vector1Glm(
+        result->glm = I32Vector1Glm(
 
                 vector[0]
 
@@ -498,11 +496,11 @@ static PyObject *
 I32Vector1__abs__(I32Vector1 *self)
 {
     auto cls = Py_TYPE(self);
-    I32Vector1Glm vector = glm::abs(*self->glm);
+    I32Vector1Glm vector = glm::abs(self->glm);
 
     I32Vector1 *result = (I32Vector1 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new I32Vector1Glm(
+    result->glm = I32Vector1Glm(
 
             vector[0]
 
@@ -516,7 +514,7 @@ static int
 I32Vector1__bool__(I32Vector1 *self)
 {
 
-        if ((*self->glm)[0] == 0)
+        if (self->glm[0] == 0)
         {
             return 0;
         }
@@ -534,7 +532,7 @@ I32Vector1_getbufferproc(I32Vector1 *self, Py_buffer *view, int flags)
         view->obj = 0;
         return -1;
     }
-    view->buf = self->glm;
+    view->buf = &self->glm;
     view->obj = (PyObject *)self;
     view->len = sizeof(int32_t) * 1;
     view->readonly = 1;
@@ -576,7 +574,7 @@ I32Vector1_getbufferproc(I32Vector1 *self, Py_buffer *view, int flags)
     static PyObject *
     I32Vector1_Getter_0(I32Vector1 *self, void *)
     {
-        auto c = (*self->glm)[0];
+        auto c = self->glm[0];
         return c_int32_t_to_pyobject(c);
     }
 
@@ -590,8 +588,15 @@ I32Vector1_pointer(I32Vector1 *self, void *)
 {
     auto module_state = get_module_state();
     if (!module_state){ return 0; }
+
+    auto void_p_cls = module_state->ctypes_c_void_p;
+    auto void_p = PyObject_CallFunction(void_p_cls, "n", (Py_ssize_t)&self->glm);
+    if (!void_p){ return 0; }
+
     auto c_p = module_state->ctypes_c_int32_t_p;
-    return PyObject_CallMethod(c_p, "from_address", "n", (Py_ssize_t)&self->glm);
+    auto result = PyObject_CallFunction(module_state->ctypes_cast, "OO", void_p, c_p);
+    Py_DECREF(void_p);
+    return result;
 }
 
 
@@ -647,7 +652,7 @@ static PyGetSetDef I32Vector1_PyGetSetDef[] = {
                     return 0;
                 }
             }
-            vec[i] = (*self->glm)[glm_index];
+            vec[i] = self->glm[glm_index];
         }
 
         auto module_state = get_module_state();
@@ -656,7 +661,7 @@ static PyGetSetDef I32Vector1_PyGetSetDef[] = {
 
         I32Vector2 *result = (I32Vector2 *)cls->tp_alloc(cls, 0);
         if (!result){ return 0; }
-        result->glm = new I32Vector2Glm(vec);
+        result->glm = I32Vector2Glm(vec);
 
         return (PyObject *)result;
     }
@@ -700,7 +705,7 @@ static PyGetSetDef I32Vector1_PyGetSetDef[] = {
                     return 0;
                 }
             }
-            vec[i] = (*self->glm)[glm_index];
+            vec[i] = self->glm[glm_index];
         }
 
         auto module_state = get_module_state();
@@ -709,7 +714,7 @@ static PyGetSetDef I32Vector1_PyGetSetDef[] = {
 
         I32Vector3 *result = (I32Vector3 *)cls->tp_alloc(cls, 0);
         if (!result){ return 0; }
-        result->glm = new I32Vector3Glm(vec);
+        result->glm = I32Vector3Glm(vec);
 
         return (PyObject *)result;
     }
@@ -753,7 +758,7 @@ static PyGetSetDef I32Vector1_PyGetSetDef[] = {
                     return 0;
                 }
             }
-            vec[i] = (*self->glm)[glm_index];
+            vec[i] = self->glm[glm_index];
         }
 
         auto module_state = get_module_state();
@@ -762,7 +767,7 @@ static PyGetSetDef I32Vector1_PyGetSetDef[] = {
 
         I32Vector4 *result = (I32Vector4 *)cls->tp_alloc(cls, 0);
         if (!result){ return 0; }
-        result->glm = new I32Vector4Glm(vec);
+        result->glm = I32Vector4Glm(vec);
 
         return (PyObject *)result;
     }
@@ -814,10 +819,10 @@ I32Vector1_min(I32Vector1 *self, PyObject *min)
     auto c_min = pyobject_to_c_int32_t(min);
     if (PyErr_Occurred()){ return 0; }
     auto cls = Py_TYPE(self);
-    auto vector = glm::min(*self->glm, c_min);
+    auto vector = glm::min(self->glm, c_min);
     I32Vector1 *result = (I32Vector1 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new I32Vector1Glm(vector);
+    result->glm = I32Vector1Glm(vector);
     return (PyObject *)result;
 }
 
@@ -828,10 +833,10 @@ I32Vector1_max(I32Vector1 *self, PyObject *max)
     auto c_max = pyobject_to_c_int32_t(max);
     if (PyErr_Occurred()){ return 0; }
     auto cls = Py_TYPE(self);
-    auto vector = glm::max(*self->glm, c_max);
+    auto vector = glm::max(self->glm, c_max);
     I32Vector1 *result = (I32Vector1 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new I32Vector1Glm(vector);
+    result->glm = I32Vector1Glm(vector);
     return (PyObject *)result;
 }
 
@@ -850,10 +855,10 @@ I32Vector1_clamp(I32Vector1 *self, PyObject *const *args, Py_ssize_t nargs)
     if (PyErr_Occurred()){ return 0; }
 
     auto cls = Py_TYPE(self);
-    auto vector = glm::clamp(*self->glm, c_min, c_max);
+    auto vector = glm::clamp(self->glm, c_min, c_max);
     I32Vector1 *result = (I32Vector1 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new I32Vector1Glm(vector);
+    result->glm = I32Vector1Glm(vector);
     return (PyObject *)result;
 }
 
@@ -911,8 +916,7 @@ I32Vector1_from_buffer(PyTypeObject *cls, PyObject *buffer)
         PyBuffer_Release(&view);
         return 0;
     }
-    result->glm = new I32Vector1Glm();
-    std::memcpy(result->glm, view.buf, expected_size);
+    std::memcpy(&result->glm, view.buf, expected_size);
     PyBuffer_Release(&view);
     return (PyObject *)result;
 }
@@ -937,7 +941,7 @@ I32Vector1_to_b(I32Vector1 *self, void *)
     auto cls = module_state->BVector1_PyTypeObject;
     auto *result = (BVector1 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new BVector1Glm(*self->glm);
+    result->glm = BVector1Glm(self->glm);
     return (PyObject *)result;
 }
 
@@ -949,7 +953,7 @@ I32Vector1_to_d(I32Vector1 *self, void *)
     auto cls = module_state->DVector1_PyTypeObject;
     auto *result = (DVector1 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new DVector1Glm(*self->glm);
+    result->glm = DVector1Glm(self->glm);
     return (PyObject *)result;
 }
 
@@ -961,7 +965,7 @@ I32Vector1_to_f(I32Vector1 *self, void *)
     auto cls = module_state->FVector1_PyTypeObject;
     auto *result = (FVector1 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new FVector1Glm(*self->glm);
+    result->glm = FVector1Glm(self->glm);
     return (PyObject *)result;
 }
 
@@ -973,7 +977,7 @@ I32Vector1_to_i8(I32Vector1 *self, void *)
     auto cls = module_state->I8Vector1_PyTypeObject;
     auto *result = (I8Vector1 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new I8Vector1Glm(*self->glm);
+    result->glm = I8Vector1Glm(self->glm);
     return (PyObject *)result;
 }
 
@@ -985,7 +989,7 @@ I32Vector1_to_u8(I32Vector1 *self, void *)
     auto cls = module_state->U8Vector1_PyTypeObject;
     auto *result = (U8Vector1 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new U8Vector1Glm(*self->glm);
+    result->glm = U8Vector1Glm(self->glm);
     return (PyObject *)result;
 }
 
@@ -997,7 +1001,7 @@ I32Vector1_to_i16(I32Vector1 *self, void *)
     auto cls = module_state->I16Vector1_PyTypeObject;
     auto *result = (I16Vector1 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new I16Vector1Glm(*self->glm);
+    result->glm = I16Vector1Glm(self->glm);
     return (PyObject *)result;
 }
 
@@ -1009,7 +1013,7 @@ I32Vector1_to_u16(I32Vector1 *self, void *)
     auto cls = module_state->U16Vector1_PyTypeObject;
     auto *result = (U16Vector1 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new U16Vector1Glm(*self->glm);
+    result->glm = U16Vector1Glm(self->glm);
     return (PyObject *)result;
 }
 
@@ -1021,7 +1025,7 @@ I32Vector1_to_u32(I32Vector1 *self, void *)
     auto cls = module_state->U32Vector1_PyTypeObject;
     auto *result = (U32Vector1 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new U32Vector1Glm(*self->glm);
+    result->glm = U32Vector1Glm(self->glm);
     return (PyObject *)result;
 }
 
@@ -1033,7 +1037,7 @@ I32Vector1_to_i(I32Vector1 *self, void *)
     auto cls = module_state->IVector1_PyTypeObject;
     auto *result = (IVector1 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new IVector1Glm(*self->glm);
+    result->glm = IVector1Glm(self->glm);
     return (PyObject *)result;
 }
 
@@ -1045,7 +1049,7 @@ I32Vector1_to_u(I32Vector1 *self, void *)
     auto cls = module_state->UVector1_PyTypeObject;
     auto *result = (UVector1 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new UVector1Glm(*self->glm);
+    result->glm = UVector1Glm(self->glm);
     return (PyObject *)result;
 }
 
@@ -1057,7 +1061,7 @@ I32Vector1_to_i64(I32Vector1 *self, void *)
     auto cls = module_state->I64Vector1_PyTypeObject;
     auto *result = (I64Vector1 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new I64Vector1Glm(*self->glm);
+    result->glm = I64Vector1Glm(self->glm);
     return (PyObject *)result;
 }
 
@@ -1069,7 +1073,7 @@ I32Vector1_to_u64(I32Vector1 *self, void *)
     auto cls = module_state->U64Vector1_PyTypeObject;
     auto *result = (U64Vector1 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new U64Vector1Glm(*self->glm);
+    result->glm = U64Vector1Glm(self->glm);
     return (PyObject *)result;
 }
 
@@ -1210,7 +1214,7 @@ I32Vector1Array__new__(PyTypeObject *cls, PyObject *args, PyObject *kwds)
         auto arg = PyTuple_GET_ITEM(args, i);
         if (Py_TYPE(arg) == element_cls)
         {
-            self->glm[i] = *(((I32Vector1*)arg)->glm);
+            self->glm[i] = ((I32Vector1*)arg)->glm;
         }
         else
         {
@@ -1237,7 +1241,7 @@ I32Vector1Array__dealloc__(I32Vector1Array *self)
         PyObject_ClearWeakRefs((PyObject *)self);
     }
 
-    delete self->glm;
+    delete[] self->glm;
 
     PyTypeObject *type = Py_TYPE(self);
     type->tp_free(self);
@@ -1298,7 +1302,7 @@ I32Vector1Array__sq_getitem__(I32Vector1Array *self, Py_ssize_t index)
 
     I32Vector1 *result = (I32Vector1 *)element_cls->tp_alloc(element_cls, 0);
     if (!result){ return 0; }
-    result->glm = new I32Vector1Glm(self->glm[index]);
+    result->glm = I32Vector1Glm(self->glm[index]);
 
     return (PyObject *)result;
 }
@@ -1355,7 +1359,7 @@ I32Vector1Array__mp_getitem__(I32Vector1Array *self, PyObject *key)
 
         I32Vector1 *result = (I32Vector1 *)element_cls->tp_alloc(element_cls, 0);
         if (!result){ return 0; }
-        result->glm = new I32Vector1Glm(self->glm[index]);
+        result->glm = I32Vector1Glm(self->glm[index]);
 
         return (PyObject *)result;
     }
@@ -1649,7 +1653,7 @@ create_I32Vector1(const int32_t *value)
     auto cls = get_I32Vector1_type();
     auto result = (I32Vector1 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new I32Vector1Glm(*(I32Vector1Glm *)value);
+    result->glm = *(I32Vector1Glm *)value;
     return (PyObject *)result;
 }
 
@@ -1685,7 +1689,7 @@ get_I32Vector1_value_ptr(const PyObject *self)
         PyErr_Format(PyExc_TypeError, "expected I32Vector1, got %R", self);
         return 0;
     }
-    return (int32_t *)((I32Vector1 *)self)->glm;
+    return (int32_t *)&((I32Vector1 *)self)->glm;
 }
 
 

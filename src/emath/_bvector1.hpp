@@ -70,7 +70,7 @@ BVector1__new__(PyTypeObject *cls, PyObject *args, PyObject *kwds)
 
     BVector1 *self = (BVector1*)cls->tp_alloc(cls, 0);
     if (!self){ return 0; }
-    self->glm = new BVector1Glm(
+    self->glm = BVector1Glm(
 
             c_0
 
@@ -87,8 +87,6 @@ BVector1__dealloc__(BVector1 *self)
     {
         PyObject_ClearWeakRefs((PyObject *)self);
     }
-
-    delete self->glm;
 
     PyTypeObject *type = Py_TYPE(self);
     type->tp_free(self);
@@ -116,7 +114,7 @@ BVector1__hash__(BVector1 *self)
     Py_uhash_t acc = _HASH_XXPRIME_5;
     for (BVector1Glm::length_type i = 0; i < len; i++)
     {
-        Py_uhash_t lane = std::hash<bool>{}((*self->glm)[i]);
+        Py_uhash_t lane = std::hash<bool>{}(self->glm[i]);
         acc += lane * _HASH_XXPRIME_2;
         acc = _HASH_XXROTATE(acc);
         acc *= _HASH_XXPRIME_1;
@@ -139,7 +137,7 @@ BVector1__repr__(BVector1 *self)
 
 
 
-        py_0 = c_bool_to_pyobject((*self->glm)[0]);
+        py_0 = c_bool_to_pyobject(self->glm[0]);
         if (!py_0){ goto cleanup; }
 
     result = PyUnicode_FromFormat(
@@ -175,7 +173,7 @@ BVector1__getitem__(BVector1 *self, Py_ssize_t index)
         PyErr_Format(PyExc_IndexError, "index out of range");
         return 0;
     }
-    auto c = (*self->glm)[(BVector1Glm::length_type)index];
+    auto c = self->glm[(BVector1Glm::length_type)index];
     return c_bool_to_pyobject(c);
 }
 
@@ -194,11 +192,11 @@ BVector1__richcmp__(BVector1 *self, BVector1 *other, int op)
         {
             for (BVector1Glm::length_type i = 0; i < 1; i++)
             {
-                if ((*self->glm)[i] < (*other->glm)[i])
+                if (self->glm[i] < other->glm[i])
                 {
                     Py_RETURN_TRUE;
                 }
-                if ((*self->glm)[i] != (*other->glm)[i])
+                if (self->glm[i] != other->glm[i])
                 {
                     Py_RETURN_FALSE;
                 }
@@ -209,11 +207,11 @@ BVector1__richcmp__(BVector1 *self, BVector1 *other, int op)
         {
             for (BVector1Glm::length_type i = 0; i < 1; i++)
             {
-                if ((*self->glm)[i] < (*other->glm)[i])
+                if (self->glm[i] < other->glm[i])
                 {
                     Py_RETURN_TRUE;
                 }
-                if ((*self->glm)[i] != (*other->glm)[i])
+                if (self->glm[i] != other->glm[i])
                 {
                     Py_RETURN_FALSE;
                 }
@@ -222,7 +220,7 @@ BVector1__richcmp__(BVector1 *self, BVector1 *other, int op)
         }
         case Py_EQ:
         {
-            if ((*self->glm) == (*other->glm))
+            if (self->glm == other->glm)
             {
                 Py_RETURN_TRUE;
             }
@@ -233,7 +231,7 @@ BVector1__richcmp__(BVector1 *self, BVector1 *other, int op)
         }
         case Py_NE:
         {
-            if ((*self->glm) != (*other->glm))
+            if (self->glm != other->glm)
             {
                 Py_RETURN_TRUE;
             }
@@ -246,11 +244,11 @@ BVector1__richcmp__(BVector1 *self, BVector1 *other, int op)
         {
             for (BVector1Glm::length_type i = 0; i < 1; i++)
             {
-                if ((*self->glm)[i] > (*other->glm)[i])
+                if (self->glm[i] > other->glm[i])
                 {
                     Py_RETURN_TRUE;
                 }
-                if ((*self->glm)[i] != (*other->glm)[i])
+                if (self->glm[i] != other->glm[i])
                 {
                     Py_RETURN_FALSE;
                 }
@@ -261,11 +259,11 @@ BVector1__richcmp__(BVector1 *self, BVector1 *other, int op)
         {
             for (BVector1Glm::length_type i = 0; i < 1; i++)
             {
-                if ((*self->glm)[i] > (*other->glm)[i])
+                if (self->glm[i] > other->glm[i])
                 {
                     Py_RETURN_TRUE;
                 }
-                if ((*self->glm)[i] != (*other->glm)[i])
+                if (self->glm[i] != other->glm[i])
                 {
                     Py_RETURN_FALSE;
                 }
@@ -287,7 +285,7 @@ BVector1__add__(PyObject *left, PyObject *right)
     BVector1Glm vector;
     if (Py_TYPE(left) == Py_TYPE(right))
     {
-        vector = (*((BVector1 *)left)->glm) + (*((BVector1 *)right)->glm);
+        vector = ((BVector1 *)left)->glm + ((BVector1 *)right)->glm;
     }
     else
     {
@@ -295,19 +293,19 @@ BVector1__add__(PyObject *left, PyObject *right)
         {
             auto c_right = pyobject_to_c_bool(right);
             if (PyErr_Occurred()){ PyErr_Clear(); Py_RETURN_NOTIMPLEMENTED; }
-            vector = (*((BVector1 *)left)->glm) + c_right;
+            vector = ((BVector1 *)left)->glm + c_right;
         }
         else
         {
             auto c_left = pyobject_to_c_bool(left);
             if (PyErr_Occurred()){ PyErr_Clear(); Py_RETURN_NOTIMPLEMENTED; }
-            vector = c_left + (*((BVector1 *)right)->glm);
+            vector = c_left + ((BVector1 *)right)->glm;
         }
     }
 
     BVector1 *result = (BVector1 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new BVector1Glm(
+    result->glm = BVector1Glm(
 
             vector[0]
 
@@ -327,7 +325,7 @@ BVector1__sub__(PyObject *left, PyObject *right)
     BVector1Glm vector;
     if (Py_TYPE(left) == Py_TYPE(right))
     {
-        vector = (*((BVector1 *)left)->glm) - (*((BVector1 *)right)->glm);
+        vector = ((BVector1 *)left)->glm - ((BVector1 *)right)->glm;
     }
     else
     {
@@ -335,19 +333,19 @@ BVector1__sub__(PyObject *left, PyObject *right)
         {
             auto c_right = pyobject_to_c_bool(right);
             if (PyErr_Occurred()){ PyErr_Clear(); Py_RETURN_NOTIMPLEMENTED; }
-            vector = (*((BVector1 *)left)->glm) - c_right;
+            vector = ((BVector1 *)left)->glm - c_right;
         }
         else
         {
             auto c_left = pyobject_to_c_bool(left);
             if (PyErr_Occurred()){ PyErr_Clear(); Py_RETURN_NOTIMPLEMENTED; }
-            vector = c_left - (*((BVector1 *)right)->glm);
+            vector = c_left - ((BVector1 *)right)->glm;
         }
     }
 
     BVector1 *result = (BVector1 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new BVector1Glm(
+    result->glm = BVector1Glm(
 
             vector[0]
 
@@ -367,7 +365,7 @@ BVector1__mul__(PyObject *left, PyObject *right)
     BVector1Glm vector;
     if (Py_TYPE(left) == Py_TYPE(right))
     {
-        vector = (*((BVector1 *)left)->glm) * (*((BVector1 *)right)->glm);
+        vector = ((BVector1 *)left)->glm * ((BVector1 *)right)->glm;
     }
     else
     {
@@ -375,19 +373,19 @@ BVector1__mul__(PyObject *left, PyObject *right)
         {
             auto c_right = pyobject_to_c_bool(right);
             if (PyErr_Occurred()){ PyErr_Clear(); Py_RETURN_NOTIMPLEMENTED; }
-            vector = (*((BVector1 *)left)->glm) * c_right;
+            vector = ((BVector1 *)left)->glm * c_right;
         }
         else
         {
             auto c_left = pyobject_to_c_bool(left);
             if (PyErr_Occurred()){ PyErr_Clear(); Py_RETURN_NOTIMPLEMENTED; }
-            vector = c_left * (*((BVector1 *)right)->glm);
+            vector = c_left * ((BVector1 *)right)->glm;
         }
     }
 
     BVector1 *result = (BVector1 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new BVector1Glm(
+    result->glm = BVector1Glm(
 
             vector[0]
 
@@ -409,12 +407,12 @@ BVector1__mul__(PyObject *left, PyObject *right)
     {
         auto cls = Py_TYPE(self);
 
-            BVector1Glm vector = (*self->glm);
+            BVector1Glm vector = self->glm;
 
 
         BVector1 *result = (BVector1 *)cls->tp_alloc(cls, 0);
         if (!result){ return 0; }
-        result->glm = new BVector1Glm(
+        result->glm = BVector1Glm(
 
                 vector[0]
 
@@ -429,11 +427,11 @@ static PyObject *
 BVector1__abs__(BVector1 *self)
 {
     auto cls = Py_TYPE(self);
-    BVector1Glm vector = glm::abs(*self->glm);
+    BVector1Glm vector = glm::abs(self->glm);
 
     BVector1 *result = (BVector1 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new BVector1Glm(
+    result->glm = BVector1Glm(
 
             vector[0]
 
@@ -447,7 +445,7 @@ static int
 BVector1__bool__(BVector1 *self)
 {
 
-        if ((*self->glm)[0] == 0)
+        if (self->glm[0] == 0)
         {
             return 0;
         }
@@ -465,7 +463,7 @@ BVector1_getbufferproc(BVector1 *self, Py_buffer *view, int flags)
         view->obj = 0;
         return -1;
     }
-    view->buf = self->glm;
+    view->buf = &self->glm;
     view->obj = (PyObject *)self;
     view->len = sizeof(bool) * 1;
     view->readonly = 1;
@@ -507,7 +505,7 @@ BVector1_getbufferproc(BVector1 *self, Py_buffer *view, int flags)
     static PyObject *
     BVector1_Getter_0(BVector1 *self, void *)
     {
-        auto c = (*self->glm)[0];
+        auto c = self->glm[0];
         return c_bool_to_pyobject(c);
     }
 
@@ -521,8 +519,15 @@ BVector1_pointer(BVector1 *self, void *)
 {
     auto module_state = get_module_state();
     if (!module_state){ return 0; }
+
+    auto void_p_cls = module_state->ctypes_c_void_p;
+    auto void_p = PyObject_CallFunction(void_p_cls, "n", (Py_ssize_t)&self->glm);
+    if (!void_p){ return 0; }
+
     auto c_p = module_state->ctypes_c_bool_p;
-    return PyObject_CallMethod(c_p, "from_address", "n", (Py_ssize_t)&self->glm);
+    auto result = PyObject_CallFunction(module_state->ctypes_cast, "OO", void_p, c_p);
+    Py_DECREF(void_p);
+    return result;
 }
 
 
@@ -578,7 +583,7 @@ static PyGetSetDef BVector1_PyGetSetDef[] = {
                     return 0;
                 }
             }
-            vec[i] = (*self->glm)[glm_index];
+            vec[i] = self->glm[glm_index];
         }
 
         auto module_state = get_module_state();
@@ -587,7 +592,7 @@ static PyGetSetDef BVector1_PyGetSetDef[] = {
 
         BVector2 *result = (BVector2 *)cls->tp_alloc(cls, 0);
         if (!result){ return 0; }
-        result->glm = new BVector2Glm(vec);
+        result->glm = BVector2Glm(vec);
 
         return (PyObject *)result;
     }
@@ -631,7 +636,7 @@ static PyGetSetDef BVector1_PyGetSetDef[] = {
                     return 0;
                 }
             }
-            vec[i] = (*self->glm)[glm_index];
+            vec[i] = self->glm[glm_index];
         }
 
         auto module_state = get_module_state();
@@ -640,7 +645,7 @@ static PyGetSetDef BVector1_PyGetSetDef[] = {
 
         BVector3 *result = (BVector3 *)cls->tp_alloc(cls, 0);
         if (!result){ return 0; }
-        result->glm = new BVector3Glm(vec);
+        result->glm = BVector3Glm(vec);
 
         return (PyObject *)result;
     }
@@ -684,7 +689,7 @@ static PyGetSetDef BVector1_PyGetSetDef[] = {
                     return 0;
                 }
             }
-            vec[i] = (*self->glm)[glm_index];
+            vec[i] = self->glm[glm_index];
         }
 
         auto module_state = get_module_state();
@@ -693,7 +698,7 @@ static PyGetSetDef BVector1_PyGetSetDef[] = {
 
         BVector4 *result = (BVector4 *)cls->tp_alloc(cls, 0);
         if (!result){ return 0; }
-        result->glm = new BVector4Glm(vec);
+        result->glm = BVector4Glm(vec);
 
         return (PyObject *)result;
     }
@@ -745,10 +750,10 @@ BVector1_min(BVector1 *self, PyObject *min)
     auto c_min = pyobject_to_c_bool(min);
     if (PyErr_Occurred()){ return 0; }
     auto cls = Py_TYPE(self);
-    auto vector = glm::min(*self->glm, c_min);
+    auto vector = glm::min(self->glm, c_min);
     BVector1 *result = (BVector1 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new BVector1Glm(vector);
+    result->glm = BVector1Glm(vector);
     return (PyObject *)result;
 }
 
@@ -759,10 +764,10 @@ BVector1_max(BVector1 *self, PyObject *max)
     auto c_max = pyobject_to_c_bool(max);
     if (PyErr_Occurred()){ return 0; }
     auto cls = Py_TYPE(self);
-    auto vector = glm::max(*self->glm, c_max);
+    auto vector = glm::max(self->glm, c_max);
     BVector1 *result = (BVector1 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new BVector1Glm(vector);
+    result->glm = BVector1Glm(vector);
     return (PyObject *)result;
 }
 
@@ -781,10 +786,10 @@ BVector1_clamp(BVector1 *self, PyObject *const *args, Py_ssize_t nargs)
     if (PyErr_Occurred()){ return 0; }
 
     auto cls = Py_TYPE(self);
-    auto vector = glm::clamp(*self->glm, c_min, c_max);
+    auto vector = glm::clamp(self->glm, c_min, c_max);
     BVector1 *result = (BVector1 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new BVector1Glm(vector);
+    result->glm = BVector1Glm(vector);
     return (PyObject *)result;
 }
 
@@ -842,8 +847,7 @@ BVector1_from_buffer(PyTypeObject *cls, PyObject *buffer)
         PyBuffer_Release(&view);
         return 0;
     }
-    result->glm = new BVector1Glm();
-    std::memcpy(result->glm, view.buf, expected_size);
+    std::memcpy(&result->glm, view.buf, expected_size);
     PyBuffer_Release(&view);
     return (PyObject *)result;
 }
@@ -868,7 +872,7 @@ BVector1_to_d(BVector1 *self, void *)
     auto cls = module_state->DVector1_PyTypeObject;
     auto *result = (DVector1 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new DVector1Glm(*self->glm);
+    result->glm = DVector1Glm(self->glm);
     return (PyObject *)result;
 }
 
@@ -880,7 +884,7 @@ BVector1_to_f(BVector1 *self, void *)
     auto cls = module_state->FVector1_PyTypeObject;
     auto *result = (FVector1 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new FVector1Glm(*self->glm);
+    result->glm = FVector1Glm(self->glm);
     return (PyObject *)result;
 }
 
@@ -892,7 +896,7 @@ BVector1_to_i8(BVector1 *self, void *)
     auto cls = module_state->I8Vector1_PyTypeObject;
     auto *result = (I8Vector1 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new I8Vector1Glm(*self->glm);
+    result->glm = I8Vector1Glm(self->glm);
     return (PyObject *)result;
 }
 
@@ -904,7 +908,7 @@ BVector1_to_u8(BVector1 *self, void *)
     auto cls = module_state->U8Vector1_PyTypeObject;
     auto *result = (U8Vector1 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new U8Vector1Glm(*self->glm);
+    result->glm = U8Vector1Glm(self->glm);
     return (PyObject *)result;
 }
 
@@ -916,7 +920,7 @@ BVector1_to_i16(BVector1 *self, void *)
     auto cls = module_state->I16Vector1_PyTypeObject;
     auto *result = (I16Vector1 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new I16Vector1Glm(*self->glm);
+    result->glm = I16Vector1Glm(self->glm);
     return (PyObject *)result;
 }
 
@@ -928,7 +932,7 @@ BVector1_to_u16(BVector1 *self, void *)
     auto cls = module_state->U16Vector1_PyTypeObject;
     auto *result = (U16Vector1 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new U16Vector1Glm(*self->glm);
+    result->glm = U16Vector1Glm(self->glm);
     return (PyObject *)result;
 }
 
@@ -940,7 +944,7 @@ BVector1_to_i32(BVector1 *self, void *)
     auto cls = module_state->I32Vector1_PyTypeObject;
     auto *result = (I32Vector1 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new I32Vector1Glm(*self->glm);
+    result->glm = I32Vector1Glm(self->glm);
     return (PyObject *)result;
 }
 
@@ -952,7 +956,7 @@ BVector1_to_u32(BVector1 *self, void *)
     auto cls = module_state->U32Vector1_PyTypeObject;
     auto *result = (U32Vector1 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new U32Vector1Glm(*self->glm);
+    result->glm = U32Vector1Glm(self->glm);
     return (PyObject *)result;
 }
 
@@ -964,7 +968,7 @@ BVector1_to_i(BVector1 *self, void *)
     auto cls = module_state->IVector1_PyTypeObject;
     auto *result = (IVector1 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new IVector1Glm(*self->glm);
+    result->glm = IVector1Glm(self->glm);
     return (PyObject *)result;
 }
 
@@ -976,7 +980,7 @@ BVector1_to_u(BVector1 *self, void *)
     auto cls = module_state->UVector1_PyTypeObject;
     auto *result = (UVector1 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new UVector1Glm(*self->glm);
+    result->glm = UVector1Glm(self->glm);
     return (PyObject *)result;
 }
 
@@ -988,7 +992,7 @@ BVector1_to_i64(BVector1 *self, void *)
     auto cls = module_state->I64Vector1_PyTypeObject;
     auto *result = (I64Vector1 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new I64Vector1Glm(*self->glm);
+    result->glm = I64Vector1Glm(self->glm);
     return (PyObject *)result;
 }
 
@@ -1000,7 +1004,7 @@ BVector1_to_u64(BVector1 *self, void *)
     auto cls = module_state->U64Vector1_PyTypeObject;
     auto *result = (U64Vector1 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new U64Vector1Glm(*self->glm);
+    result->glm = U64Vector1Glm(self->glm);
     return (PyObject *)result;
 }
 
@@ -1139,7 +1143,7 @@ BVector1Array__new__(PyTypeObject *cls, PyObject *args, PyObject *kwds)
         auto arg = PyTuple_GET_ITEM(args, i);
         if (Py_TYPE(arg) == element_cls)
         {
-            self->glm[i] = *(((BVector1*)arg)->glm);
+            self->glm[i] = ((BVector1*)arg)->glm;
         }
         else
         {
@@ -1166,7 +1170,7 @@ BVector1Array__dealloc__(BVector1Array *self)
         PyObject_ClearWeakRefs((PyObject *)self);
     }
 
-    delete self->glm;
+    delete[] self->glm;
 
     PyTypeObject *type = Py_TYPE(self);
     type->tp_free(self);
@@ -1227,7 +1231,7 @@ BVector1Array__sq_getitem__(BVector1Array *self, Py_ssize_t index)
 
     BVector1 *result = (BVector1 *)element_cls->tp_alloc(element_cls, 0);
     if (!result){ return 0; }
-    result->glm = new BVector1Glm(self->glm[index]);
+    result->glm = BVector1Glm(self->glm[index]);
 
     return (PyObject *)result;
 }
@@ -1284,7 +1288,7 @@ BVector1Array__mp_getitem__(BVector1Array *self, PyObject *key)
 
         BVector1 *result = (BVector1 *)element_cls->tp_alloc(element_cls, 0);
         if (!result){ return 0; }
-        result->glm = new BVector1Glm(self->glm[index]);
+        result->glm = BVector1Glm(self->glm[index]);
 
         return (PyObject *)result;
     }
@@ -1578,7 +1582,7 @@ create_BVector1(const bool *value)
     auto cls = get_BVector1_type();
     auto result = (BVector1 *)cls->tp_alloc(cls, 0);
     if (!result){ return 0; }
-    result->glm = new BVector1Glm(*(BVector1Glm *)value);
+    result->glm = *(BVector1Glm *)value;
     return (PyObject *)result;
 }
 
@@ -1614,7 +1618,7 @@ get_BVector1_value_ptr(const PyObject *self)
         PyErr_Format(PyExc_TypeError, "expected BVector1, got %R", self);
         return 0;
     }
-    return (bool *)((BVector1 *)self)->glm;
+    return (bool *)&((BVector1 *)self)->glm;
 }
 
 

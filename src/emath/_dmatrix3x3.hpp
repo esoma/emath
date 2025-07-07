@@ -95,11 +95,11 @@ DMatrix3x3__new__(PyTypeObject *cls, PyObject *args, PyObject *kwds)
 
             glm = new DMatrix3x3Glm(
 
-                    *((DVector3 *)p_0)->glm,
+                    ((DVector3 *)p_0)->glm,
 
-                    *((DVector3 *)p_1)->glm,
+                    ((DVector3 *)p_1)->glm,
 
-                    *((DVector3 *)p_2)->glm
+                    ((DVector3 *)p_2)->glm
 
             );
 
@@ -704,8 +704,8 @@ DMatrix3x3__matmul__(PyObject *left, PyObject *right)
             {
                 DVector3 *result = (DVector3 *)column_cls->tp_alloc(column_cls, 0);
                 if (!result){ return 0; }
-                result->glm = new DVector3Glm(
-                    (*((DMatrix3x3 *)left)->glm) * (*((DVector3 *)right)->glm)
+                result->glm = DVector3Glm(
+                    (*((DMatrix3x3 *)left)->glm) * (((DVector3 *)right)->glm)
                 );
                 return (PyObject *)result;
             }
@@ -721,8 +721,8 @@ DMatrix3x3__matmul__(PyObject *left, PyObject *right)
         {
             DVector3 *result = (DVector3 *)row_cls->tp_alloc(row_cls, 0);
             if (!result){ return 0; }
-            result->glm = new DVector3Glm(
-                (*((DVector3 *)left)->glm) * (*((DMatrix3x3 *)right)->glm)
+            result->glm = DVector3Glm(
+                (((DVector3 *)left)->glm) * (*((DMatrix3x3 *)right)->glm)
             );
             return (PyObject *)result;
         }
@@ -758,8 +758,8 @@ DMatrix3x3__truediv__(PyObject *left, PyObject *right)
             {
                 DVector3 *result = (DVector3 *)row_cls->tp_alloc(row_cls, 0);
                 if (!result){ return 0; }
-                result->glm = new DVector3Glm(
-                    (*((DMatrix3x3 *)left)->glm) / (*((DVector3 *)right)->glm)
+                result->glm = DVector3Glm(
+                    (*((DMatrix3x3 *)left)->glm) / (((DVector3 *)right)->glm)
                 );
                 return (PyObject *)result;
             }
@@ -779,8 +779,8 @@ DMatrix3x3__truediv__(PyObject *left, PyObject *right)
             {
                 DVector3 *result = (DVector3 *)row_cls->tp_alloc(row_cls, 0);
                 if (!result){ return 0; }
-                result->glm = new DVector3Glm(
-                    (*((DVector3 *)left)->glm) / (*((DMatrix3x3 *)right)->glm)
+                result->glm = DVector3Glm(
+                    (((DVector3 *)left)->glm) / (*((DMatrix3x3 *)right)->glm)
                 );
                 return (PyObject *)result;
             }
@@ -949,7 +949,7 @@ DMatrix3x3_get_row(DMatrix3x3 *self, PyObject *const *args, Py_ssize_t nargs)
     auto *result = (DVector3 *)row_cls->tp_alloc(row_cls, 0);
     if (!result){ return 0; }
     auto row = glm::row(*self->glm, index);
-    result->glm = new DVector3Glm(row);
+    result->glm = DVector3Glm(row);
     return result;
 }
 

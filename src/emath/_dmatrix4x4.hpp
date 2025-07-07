@@ -107,13 +107,13 @@ DMatrix4x4__new__(PyTypeObject *cls, PyObject *args, PyObject *kwds)
 
             glm = new DMatrix4x4Glm(
 
-                    *((DVector4 *)p_0)->glm,
+                    ((DVector4 *)p_0)->glm,
 
-                    *((DVector4 *)p_1)->glm,
+                    ((DVector4 *)p_1)->glm,
 
-                    *((DVector4 *)p_2)->glm,
+                    ((DVector4 *)p_2)->glm,
 
-                    *((DVector4 *)p_3)->glm
+                    ((DVector4 *)p_3)->glm
 
             );
 
@@ -899,9 +899,9 @@ DMatrix4x4__matmul__(PyObject *left, PyObject *right)
             {
                 auto result = (DVector3 *)vector3_cls->tp_alloc(vector3_cls, 0);
                 if (!result){ return 0; }
-                result->glm = new DVector3Glm(
+                result->glm = DVector3Glm(
                     (*((DMatrix4x4 *)left)->glm) * DVector4Glm(
-                        *((DVector3 *)right)->glm,
+                        ((DVector3 *)right)->glm,
                         1
                     )
                 );
@@ -917,8 +917,8 @@ DMatrix4x4__matmul__(PyObject *left, PyObject *right)
             {
                 DVector4 *result = (DVector4 *)column_cls->tp_alloc(column_cls, 0);
                 if (!result){ return 0; }
-                result->glm = new DVector4Glm(
-                    (*((DMatrix4x4 *)left)->glm) * (*((DVector4 *)right)->glm)
+                result->glm = DVector4Glm(
+                    (*((DMatrix4x4 *)left)->glm) * (((DVector4 *)right)->glm)
                 );
                 return (PyObject *)result;
             }
@@ -933,9 +933,9 @@ DMatrix4x4__matmul__(PyObject *left, PyObject *right)
             {
                 auto result = (DVector3 *)vector3_cls->tp_alloc(vector3_cls, 0);
                 if (!result){ return 0; }
-                result->glm = new DVector3Glm(
+                result->glm = DVector3Glm(
                      DVector4Glm(
-                        *((DVector3 *)left)->glm,
+                        ((DVector3 *)left)->glm,
                         1
                     ) * (*((DMatrix4x4 *)right)->glm)
                 );
@@ -950,8 +950,8 @@ DMatrix4x4__matmul__(PyObject *left, PyObject *right)
         {
             DVector4 *result = (DVector4 *)row_cls->tp_alloc(row_cls, 0);
             if (!result){ return 0; }
-            result->glm = new DVector4Glm(
-                (*((DVector4 *)left)->glm) * (*((DMatrix4x4 *)right)->glm)
+            result->glm = DVector4Glm(
+                (((DVector4 *)left)->glm) * (*((DMatrix4x4 *)right)->glm)
             );
             return (PyObject *)result;
         }
@@ -987,8 +987,8 @@ DMatrix4x4__truediv__(PyObject *left, PyObject *right)
             {
                 DVector4 *result = (DVector4 *)row_cls->tp_alloc(row_cls, 0);
                 if (!result){ return 0; }
-                result->glm = new DVector4Glm(
-                    (*((DMatrix4x4 *)left)->glm) / (*((DVector4 *)right)->glm)
+                result->glm = DVector4Glm(
+                    (*((DMatrix4x4 *)left)->glm) / (((DVector4 *)right)->glm)
                 );
                 return (PyObject *)result;
             }
@@ -1008,8 +1008,8 @@ DMatrix4x4__truediv__(PyObject *left, PyObject *right)
             {
                 DVector4 *result = (DVector4 *)row_cls->tp_alloc(row_cls, 0);
                 if (!result){ return 0; }
-                result->glm = new DVector4Glm(
-                    (*((DVector4 *)left)->glm) / (*((DMatrix4x4 *)right)->glm)
+                result->glm = DVector4Glm(
+                    (((DVector4 *)left)->glm) / (*((DMatrix4x4 *)right)->glm)
                 );
                 return (PyObject *)result;
             }
@@ -1158,7 +1158,7 @@ static PyGetSetDef DMatrix4x4_PyGetSetDef[] = {
         }
         DVector3 *vector = (DVector3 *)args[1];
 
-        auto matrix = glm::rotate(*self->glm, angle, *vector->glm);
+        auto matrix = glm::rotate(*self->glm, angle, vector->glm);
 
         auto cls = Py_TYPE(self);
         auto *result = (DMatrix4x4 *)cls->tp_alloc(cls, 0);
@@ -1186,7 +1186,7 @@ static PyGetSetDef DMatrix4x4_PyGetSetDef[] = {
         }
         DVector3 *vector = (DVector3 *)args[0];
 
-        auto matrix = glm::scale(*self->glm, *vector->glm);
+        auto matrix = glm::scale(*self->glm, vector->glm);
 
         auto cls = Py_TYPE(self);
         auto *result = (DMatrix4x4 *)cls->tp_alloc(cls, 0);
@@ -1214,7 +1214,7 @@ static PyGetSetDef DMatrix4x4_PyGetSetDef[] = {
         }
         DVector3 *vector = (DVector3 *)args[0];
 
-        auto matrix = glm::translate(*self->glm, *vector->glm);
+        auto matrix = glm::translate(*self->glm, vector->glm);
 
         auto cls = Py_TYPE(self);
         auto *result = (DMatrix4x4 *)cls->tp_alloc(cls, 0);
@@ -1309,7 +1309,7 @@ static PyGetSetDef DMatrix4x4_PyGetSetDef[] = {
 
         auto *result = (DMatrix4x4 *)cls->tp_alloc(cls, 0);
         if (!result){ return 0; }
-        result->glm = new DMatrix4x4Glm(glm::lookAt(*eye->glm, *center->glm, *up->glm));
+        result->glm = new DMatrix4x4Glm(glm::lookAt(eye->glm, center->glm, up->glm));
         return result;
     }
 
@@ -1368,7 +1368,7 @@ DMatrix4x4_get_row(DMatrix4x4 *self, PyObject *const *args, Py_ssize_t nargs)
     auto *result = (DVector4 *)row_cls->tp_alloc(row_cls, 0);
     if (!result){ return 0; }
     auto row = glm::row(*self->glm, index);
-    result->glm = new DVector4Glm(row);
+    result->glm = DVector4Glm(row);
     return result;
 }
 

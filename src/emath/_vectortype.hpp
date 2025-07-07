@@ -19,7 +19,7 @@ struct BVector1
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    BVector1Glm *glm;
+    BVector1Glm glm;
 };
 
 static BVector1 *
@@ -42,7 +42,7 @@ struct DVector1
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    DVector1Glm *glm;
+    DVector1Glm glm;
 };
 
 static DVector1 *
@@ -65,7 +65,7 @@ struct FVector1
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    FVector1Glm *glm;
+    FVector1Glm glm;
 };
 
 static FVector1 *
@@ -88,7 +88,7 @@ struct I8Vector1
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    I8Vector1Glm *glm;
+    I8Vector1Glm glm;
 };
 
 static I8Vector1 *
@@ -111,7 +111,7 @@ struct U8Vector1
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    U8Vector1Glm *glm;
+    U8Vector1Glm glm;
 };
 
 static U8Vector1 *
@@ -134,7 +134,7 @@ struct I16Vector1
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    I16Vector1Glm *glm;
+    I16Vector1Glm glm;
 };
 
 static I16Vector1 *
@@ -157,7 +157,7 @@ struct U16Vector1
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    U16Vector1Glm *glm;
+    U16Vector1Glm glm;
 };
 
 static U16Vector1 *
@@ -180,7 +180,7 @@ struct I32Vector1
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    I32Vector1Glm *glm;
+    I32Vector1Glm glm;
 };
 
 static I32Vector1 *
@@ -203,7 +203,7 @@ struct U32Vector1
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    U32Vector1Glm *glm;
+    U32Vector1Glm glm;
 };
 
 static U32Vector1 *
@@ -226,7 +226,7 @@ struct IVector1
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    IVector1Glm *glm;
+    IVector1Glm glm;
 };
 
 static IVector1 *
@@ -249,7 +249,7 @@ struct UVector1
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    UVector1Glm *glm;
+    UVector1Glm glm;
 };
 
 static UVector1 *
@@ -272,7 +272,7 @@ struct I64Vector1
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    I64Vector1Glm *glm;
+    I64Vector1Glm glm;
 };
 
 static I64Vector1 *
@@ -295,7 +295,7 @@ struct U64Vector1
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    U64Vector1Glm *glm;
+    U64Vector1Glm glm;
 };
 
 static U64Vector1 *
@@ -318,7 +318,7 @@ struct BVector2
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    BVector2Glm *glm;
+    BVector2Glm glm;
 };
 
 static BVector2 *
@@ -341,7 +341,7 @@ struct DVector2
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    DVector2Glm *glm;
+    DVector2Glm glm;
 };
 
 static DVector2 *
@@ -364,7 +364,7 @@ struct FVector2
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    FVector2Glm *glm;
+    FVector2Glm glm;
 };
 
 static FVector2 *
@@ -387,7 +387,7 @@ struct I8Vector2
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    I8Vector2Glm *glm;
+    I8Vector2Glm glm;
 };
 
 static I8Vector2 *
@@ -410,7 +410,7 @@ struct U8Vector2
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    U8Vector2Glm *glm;
+    U8Vector2Glm glm;
 };
 
 static U8Vector2 *
@@ -433,7 +433,7 @@ struct I16Vector2
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    I16Vector2Glm *glm;
+    I16Vector2Glm glm;
 };
 
 static I16Vector2 *
@@ -456,7 +456,7 @@ struct U16Vector2
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    U16Vector2Glm *glm;
+    U16Vector2Glm glm;
 };
 
 static U16Vector2 *
@@ -479,7 +479,7 @@ struct I32Vector2
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    I32Vector2Glm *glm;
+    I32Vector2Glm glm;
 };
 
 static I32Vector2 *
@@ -502,7 +502,7 @@ struct U32Vector2
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    U32Vector2Glm *glm;
+    U32Vector2Glm glm;
 };
 
 static U32Vector2 *
@@ -525,7 +525,7 @@ struct IVector2
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    IVector2Glm *glm;
+    IVector2Glm glm;
 };
 
 static IVector2 *
@@ -548,7 +548,7 @@ struct UVector2
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    UVector2Glm *glm;
+    UVector2Glm glm;
 };
 
 static UVector2 *
@@ -571,7 +571,7 @@ struct I64Vector2
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    I64Vector2Glm *glm;
+    I64Vector2Glm glm;
 };
 
 static I64Vector2 *
@@ -594,7 +594,7 @@ struct U64Vector2
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    U64Vector2Glm *glm;
+    U64Vector2Glm glm;
 };
 
 static U64Vector2 *
@@ -617,7 +617,7 @@ struct BVector3
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    BVector3Glm *glm;
+    BVector3Glm glm;
 };
 
 static BVector3 *
@@ -640,7 +640,7 @@ struct DVector3
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    DVector3Glm *glm;
+    DVector3Glm glm;
 };
 
 static DVector3 *
@@ -663,7 +663,7 @@ struct FVector3
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    FVector3Glm *glm;
+    FVector3Glm glm;
 };
 
 static FVector3 *
@@ -686,7 +686,7 @@ struct I8Vector3
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    I8Vector3Glm *glm;
+    I8Vector3Glm glm;
 };
 
 static I8Vector3 *
@@ -709,7 +709,7 @@ struct U8Vector3
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    U8Vector3Glm *glm;
+    U8Vector3Glm glm;
 };
 
 static U8Vector3 *
@@ -732,7 +732,7 @@ struct I16Vector3
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    I16Vector3Glm *glm;
+    I16Vector3Glm glm;
 };
 
 static I16Vector3 *
@@ -755,7 +755,7 @@ struct U16Vector3
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    U16Vector3Glm *glm;
+    U16Vector3Glm glm;
 };
 
 static U16Vector3 *
@@ -778,7 +778,7 @@ struct I32Vector3
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    I32Vector3Glm *glm;
+    I32Vector3Glm glm;
 };
 
 static I32Vector3 *
@@ -801,7 +801,7 @@ struct U32Vector3
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    U32Vector3Glm *glm;
+    U32Vector3Glm glm;
 };
 
 static U32Vector3 *
@@ -824,7 +824,7 @@ struct IVector3
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    IVector3Glm *glm;
+    IVector3Glm glm;
 };
 
 static IVector3 *
@@ -847,7 +847,7 @@ struct UVector3
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    UVector3Glm *glm;
+    UVector3Glm glm;
 };
 
 static UVector3 *
@@ -870,7 +870,7 @@ struct I64Vector3
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    I64Vector3Glm *glm;
+    I64Vector3Glm glm;
 };
 
 static I64Vector3 *
@@ -893,7 +893,7 @@ struct U64Vector3
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    U64Vector3Glm *glm;
+    U64Vector3Glm glm;
 };
 
 static U64Vector3 *
@@ -916,7 +916,7 @@ struct BVector4
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    BVector4Glm *glm;
+    BVector4Glm glm;
 };
 
 static BVector4 *
@@ -939,7 +939,7 @@ struct DVector4
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    DVector4Glm *glm;
+    DVector4Glm glm;
 };
 
 static DVector4 *
@@ -962,7 +962,7 @@ struct FVector4
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    FVector4Glm *glm;
+    FVector4Glm glm;
 };
 
 static FVector4 *
@@ -985,7 +985,7 @@ struct I8Vector4
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    I8Vector4Glm *glm;
+    I8Vector4Glm glm;
 };
 
 static I8Vector4 *
@@ -1008,7 +1008,7 @@ struct U8Vector4
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    U8Vector4Glm *glm;
+    U8Vector4Glm glm;
 };
 
 static U8Vector4 *
@@ -1031,7 +1031,7 @@ struct I16Vector4
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    I16Vector4Glm *glm;
+    I16Vector4Glm glm;
 };
 
 static I16Vector4 *
@@ -1054,7 +1054,7 @@ struct U16Vector4
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    U16Vector4Glm *glm;
+    U16Vector4Glm glm;
 };
 
 static U16Vector4 *
@@ -1077,7 +1077,7 @@ struct I32Vector4
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    I32Vector4Glm *glm;
+    I32Vector4Glm glm;
 };
 
 static I32Vector4 *
@@ -1100,7 +1100,7 @@ struct U32Vector4
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    U32Vector4Glm *glm;
+    U32Vector4Glm glm;
 };
 
 static U32Vector4 *
@@ -1123,7 +1123,7 @@ struct IVector4
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    IVector4Glm *glm;
+    IVector4Glm glm;
 };
 
 static IVector4 *
@@ -1146,7 +1146,7 @@ struct UVector4
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    UVector4Glm *glm;
+    UVector4Glm glm;
 };
 
 static UVector4 *
@@ -1169,7 +1169,7 @@ struct I64Vector4
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    I64Vector4Glm *glm;
+    I64Vector4Glm glm;
 };
 
 static I64Vector4 *
@@ -1192,7 +1192,7 @@ struct U64Vector4
 {
     PyObject_HEAD
     PyObject *weakreflist;
-    U64Vector4Glm *glm;
+    U64Vector4Glm glm;
 };
 
 static U64Vector4 *

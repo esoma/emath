@@ -318,6 +318,13 @@ static PyMemberDef I64Array_PyMemberDef[] = {
 
 
 static PyObject *
+I64Array_address(I64Array *self, void *)
+{
+    return PyLong_FromSsize_t((Py_ssize_t)self->pod);
+}
+
+
+static PyObject *
 I64Array_pointer(I64Array *self, void *)
 {
     auto module_state = get_module_state();
@@ -335,6 +342,7 @@ I64Array_size(I64Array *self, void *)
 
 
 static PyGetSetDef I64Array_PyGetSetDef[] = {
+    {"address", (getter)I64Array_address, 0, 0, 0},
     {"pointer", (getter)I64Array_pointer, 0, 0, 0},
     {"size", (getter)I64Array_size, 0, 0, 0},
     {0, 0, 0, 0, 0}

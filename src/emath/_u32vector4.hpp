@@ -728,6 +728,13 @@ U32Vector4_getbufferproc(U32Vector4 *self, Py_buffer *view, int flags)
 
 
 static PyObject *
+U32Vector4_address(U32Vector4 *self, void *)
+{
+    return PyLong_FromSsize_t((Py_ssize_t)&self->glm);
+}
+
+
+static PyObject *
 U32Vector4_pointer(U32Vector4 *self, void *)
 {
     auto module_state = get_module_state();
@@ -745,6 +752,7 @@ U32Vector4_pointer(U32Vector4 *self, void *)
 
 
 static PyGetSetDef U32Vector4_PyGetSetDef[] = {
+    {"address", (getter)U32Vector4_address, 0, 0, 0},
     {"x", (getter)U32Vector4_Getter_0, 0, 0, 0},
     {"r", (getter)U32Vector4_Getter_0, 0, 0, 0},
     {"s", (getter)U32Vector4_Getter_0, 0, 0, 0},
@@ -1717,6 +1725,13 @@ static PyMemberDef U32Vector4Array_PyMemberDef[] = {
 
 
 static PyObject *
+U32Vector4Array_address(U32Vector4Array *self, void *)
+{
+    return PyLong_FromVoidPtr(self->glm);
+}
+
+
+static PyObject *
 U32Vector4Array_pointer(U32Vector4Array *self, void *)
 {
     auto module_state = get_module_state();
@@ -1734,6 +1749,7 @@ U32Vector4Array_size(U32Vector4Array *self, void *)
 
 
 static PyGetSetDef U32Vector4Array_PyGetSetDef[] = {
+    {"address", (getter)U32Vector4Array_address, 0, 0, 0},
     {"pointer", (getter)U32Vector4Array_pointer, 0, 0, 0},
     {"size", (getter)U32Vector4Array_size, 0, 0, 0},
     {0, 0, 0, 0, 0}

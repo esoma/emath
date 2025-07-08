@@ -596,15 +596,19 @@ class QuaternionTest:
         real_type = {"d": ctypes.c_double, "f": ctypes.c_float}[self.struct_format]
         quat = self.cls(*range(4))
         assert isinstance(quat.pointer, ctypes.POINTER(real_type))
+        address_pointer = ctypes.cast(ctypes.c_void_p(quat.address), ctypes.POINTER(real_type))
         for i in range(4):
-            quat.pointer[i] == i
+            assert quat.pointer[i] == i
+            assert address_pointer[i] == i
 
     def test_array_pointer(self) -> None:
         real_type = {"d": ctypes.c_double, "f": ctypes.c_float}[self.struct_format]
         array = self.array_cls(self.cls(*range(4)), self.cls(0))
         assert isinstance(array.pointer, ctypes.POINTER(real_type))
+        address_pointer = ctypes.cast(ctypes.c_void_p(array.address), ctypes.POINTER(real_type))
         for i in (*range(4), *(0 for _ in range(4))):
-            array.pointer[i] == i
+            assert array.pointer[i] == i
+            assert address_pointer[i] == i
 
     def test_inverse(self) -> None:
         assert self.cls(1).inverse() == self.cls(-0, -0, -0, 1)

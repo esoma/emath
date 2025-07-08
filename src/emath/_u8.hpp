@@ -318,6 +318,13 @@ static PyMemberDef U8Array_PyMemberDef[] = {
 
 
 static PyObject *
+U8Array_address(U8Array *self, void *)
+{
+    return PyLong_FromSsize_t((Py_ssize_t)self->pod);
+}
+
+
+static PyObject *
 U8Array_pointer(U8Array *self, void *)
 {
     auto module_state = get_module_state();
@@ -335,6 +342,7 @@ U8Array_size(U8Array *self, void *)
 
 
 static PyGetSetDef U8Array_PyGetSetDef[] = {
+    {"address", (getter)U8Array_address, 0, 0, 0},
     {"pointer", (getter)U8Array_pointer, 0, 0, 0},
     {"size", (getter)U8Array_size, 0, 0, 0},
     {0, 0, 0, 0, 0}

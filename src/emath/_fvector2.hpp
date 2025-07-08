@@ -725,6 +725,13 @@ FVector2_getbufferproc(FVector2 *self, Py_buffer *view, int flags)
 
 
 static PyObject *
+FVector2_address(FVector2 *self, void *)
+{
+    return PyLong_FromSsize_t((Py_ssize_t)&self->glm);
+}
+
+
+static PyObject *
 FVector2_pointer(FVector2 *self, void *)
 {
     auto module_state = get_module_state();
@@ -742,6 +749,7 @@ FVector2_pointer(FVector2 *self, void *)
 
 
 static PyGetSetDef FVector2_PyGetSetDef[] = {
+    {"address", (getter)FVector2_address, 0, 0, 0},
     {"x", (getter)FVector2_Getter_0, 0, 0, 0},
     {"r", (getter)FVector2_Getter_0, 0, 0, 0},
     {"s", (getter)FVector2_Getter_0, 0, 0, 0},
@@ -1761,6 +1769,13 @@ static PyMemberDef FVector2Array_PyMemberDef[] = {
 
 
 static PyObject *
+FVector2Array_address(FVector2Array *self, void *)
+{
+    return PyLong_FromVoidPtr(self->glm);
+}
+
+
+static PyObject *
 FVector2Array_pointer(FVector2Array *self, void *)
 {
     auto module_state = get_module_state();
@@ -1778,6 +1793,7 @@ FVector2Array_size(FVector2Array *self, void *)
 
 
 static PyGetSetDef FVector2Array_PyGetSetDef[] = {
+    {"address", (getter)FVector2Array_address, 0, 0, 0},
     {"pointer", (getter)FVector2Array_pointer, 0, 0, 0},
     {"size", (getter)FVector2Array_size, 0, 0, 0},
     {0, 0, 0, 0, 0}

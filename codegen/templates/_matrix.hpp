@@ -631,6 +631,13 @@ static PyMemberDef {{ name }}_PyMemberDef[] = {
 
 
 static PyObject *
+{{ name }}_address({{ name }} *self, void *)
+{
+    return PyLong_FromSsize_t((Py_ssize_t)self->glm);
+}
+
+
+static PyObject *
 {{ name }}_pointer({{ name }} *self, void *)
 {
     auto module_state = get_module_state();
@@ -641,6 +648,7 @@ static PyObject *
 
 
 static PyGetSetDef {{ name }}_PyGetSetDef[] = {
+    {"address", (getter){{ name }}_address, 0, 0, 0},
     {"pointer", (getter){{ name }}_pointer, 0, 0, 0},
     {0, 0, 0, 0, 0}
 };
@@ -1433,6 +1441,13 @@ static PyMemberDef {{ name }}Array_PyMemberDef[] = {
 
 
 static PyObject *
+{{ name }}Array_address({{ name }}Array *self, void *)
+{
+    return PyLong_FromSsize_t((Py_ssize_t)self->glm);
+}
+
+
+static PyObject *
 {{ name }}Array_pointer({{ name }}Array *self, void *)
 {
     auto module_state = get_module_state();
@@ -1450,6 +1465,7 @@ static PyObject *
 
 
 static PyGetSetDef {{ name }}Array_PyGetSetDef[] = {
+    {"address", (getter){{ name }}Array_address, 0, 0, 0},
     {"pointer", (getter){{ name }}Array_pointer, 0, 0, 0},
     {"size", (getter){{ name }}Array_size, 0, 0, 0},
     {0, 0, 0, 0, 0}

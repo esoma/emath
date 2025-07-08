@@ -318,6 +318,13 @@ static PyMemberDef BArray_PyMemberDef[] = {
 
 
 static PyObject *
+BArray_address(BArray *self, void *)
+{
+    return PyLong_FromSsize_t((Py_ssize_t)self->pod);
+}
+
+
+static PyObject *
 BArray_pointer(BArray *self, void *)
 {
     auto module_state = get_module_state();
@@ -335,6 +342,7 @@ BArray_size(BArray *self, void *)
 
 
 static PyGetSetDef BArray_PyGetSetDef[] = {
+    {"address", (getter)BArray_address, 0, 0, 0},
     {"pointer", (getter)BArray_pointer, 0, 0, 0},
     {"size", (getter)BArray_size, 0, 0, 0},
     {0, 0, 0, 0, 0}

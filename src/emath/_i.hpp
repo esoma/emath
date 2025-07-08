@@ -318,6 +318,13 @@ static PyMemberDef IArray_PyMemberDef[] = {
 
 
 static PyObject *
+IArray_address(IArray *self, void *)
+{
+    return PyLong_FromSsize_t((Py_ssize_t)self->pod);
+}
+
+
+static PyObject *
 IArray_pointer(IArray *self, void *)
 {
     auto module_state = get_module_state();
@@ -335,6 +342,7 @@ IArray_size(IArray *self, void *)
 
 
 static PyGetSetDef IArray_PyGetSetDef[] = {
+    {"address", (getter)IArray_address, 0, 0, 0},
     {"pointer", (getter)IArray_pointer, 0, 0, 0},
     {"size", (getter)IArray_size, 0, 0, 0},
     {0, 0, 0, 0, 0}

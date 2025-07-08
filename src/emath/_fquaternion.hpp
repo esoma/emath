@@ -459,6 +459,13 @@ static PyMemberDef FQuaternion_PyMemberDef[] = {
 
 
 static PyObject *
+FQuaternion_address(FQuaternion *self, void *)
+{
+    return PyLong_FromSsize_t((Py_ssize_t)self->glm);
+}
+
+
+static PyObject *
 FQuaternion_pointer(FQuaternion *self, void *)
 {
     auto module_state = get_module_state();
@@ -509,6 +516,7 @@ FQuaternion_magnitude(FQuaternion *self, void *)
 
 
 static PyGetSetDef FQuaternion_PyGetSetDef[] = {
+    {"address", (getter)FQuaternion_address, 0, 0, 0},
     {"w", (getter)FQuaternion_Getter_w, 0, 0, 0},
     {"x", (getter)FQuaternion_Getter_x, 0, 0, 0},
     {"y", (getter)FQuaternion_Getter_y, 0, 0, 0},
@@ -1115,6 +1123,13 @@ static PyMemberDef FQuaternionArray_PyMemberDef[] = {
 
 
 static PyObject *
+FQuaternionArray_address(FQuaternionArray *self, void *)
+{
+    return PyLong_FromSsize_t((Py_ssize_t)self->glm);
+}
+
+
+static PyObject *
 FQuaternionArray_pointer(FQuaternionArray *self, void *)
 {
     auto module_state = get_module_state();
@@ -1131,6 +1146,7 @@ FQuaternionArray_size(FQuaternionArray *self, void *)
 }
 
 static PyGetSetDef FQuaternionArray_PyGetSetDef[] = {
+    {"address", (getter)FQuaternionArray_address, 0, 0, 0},
     {"pointer", (getter)FQuaternionArray_pointer, 0, 0, 0},
     {"size", (getter)FQuaternionArray_size, 0, 0, 0},
     {0, 0, 0, 0, 0}

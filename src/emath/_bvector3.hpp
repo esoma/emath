@@ -620,6 +620,13 @@ BVector3_getbufferproc(BVector3 *self, Py_buffer *view, int flags)
 
 
 static PyObject *
+BVector3_address(BVector3 *self, void *)
+{
+    return PyLong_FromSsize_t((Py_ssize_t)&self->glm);
+}
+
+
+static PyObject *
 BVector3_pointer(BVector3 *self, void *)
 {
     auto module_state = get_module_state();
@@ -637,6 +644,7 @@ BVector3_pointer(BVector3 *self, void *)
 
 
 static PyGetSetDef BVector3_PyGetSetDef[] = {
+    {"address", (getter)BVector3_address, 0, 0, 0},
     {"x", (getter)BVector3_Getter_0, 0, 0, 0},
     {"r", (getter)BVector3_Getter_0, 0, 0, 0},
     {"s", (getter)BVector3_Getter_0, 0, 0, 0},
@@ -1587,6 +1595,13 @@ static PyMemberDef BVector3Array_PyMemberDef[] = {
 
 
 static PyObject *
+BVector3Array_address(BVector3Array *self, void *)
+{
+    return PyLong_FromVoidPtr(self->glm);
+}
+
+
+static PyObject *
 BVector3Array_pointer(BVector3Array *self, void *)
 {
     auto module_state = get_module_state();
@@ -1604,6 +1619,7 @@ BVector3Array_size(BVector3Array *self, void *)
 
 
 static PyGetSetDef BVector3Array_PyGetSetDef[] = {
+    {"address", (getter)BVector3Array_address, 0, 0, 0},
     {"pointer", (getter)BVector3Array_pointer, 0, 0, 0},
     {"size", (getter)BVector3Array_size, 0, 0, 0},
     {0, 0, 0, 0, 0}

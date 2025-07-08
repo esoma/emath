@@ -678,6 +678,13 @@ U64Vector3_getbufferproc(U64Vector3 *self, Py_buffer *view, int flags)
 
 
 static PyObject *
+U64Vector3_address(U64Vector3 *self, void *)
+{
+    return PyLong_FromSsize_t((Py_ssize_t)&self->glm);
+}
+
+
+static PyObject *
 U64Vector3_pointer(U64Vector3 *self, void *)
 {
     auto module_state = get_module_state();
@@ -695,6 +702,7 @@ U64Vector3_pointer(U64Vector3 *self, void *)
 
 
 static PyGetSetDef U64Vector3_PyGetSetDef[] = {
+    {"address", (getter)U64Vector3_address, 0, 0, 0},
     {"x", (getter)U64Vector3_Getter_0, 0, 0, 0},
     {"r", (getter)U64Vector3_Getter_0, 0, 0, 0},
     {"s", (getter)U64Vector3_Getter_0, 0, 0, 0},
@@ -1645,6 +1653,13 @@ static PyMemberDef U64Vector3Array_PyMemberDef[] = {
 
 
 static PyObject *
+U64Vector3Array_address(U64Vector3Array *self, void *)
+{
+    return PyLong_FromVoidPtr(self->glm);
+}
+
+
+static PyObject *
 U64Vector3Array_pointer(U64Vector3Array *self, void *)
 {
     auto module_state = get_module_state();
@@ -1662,6 +1677,7 @@ U64Vector3Array_size(U64Vector3Array *self, void *)
 
 
 static PyGetSetDef U64Vector3Array_PyGetSetDef[] = {
+    {"address", (getter)U64Vector3Array_address, 0, 0, 0},
     {"pointer", (getter)U64Vector3Array_pointer, 0, 0, 0},
     {"size", (getter)U64Vector3Array_size, 0, 0, 0},
     {0, 0, 0, 0, 0}

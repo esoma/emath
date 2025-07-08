@@ -1,5 +1,3 @@
-# emath
-# python
 import ctypes
 import itertools
 import struct
@@ -11,7 +9,6 @@ from math import sqrt
 from typing import Final
 from weakref import ref
 
-# pytest
 import pytest
 
 from emath import BVector1
@@ -1129,7 +1126,7 @@ class VectorTest:
             self.cls(0).distance(1)
         assert str(excinfo.value) == f"{1!r} is not {self.cls.__name__}"
 
-    def test_pointer(self) -> None:
+    def test_pointer_and_address(self) -> None:
         real_type = {
             "?": ctypes.c_bool,
             "d": ctypes.c_double,
@@ -1147,10 +1144,12 @@ class VectorTest:
         }[self.struct_byte_order + self.struct_format]
         vector = self.cls(*range(self.component_count))
         assert isinstance(vector.pointer, ctypes.POINTER(real_type))
+        address_pointer = ctypes.cast(ctypes.c_void_p(vector.address), ctypes.POINTER(real_type))
         for i in range(self.component_count):
-            vector.pointer[i] == self.type(i)
+            assert vector.pointer[i] == self.type(i)
+            assert address_pointer[i] == self.type(i)
 
-    def test_array_pointer(self) -> None:
+    def test_array_pointer_and_address(self) -> None:
         real_type = {
             "?": ctypes.c_bool,
             "d": ctypes.c_double,
@@ -1168,8 +1167,10 @@ class VectorTest:
         }[self.struct_byte_order + self.struct_format]
         array = self.array_cls(self.cls(*range(self.component_count)), self.cls(0))
         assert isinstance(array.pointer, ctypes.POINTER(real_type))
+        address_pointer = ctypes.cast(ctypes.c_void_p(array.address), ctypes.POINTER(real_type))
         for i in (*range(self.component_count), *(0 for _ in range(self.component_count))):
-            array.pointer[i] == self.type(i)
+            assert array.pointer[i] == self.type(i)
+            assert address_pointer[i] == self.type(i)
 
     def test_to_quaternion(self) -> None:
         if self.type != float or self.component_count != 3:

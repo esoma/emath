@@ -318,6 +318,13 @@ static PyMemberDef U16Array_PyMemberDef[] = {
 
 
 static PyObject *
+U16Array_address(U16Array *self, void *)
+{
+    return PyLong_FromSsize_t((Py_ssize_t)self->pod);
+}
+
+
+static PyObject *
 U16Array_pointer(U16Array *self, void *)
 {
     auto module_state = get_module_state();
@@ -335,6 +342,7 @@ U16Array_size(U16Array *self, void *)
 
 
 static PyGetSetDef U16Array_PyGetSetDef[] = {
+    {"address", (getter)U16Array_address, 0, 0, 0},
     {"pointer", (getter)U16Array_pointer, 0, 0, 0},
     {"size", (getter)U16Array_size, 0, 0, 0},
     {0, 0, 0, 0, 0}

@@ -829,6 +829,13 @@ DVector4_getbufferproc(DVector4 *self, Py_buffer *view, int flags)
 
 
 static PyObject *
+DVector4_address(DVector4 *self, void *)
+{
+    return PyLong_FromSsize_t((Py_ssize_t)&self->glm);
+}
+
+
+static PyObject *
 DVector4_pointer(DVector4 *self, void *)
 {
     auto module_state = get_module_state();
@@ -846,6 +853,7 @@ DVector4_pointer(DVector4 *self, void *)
 
 
 static PyGetSetDef DVector4_PyGetSetDef[] = {
+    {"address", (getter)DVector4_address, 0, 0, 0},
     {"x", (getter)DVector4_Getter_0, 0, 0, 0},
     {"r", (getter)DVector4_Getter_0, 0, 0, 0},
     {"s", (getter)DVector4_Getter_0, 0, 0, 0},
@@ -1913,6 +1921,13 @@ static PyMemberDef DVector4Array_PyMemberDef[] = {
 
 
 static PyObject *
+DVector4Array_address(DVector4Array *self, void *)
+{
+    return PyLong_FromVoidPtr(self->glm);
+}
+
+
+static PyObject *
 DVector4Array_pointer(DVector4Array *self, void *)
 {
     auto module_state = get_module_state();
@@ -1930,6 +1945,7 @@ DVector4Array_size(DVector4Array *self, void *)
 
 
 static PyGetSetDef DVector4Array_PyGetSetDef[] = {
+    {"address", (getter)DVector4Array_address, 0, 0, 0},
     {"pointer", (getter)DVector4Array_pointer, 0, 0, 0},
     {"size", (getter)DVector4Array_size, 0, 0, 0},
     {0, 0, 0, 0, 0}

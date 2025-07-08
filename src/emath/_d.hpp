@@ -318,6 +318,13 @@ static PyMemberDef DArray_PyMemberDef[] = {
 
 
 static PyObject *
+DArray_address(DArray *self, void *)
+{
+    return PyLong_FromSsize_t((Py_ssize_t)self->pod);
+}
+
+
+static PyObject *
 DArray_pointer(DArray *self, void *)
 {
     auto module_state = get_module_state();
@@ -335,6 +342,7 @@ DArray_size(DArray *self, void *)
 
 
 static PyGetSetDef DArray_PyGetSetDef[] = {
+    {"address", (getter)DArray_address, 0, 0, 0},
     {"pointer", (getter)DArray_pointer, 0, 0, 0},
     {"size", (getter)DArray_size, 0, 0, 0},
     {0, 0, 0, 0, 0}

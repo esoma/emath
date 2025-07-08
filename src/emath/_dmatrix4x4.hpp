@@ -1106,6 +1106,13 @@ static PyMemberDef DMatrix4x4_PyMemberDef[] = {
 
 
 static PyObject *
+DMatrix4x4_address(DMatrix4x4 *self, void *)
+{
+    return PyLong_FromSsize_t((Py_ssize_t)self->glm);
+}
+
+
+static PyObject *
 DMatrix4x4_pointer(DMatrix4x4 *self, void *)
 {
     auto module_state = get_module_state();
@@ -1116,6 +1123,7 @@ DMatrix4x4_pointer(DMatrix4x4 *self, void *)
 
 
 static PyGetSetDef DMatrix4x4_PyGetSetDef[] = {
+    {"address", (getter)DMatrix4x4_address, 0, 0, 0},
     {"pointer", (getter)DMatrix4x4_pointer, 0, 0, 0},
     {0, 0, 0, 0, 0}
 };
@@ -1893,6 +1901,13 @@ static PyMemberDef DMatrix4x4Array_PyMemberDef[] = {
 
 
 static PyObject *
+DMatrix4x4Array_address(DMatrix4x4Array *self, void *)
+{
+    return PyLong_FromSsize_t((Py_ssize_t)self->glm);
+}
+
+
+static PyObject *
 DMatrix4x4Array_pointer(DMatrix4x4Array *self, void *)
 {
     auto module_state = get_module_state();
@@ -1910,6 +1925,7 @@ DMatrix4x4Array_size(DMatrix4x4Array *self, void *)
 
 
 static PyGetSetDef DMatrix4x4Array_PyGetSetDef[] = {
+    {"address", (getter)DMatrix4x4Array_address, 0, 0, 0},
     {"pointer", (getter)DMatrix4x4Array_pointer, 0, 0, 0},
     {"size", (getter)DMatrix4x4Array_size, 0, 0, 0},
     {0, 0, 0, 0, 0}

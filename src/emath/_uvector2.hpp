@@ -628,6 +628,13 @@ UVector2_getbufferproc(UVector2 *self, Py_buffer *view, int flags)
 
 
 static PyObject *
+UVector2_address(UVector2 *self, void *)
+{
+    return PyLong_FromSsize_t((Py_ssize_t)&self->glm);
+}
+
+
+static PyObject *
 UVector2_pointer(UVector2 *self, void *)
 {
     auto module_state = get_module_state();
@@ -645,6 +652,7 @@ UVector2_pointer(UVector2 *self, void *)
 
 
 static PyGetSetDef UVector2_PyGetSetDef[] = {
+    {"address", (getter)UVector2_address, 0, 0, 0},
     {"x", (getter)UVector2_Getter_0, 0, 0, 0},
     {"r", (getter)UVector2_Getter_0, 0, 0, 0},
     {"s", (getter)UVector2_Getter_0, 0, 0, 0},
@@ -1573,6 +1581,13 @@ static PyMemberDef UVector2Array_PyMemberDef[] = {
 
 
 static PyObject *
+UVector2Array_address(UVector2Array *self, void *)
+{
+    return PyLong_FromVoidPtr(self->glm);
+}
+
+
+static PyObject *
 UVector2Array_pointer(UVector2Array *self, void *)
 {
     auto module_state = get_module_state();
@@ -1590,6 +1605,7 @@ UVector2Array_size(UVector2Array *self, void *)
 
 
 static PyGetSetDef UVector2Array_PyGetSetDef[] = {
+    {"address", (getter)UVector2Array_address, 0, 0, 0},
     {"pointer", (getter)UVector2Array_pointer, 0, 0, 0},
     {"size", (getter)UVector2Array_size, 0, 0, 0},
     {0, 0, 0, 0, 0}

@@ -945,6 +945,13 @@ static PyMemberDef FMatrix3x4_PyMemberDef[] = {
 
 
 static PyObject *
+FMatrix3x4_address(FMatrix3x4 *self, void *)
+{
+    return PyLong_FromSsize_t((Py_ssize_t)self->glm);
+}
+
+
+static PyObject *
 FMatrix3x4_pointer(FMatrix3x4 *self, void *)
 {
     auto module_state = get_module_state();
@@ -955,6 +962,7 @@ FMatrix3x4_pointer(FMatrix3x4 *self, void *)
 
 
 static PyGetSetDef FMatrix3x4_PyGetSetDef[] = {
+    {"address", (getter)FMatrix3x4_address, 0, 0, 0},
     {"pointer", (getter)FMatrix3x4_pointer, 0, 0, 0},
     {0, 0, 0, 0, 0}
 };
@@ -1506,6 +1514,13 @@ static PyMemberDef FMatrix3x4Array_PyMemberDef[] = {
 
 
 static PyObject *
+FMatrix3x4Array_address(FMatrix3x4Array *self, void *)
+{
+    return PyLong_FromSsize_t((Py_ssize_t)self->glm);
+}
+
+
+static PyObject *
 FMatrix3x4Array_pointer(FMatrix3x4Array *self, void *)
 {
     auto module_state = get_module_state();
@@ -1523,6 +1538,7 @@ FMatrix3x4Array_size(FMatrix3x4Array *self, void *)
 
 
 static PyGetSetDef FMatrix3x4Array_PyGetSetDef[] = {
+    {"address", (getter)FMatrix3x4Array_address, 0, 0, 0},
     {"pointer", (getter)FMatrix3x4Array_pointer, 0, 0, 0},
     {"size", (getter)FMatrix3x4Array_size, 0, 0, 0},
     {0, 0, 0, 0, 0}

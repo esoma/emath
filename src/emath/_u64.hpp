@@ -318,6 +318,13 @@ static PyMemberDef U64Array_PyMemberDef[] = {
 
 
 static PyObject *
+U64Array_address(U64Array *self, void *)
+{
+    return PyLong_FromSsize_t((Py_ssize_t)self->pod);
+}
+
+
+static PyObject *
 U64Array_pointer(U64Array *self, void *)
 {
     auto module_state = get_module_state();
@@ -335,6 +342,7 @@ U64Array_size(U64Array *self, void *)
 
 
 static PyGetSetDef U64Array_PyGetSetDef[] = {
+    {"address", (getter)U64Array_address, 0, 0, 0},
     {"pointer", (getter)U64Array_pointer, 0, 0, 0},
     {"size", (getter)U64Array_size, 0, 0, 0},
     {0, 0, 0, 0, 0}

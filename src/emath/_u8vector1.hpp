@@ -565,6 +565,13 @@ U8Vector1_getbufferproc(U8Vector1 *self, Py_buffer *view, int flags)
 
 
 static PyObject *
+U8Vector1_address(U8Vector1 *self, void *)
+{
+    return PyLong_FromSsize_t((Py_ssize_t)&self->glm);
+}
+
+
+static PyObject *
 U8Vector1_pointer(U8Vector1 *self, void *)
 {
     auto module_state = get_module_state();
@@ -582,6 +589,7 @@ U8Vector1_pointer(U8Vector1 *self, void *)
 
 
 static PyGetSetDef U8Vector1_PyGetSetDef[] = {
+    {"address", (getter)U8Vector1_address, 0, 0, 0},
     {"x", (getter)U8Vector1_Getter_0, 0, 0, 0},
     {"r", (getter)U8Vector1_Getter_0, 0, 0, 0},
     {"s", (getter)U8Vector1_Getter_0, 0, 0, 0},
@@ -1477,6 +1485,13 @@ static PyMemberDef U8Vector1Array_PyMemberDef[] = {
 
 
 static PyObject *
+U8Vector1Array_address(U8Vector1Array *self, void *)
+{
+    return PyLong_FromVoidPtr(self->glm);
+}
+
+
+static PyObject *
 U8Vector1Array_pointer(U8Vector1Array *self, void *)
 {
     auto module_state = get_module_state();
@@ -1494,6 +1509,7 @@ U8Vector1Array_size(U8Vector1Array *self, void *)
 
 
 static PyGetSetDef U8Vector1Array_PyGetSetDef[] = {
+    {"address", (getter)U8Vector1Array_address, 0, 0, 0},
     {"pointer", (getter)U8Vector1Array_pointer, 0, 0, 0},
     {"size", (getter)U8Vector1Array_size, 0, 0, 0},
     {0, 0, 0, 0, 0}

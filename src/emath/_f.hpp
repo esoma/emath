@@ -318,6 +318,13 @@ static PyMemberDef FArray_PyMemberDef[] = {
 
 
 static PyObject *
+FArray_address(FArray *self, void *)
+{
+    return PyLong_FromSsize_t((Py_ssize_t)self->pod);
+}
+
+
+static PyObject *
 FArray_pointer(FArray *self, void *)
 {
     auto module_state = get_module_state();
@@ -335,6 +342,7 @@ FArray_size(FArray *self, void *)
 
 
 static PyGetSetDef FArray_PyGetSetDef[] = {
+    {"address", (getter)FArray_address, 0, 0, 0},
     {"pointer", (getter)FArray_pointer, 0, 0, 0},
     {"size", (getter)FArray_size, 0, 0, 0},
     {0, 0, 0, 0, 0}

@@ -753,6 +753,13 @@ IVector4_getbufferproc(IVector4 *self, Py_buffer *view, int flags)
 
 
 static PyObject *
+IVector4_address(IVector4 *self, void *)
+{
+    return PyLong_FromSsize_t((Py_ssize_t)&self->glm);
+}
+
+
+static PyObject *
 IVector4_pointer(IVector4 *self, void *)
 {
     auto module_state = get_module_state();
@@ -770,6 +777,7 @@ IVector4_pointer(IVector4 *self, void *)
 
 
 static PyGetSetDef IVector4_PyGetSetDef[] = {
+    {"address", (getter)IVector4_address, 0, 0, 0},
     {"x", (getter)IVector4_Getter_0, 0, 0, 0},
     {"r", (getter)IVector4_Getter_0, 0, 0, 0},
     {"s", (getter)IVector4_Getter_0, 0, 0, 0},
@@ -1744,6 +1752,13 @@ static PyMemberDef IVector4Array_PyMemberDef[] = {
 
 
 static PyObject *
+IVector4Array_address(IVector4Array *self, void *)
+{
+    return PyLong_FromVoidPtr(self->glm);
+}
+
+
+static PyObject *
 IVector4Array_pointer(IVector4Array *self, void *)
 {
     auto module_state = get_module_state();
@@ -1761,6 +1776,7 @@ IVector4Array_size(IVector4Array *self, void *)
 
 
 static PyGetSetDef IVector4Array_PyGetSetDef[] = {
+    {"address", (getter)IVector4Array_address, 0, 0, 0},
     {"pointer", (getter)IVector4Array_pointer, 0, 0, 0},
     {"size", (getter)IVector4Array_size, 0, 0, 0},
     {0, 0, 0, 0, 0}

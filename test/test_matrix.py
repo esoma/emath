@@ -1,5 +1,3 @@
-# emath
-# python
 import ctypes
 import struct
 from math import inf
@@ -8,7 +6,6 @@ from math import isnan
 from math import radians
 from weakref import ref
 
-# pytest
 import pytest
 
 from emath import DMatrix2
@@ -792,15 +789,19 @@ class MatrixTest:
         real_type = {"d": ctypes.c_double, "f": ctypes.c_float}[self.struct_format]
         matrix = self.cls(*range(self.component_count))
         assert isinstance(matrix.pointer, ctypes.POINTER(real_type))
+        address_pointer = ctypes.cast(ctypes.c_void_p(matrix.address), ctypes.POINTER(real_type))
         for i in range(self.component_count):
-            matrix.pointer[i] == self.type(i)
+            assert matrix.pointer[i] == self.type(i)
+            assert address_pointer[i] == self.type(i)
 
     def test_array_pointer(self) -> None:
         real_type = {"d": ctypes.c_double, "f": ctypes.c_float}[self.struct_format]
         array = self.array_cls(self.cls(*range(self.component_count)), self.cls(0))
         assert isinstance(array.pointer, ctypes.POINTER(real_type))
+        address_pointer = ctypes.cast(ctypes.c_void_p(array.address), ctypes.POINTER(real_type))
         for i in (*range(self.component_count), *(0 for _ in range(self.component_count))):
-            array.pointer[i] == self.type(i)
+            assert array.pointer[i] == self.type(i)
+            assert address_pointer[i] == self.type(i)
 
     def test_get_row(self) -> None:
         matrix = self.cls(*range(self.component_count))

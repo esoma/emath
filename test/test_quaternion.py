@@ -674,6 +674,21 @@ class QuaternionTest:
         assert isclose(rot_mat[3].z, 0)
         assert isclose(rot_mat[3].w, 1)
 
+    def test_euler_angles(self) -> None:
+        vector3_cls = globals()[f"{self.cls.__name__[0]}Vector3"]
+
+        rot_quat = self.cls(1)
+        rot_quat.euler_angles == vector3_cls(0, 0, 0)
+
+        rot_quat = self.cls(1).rotate(radians(90), vector3_cls(0, 1, 0))
+        rot_quat.euler_angles == vector3_cls(0, radians(90), 0)
+
+        rot_quat = self.cls(1).rotate(radians(90), vector3_cls(1, 0, 0))
+        rot_quat.euler_angles == vector3_cls(radians(90), 0, 0)
+
+        rot_quat = self.cls(1).rotate(radians(90), vector3_cls(0, 0, 1))
+        rot_quat.euler_angles == vector3_cls(0, 0, radians(90))
+
     def test_get_size(self) -> None:
         assert self.cls.get_size() == (struct.calcsize("=" + self.struct_format) * 4)
 

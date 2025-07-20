@@ -514,6 +514,20 @@ DQuaternion_magnitude(DQuaternion *self, void *)
     return c_double_to_pyobject(magnitude);
 }
 
+static PyObject *
+DQuaternion_euler_angles(DQuaternion *self, void *)
+{
+    auto module_state = get_module_state();
+    if (!module_state){ return 0; }
+    auto cls = module_state->DVector3_PyTypeObject;
+
+    auto angles = glm::eulerAngles(*self->glm);
+    auto *result = (DVector3 *)cls->tp_alloc(cls, 0);
+    if (!result){ return 0; }
+    result->glm = angles;
+    return (PyObject *)result;
+}
+
 
 static PyGetSetDef DQuaternion_PyGetSetDef[] = {
     {"address", (getter)DQuaternion_address, 0, 0, 0},
@@ -523,6 +537,7 @@ static PyGetSetDef DQuaternion_PyGetSetDef[] = {
     {"z", (getter)DQuaternion_Getter_z, 0, 0, 0},
     {"magnitude", (getter)DQuaternion_magnitude, 0, 0, 0},
     {"pointer", (getter)DQuaternion_pointer, 0, 0, 0},
+    {"euler_angles", (getter)DQuaternion_euler_angles, 0, 0, 0},
     {0, 0, 0, 0, 0}
 };
 

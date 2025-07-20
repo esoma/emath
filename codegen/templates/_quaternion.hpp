@@ -514,6 +514,20 @@ static PyObject *
     return c_{{ c_type.replace(' ', '_') }}_to_pyobject(magnitude);
 }
 
+static PyObject *
+{{ name }}_euler_angles({{ name }} *self, void *)
+{
+    auto module_state = get_module_state();
+    if (!module_state){ return 0; }
+    auto cls = module_state->{{ name[0] }}Vector3_PyTypeObject;
+
+    auto angles = glm::eulerAngles(*self->glm);
+    auto *result = ({{ name[0] }}Vector3 *)cls->tp_alloc(cls, 0);
+    if (!result){ return 0; }
+    result->glm = angles;
+    return (PyObject *)result;
+}
+
 
 static PyGetSetDef {{ name }}_PyGetSetDef[] = {
     {"address", (getter){{ name }}_address, 0, 0, 0},
@@ -523,6 +537,7 @@ static PyGetSetDef {{ name }}_PyGetSetDef[] = {
     {"z", (getter){{ name }}_Getter_z, 0, 0, 0},
     {"magnitude", (getter){{ name }}_magnitude, 0, 0, 0},
     {"pointer", (getter){{ name }}_pointer, 0, 0, 0},
+    {"euler_angles", (getter){{ name }}_euler_angles, 0, 0, 0},
     {0, 0, 0, 0, 0}
 };
 

@@ -757,7 +757,7 @@ static PyGetSetDef {{ name }}_PyGetSetDef[] = {
     }
 
     static {{ name }} *
-    {{ name }}_perspective(PyTypeObject *cls, PyObject *const *args, Py_ssize_t nargs)
+    {{ name }}_perspective_rh_no(PyTypeObject *cls, PyObject *const *args, Py_ssize_t nargs)
     {
         if (nargs != 4)
         {
@@ -776,12 +776,36 @@ static PyGetSetDef {{ name }}_PyGetSetDef[] = {
 
         auto *result = ({{ name }} *)cls->tp_alloc(cls, 0);
         if (!result){ return 0; }
-        result->glm = new {{ name }}Glm(glm::perspective(fov, aspect, near, far));
+        result->glm = new {{ name }}Glm(glm::perspectiveRH_NO(fov, aspect, near, far));
         return result;
     }
 
     static {{ name }} *
-    {{ name }}_orthographic(PyTypeObject *cls, PyObject *const *args, Py_ssize_t nargs)
+    {{ name }}_perspective_rh_zo(PyTypeObject *cls, PyObject *const *args, Py_ssize_t nargs)
+    {
+        if (nargs != 4)
+        {
+            PyErr_Format(PyExc_TypeError, "expected 4 argument, got %zi", nargs);
+            return 0;
+        }
+
+        double fov = PyFloat_AsDouble(args[0]);
+        if (PyErr_Occurred()){ return 0; }
+        double aspect = PyFloat_AsDouble(args[1]);
+        if (PyErr_Occurred()){ return 0; }
+        double near = PyFloat_AsDouble(args[2]);
+        if (PyErr_Occurred()){ return 0; }
+        double far = PyFloat_AsDouble(args[3]);
+        if (PyErr_Occurred()){ return 0; }
+
+        auto *result = ({{ name }} *)cls->tp_alloc(cls, 0);
+        if (!result){ return 0; }
+        result->glm = new {{ name }}Glm(glm::perspectiveRH_ZO(fov, aspect, near, far));
+        return result;
+    }
+
+    static {{ name }} *
+    {{ name }}_orthographic_rh_zo(PyTypeObject *cls, PyObject *const *args, Py_ssize_t nargs)
     {
         if (nargs != 6)
         {
@@ -804,7 +828,35 @@ static PyGetSetDef {{ name }}_PyGetSetDef[] = {
 
         auto *result = ({{ name }} *)cls->tp_alloc(cls, 0);
         if (!result){ return 0; }
-        result->glm = new {{ name }}Glm(glm::ortho(left, right, bottom, top, near, far));
+        result->glm = new {{ name }}Glm(glm::orthoRH_ZO(left, right, bottom, top, near, far));
+        return result;
+    }
+
+    static {{ name }} *
+    {{ name }}_orthographic_rh_no(PyTypeObject *cls, PyObject *const *args, Py_ssize_t nargs)
+    {
+        if (nargs != 6)
+        {
+            PyErr_Format(PyExc_TypeError, "expected 6 argument, got %zi", nargs);
+            return 0;
+        }
+
+        double left = PyFloat_AsDouble(args[0]);
+        if (PyErr_Occurred()){ return 0; }
+        double right = PyFloat_AsDouble(args[1]);
+        if (PyErr_Occurred()){ return 0; }
+        double bottom = PyFloat_AsDouble(args[2]);
+        if (PyErr_Occurred()){ return 0; }
+        double top = PyFloat_AsDouble(args[3]);
+        if (PyErr_Occurred()){ return 0; }
+        double near = PyFloat_AsDouble(args[4]);
+        if (PyErr_Occurred()){ return 0; }
+        double far = PyFloat_AsDouble(args[5]);
+        if (PyErr_Occurred()){ return 0; }
+
+        auto *result = ({{ name }} *)cls->tp_alloc(cls, 0);
+        if (!result){ return 0; }
+        result->glm = new {{ name }}Glm(glm::orthoRH_NO(left, right, bottom, top, near, far));
         return result;
     }
 
@@ -1034,8 +1086,12 @@ static PyMethodDef {{ name }}_PyMethodDef[] = {
         {"rotate", (PyCFunction){{ name }}_rotate, METH_FASTCALL, 0},
         {"scale", (PyCFunction){{ name }}_scale, METH_FASTCALL, 0},
         {"translate", (PyCFunction){{ name }}_translate, METH_FASTCALL, 0},
-        {"perspective", (PyCFunction){{ name }}_perspective, METH_CLASS | METH_FASTCALL, 0},
-        {"orthographic", (PyCFunction){{ name }}_orthographic, METH_CLASS | METH_FASTCALL, 0},
+        {"perspective", (PyCFunction){{ name }}_perspective_rh_no, METH_CLASS | METH_FASTCALL, 0},
+        {"perspective_rh_zo", (PyCFunction){{ name }}_perspective_rh_zo, METH_CLASS | METH_FASTCALL, 0},
+        {"perspective_rh_no", (PyCFunction){{ name }}_perspective_rh_no, METH_CLASS | METH_FASTCALL, 0},
+        {"orthographic", (PyCFunction){{ name }}_orthographic_rh_no, METH_CLASS | METH_FASTCALL, 0},
+        {"orthographic_rh_zo", (PyCFunction){{ name }}_orthographic_rh_zo, METH_CLASS | METH_FASTCALL, 0},
+        {"orthographic_rh_no", (PyCFunction){{ name }}_orthographic_rh_no, METH_CLASS | METH_FASTCALL, 0},
         {"look_at", (PyCFunction){{ name }}_look_at, METH_CLASS | METH_FASTCALL, 0},
         {"to_matrix3", (PyCFunction){{ name }}_to_matrix3, METH_NOARGS, 0},
     {% endif %}

@@ -1232,7 +1232,7 @@ static PyGetSetDef DMatrix4x4_PyGetSetDef[] = {
     }
 
     static DMatrix4x4 *
-    DMatrix4x4_perspective(PyTypeObject *cls, PyObject *const *args, Py_ssize_t nargs)
+    DMatrix4x4_perspective_rh_no(PyTypeObject *cls, PyObject *const *args, Py_ssize_t nargs)
     {
         if (nargs != 4)
         {
@@ -1251,12 +1251,36 @@ static PyGetSetDef DMatrix4x4_PyGetSetDef[] = {
 
         auto *result = (DMatrix4x4 *)cls->tp_alloc(cls, 0);
         if (!result){ return 0; }
-        result->glm = new DMatrix4x4Glm(glm::perspective(fov, aspect, near, far));
+        result->glm = new DMatrix4x4Glm(glm::perspectiveRH_NO(fov, aspect, near, far));
         return result;
     }
 
     static DMatrix4x4 *
-    DMatrix4x4_orthographic(PyTypeObject *cls, PyObject *const *args, Py_ssize_t nargs)
+    DMatrix4x4_perspective_rh_zo(PyTypeObject *cls, PyObject *const *args, Py_ssize_t nargs)
+    {
+        if (nargs != 4)
+        {
+            PyErr_Format(PyExc_TypeError, "expected 4 argument, got %zi", nargs);
+            return 0;
+        }
+
+        double fov = PyFloat_AsDouble(args[0]);
+        if (PyErr_Occurred()){ return 0; }
+        double aspect = PyFloat_AsDouble(args[1]);
+        if (PyErr_Occurred()){ return 0; }
+        double near = PyFloat_AsDouble(args[2]);
+        if (PyErr_Occurred()){ return 0; }
+        double far = PyFloat_AsDouble(args[3]);
+        if (PyErr_Occurred()){ return 0; }
+
+        auto *result = (DMatrix4x4 *)cls->tp_alloc(cls, 0);
+        if (!result){ return 0; }
+        result->glm = new DMatrix4x4Glm(glm::perspectiveRH_ZO(fov, aspect, near, far));
+        return result;
+    }
+
+    static DMatrix4x4 *
+    DMatrix4x4_orthographic_rh_zo(PyTypeObject *cls, PyObject *const *args, Py_ssize_t nargs)
     {
         if (nargs != 6)
         {
@@ -1279,7 +1303,35 @@ static PyGetSetDef DMatrix4x4_PyGetSetDef[] = {
 
         auto *result = (DMatrix4x4 *)cls->tp_alloc(cls, 0);
         if (!result){ return 0; }
-        result->glm = new DMatrix4x4Glm(glm::ortho(left, right, bottom, top, near, far));
+        result->glm = new DMatrix4x4Glm(glm::orthoRH_ZO(left, right, bottom, top, near, far));
+        return result;
+    }
+
+    static DMatrix4x4 *
+    DMatrix4x4_orthographic_rh_no(PyTypeObject *cls, PyObject *const *args, Py_ssize_t nargs)
+    {
+        if (nargs != 6)
+        {
+            PyErr_Format(PyExc_TypeError, "expected 6 argument, got %zi", nargs);
+            return 0;
+        }
+
+        double left = PyFloat_AsDouble(args[0]);
+        if (PyErr_Occurred()){ return 0; }
+        double right = PyFloat_AsDouble(args[1]);
+        if (PyErr_Occurred()){ return 0; }
+        double bottom = PyFloat_AsDouble(args[2]);
+        if (PyErr_Occurred()){ return 0; }
+        double top = PyFloat_AsDouble(args[3]);
+        if (PyErr_Occurred()){ return 0; }
+        double near = PyFloat_AsDouble(args[4]);
+        if (PyErr_Occurred()){ return 0; }
+        double far = PyFloat_AsDouble(args[5]);
+        if (PyErr_Occurred()){ return 0; }
+
+        auto *result = (DMatrix4x4 *)cls->tp_alloc(cls, 0);
+        if (!result){ return 0; }
+        result->glm = new DMatrix4x4Glm(glm::orthoRH_NO(left, right, bottom, top, near, far));
         return result;
     }
 
@@ -1496,8 +1548,12 @@ static PyMethodDef DMatrix4x4_PyMethodDef[] = {
         {"rotate", (PyCFunction)DMatrix4x4_rotate, METH_FASTCALL, 0},
         {"scale", (PyCFunction)DMatrix4x4_scale, METH_FASTCALL, 0},
         {"translate", (PyCFunction)DMatrix4x4_translate, METH_FASTCALL, 0},
-        {"perspective", (PyCFunction)DMatrix4x4_perspective, METH_CLASS | METH_FASTCALL, 0},
-        {"orthographic", (PyCFunction)DMatrix4x4_orthographic, METH_CLASS | METH_FASTCALL, 0},
+        {"perspective", (PyCFunction)DMatrix4x4_perspective_rh_no, METH_CLASS | METH_FASTCALL, 0},
+        {"perspective_rh_zo", (PyCFunction)DMatrix4x4_perspective_rh_zo, METH_CLASS | METH_FASTCALL, 0},
+        {"perspective_rh_no", (PyCFunction)DMatrix4x4_perspective_rh_no, METH_CLASS | METH_FASTCALL, 0},
+        {"orthographic", (PyCFunction)DMatrix4x4_orthographic_rh_no, METH_CLASS | METH_FASTCALL, 0},
+        {"orthographic_rh_zo", (PyCFunction)DMatrix4x4_orthographic_rh_zo, METH_CLASS | METH_FASTCALL, 0},
+        {"orthographic_rh_no", (PyCFunction)DMatrix4x4_orthographic_rh_no, METH_CLASS | METH_FASTCALL, 0},
         {"look_at", (PyCFunction)DMatrix4x4_look_at, METH_CLASS | METH_FASTCALL, 0},
         {"to_matrix3", (PyCFunction)DMatrix4x4_to_matrix3, METH_NOARGS, 0},
 

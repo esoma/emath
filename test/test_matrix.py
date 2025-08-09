@@ -817,32 +817,35 @@ class MatrixTest:
         with pytest.raises(TypeError):
             matrix.get_row(None)
 
-    def test_perspective(self) -> None:
+    @pytest.mark.parametrize("name", ["perspective", "perspective_rh_no"])
+    def test_perspective(self, name) -> None:
         if self.type != float or self.row_size != 4 or self.column_size != 4:
             with pytest.raises(AttributeError):
-                self.cls.perspective
+                getattr(self.cls, name)
             return
 
-        with pytest.raises(TypeError):
-            self.cls.perspective()
-        with pytest.raises(TypeError):
-            self.cls.perspective(1)
-        with pytest.raises(TypeError):
-            self.cls.perspective(1, 2)
-        with pytest.raises(TypeError):
-            self.cls.perspective(1, 2, 3)
-        with pytest.raises(TypeError):
-            self.cls.perspective(1, 2, 3, 4, 5)
-        with pytest.raises(TypeError):
-            self.cls.perspective(None, 2, 3, 4)
-        with pytest.raises(TypeError):
-            self.cls.perspective(1, None, 3, 4)
-        with pytest.raises(TypeError):
-            self.cls.perspective(1, 2, None, 4)
-        with pytest.raises(TypeError):
-            self.cls.perspective(1, 2, 3, None)
+        perspective = getattr(self.cls, name)
 
-        perspective = self.cls.perspective(0.78, 0.5, 0.1, 100)
+        with pytest.raises(TypeError):
+            perspective()
+        with pytest.raises(TypeError):
+            perspective(1)
+        with pytest.raises(TypeError):
+            perspective(1, 2)
+        with pytest.raises(TypeError):
+            perspective(1, 2, 3)
+        with pytest.raises(TypeError):
+            perspective(1, 2, 3, 4, 5)
+        with pytest.raises(TypeError):
+            perspective(None, 2, 3, 4)
+        with pytest.raises(TypeError):
+            perspective(1, None, 3, 4)
+        with pytest.raises(TypeError):
+            perspective(1, 2, None, 4)
+        with pytest.raises(TypeError):
+            perspective(1, 2, 3, None)
+
+        perspective = perspective(0.78, 0.5, 0.1, 100)
         assert isinstance(perspective, self.cls)
         assert isclose(perspective[0][0], 4.865530014038086)
         assert isclose(perspective[0][1], 0)
@@ -859,6 +862,50 @@ class MatrixTest:
         assert isclose(perspective[3][0], 0)
         assert isclose(perspective[3][1], 0)
         assert isclose(perspective[3][2], -0.20020020008087158)
+        assert isclose(perspective[3][3], 0)
+
+    def test_perspective_rh_zo(self) -> None:
+        if self.type != float or self.row_size != 4 or self.column_size != 4:
+            with pytest.raises(AttributeError):
+                self.cls.perspective_rh_zo
+            return
+
+        with pytest.raises(TypeError):
+            self.cls.perspective_rh_zo()
+        with pytest.raises(TypeError):
+            self.cls.perspective_rh_zo(1)
+        with pytest.raises(TypeError):
+            self.cls.perspective_rh_zo(1, 2)
+        with pytest.raises(TypeError):
+            self.cls.perspective_rh_zo(1, 2, 3)
+        with pytest.raises(TypeError):
+            self.cls.perspective_rh_zo(1, 2, 3, 4, 5)
+        with pytest.raises(TypeError):
+            self.cls.perspective_rh_zo(None, 2, 3, 4)
+        with pytest.raises(TypeError):
+            self.cls.perspective_rh_zo(1, None, 3, 4)
+        with pytest.raises(TypeError):
+            self.cls.perspective_rh_zo(1, 2, None, 4)
+        with pytest.raises(TypeError):
+            self.cls.perspective_rh_zo(1, 2, 3, None)
+
+        perspective = self.cls.perspective_rh_zo(0.78, 0.5, 0.1, 100)
+        assert isinstance(perspective, self.cls)
+        assert isclose(perspective[0][0], 4.865530014038086)
+        assert isclose(perspective[0][1], 0)
+        assert isclose(perspective[0][2], 0)
+        assert isclose(perspective[0][3], 0)
+        assert isclose(perspective[1][0], 0)
+        assert isclose(perspective[1][1], 2.432765007019043)
+        assert isclose(perspective[1][2], 0)
+        assert isclose(perspective[1][3], 0)
+        assert isclose(perspective[2][0], 0)
+        assert isclose(perspective[2][1], 0)
+        assert isclose(perspective[2][2], -1.001001000404358)
+        assert isclose(perspective[2][3], -1)
+        assert isclose(perspective[3][0], 0)
+        assert isclose(perspective[3][1], 0)
+        assert isclose(perspective[3][2], -0.10010010004043579)
         assert isclose(perspective[3][3], 0)
 
     def test_get_size(self) -> None:
@@ -938,40 +985,43 @@ class MatrixTest:
             d_cls(*range(self.component_count))
         )
 
-    def test_orthographic(self) -> None:
+    @pytest.mark.parametrize("name", ["orthographic", "orthographic_rh_no"])
+    def test_orthographic(self, name) -> None:
         if self.type != float or self.row_size != 4 or self.column_size != 4:
             with pytest.raises(AttributeError):
-                self.cls.orthographic
+                getattr(self.cls, name)
             return
 
-        with pytest.raises(TypeError):
-            self.cls.orthographic()
-        with pytest.raises(TypeError):
-            self.cls.orthographic(1)
-        with pytest.raises(TypeError):
-            self.cls.orthographic(1, 2)
-        with pytest.raises(TypeError):
-            self.cls.orthographic(1, 2, 3)
-        with pytest.raises(TypeError):
-            self.cls.orthographic(1, 2, 3, 4)
-        with pytest.raises(TypeError):
-            self.cls.orthographic(1, 2, 3, 4, 5)
-        with pytest.raises(TypeError):
-            self.cls.orthographic(1, 2, 3, 4, 5, 6, 7)
-        with pytest.raises(TypeError):
-            self.cls.orthographic(None, 2, 3, 4, 5, 6)
-        with pytest.raises(TypeError):
-            self.cls.orthographic(1, None, 3, 4, 5, 6)
-        with pytest.raises(TypeError):
-            self.cls.orthographic(1, 2, None, 4, 5, 6)
-        with pytest.raises(TypeError):
-            self.cls.orthographic(1, 2, 3, None, 5, 6)
-        with pytest.raises(TypeError):
-            self.cls.orthographic(1, 2, 3, 4, None, 6)
-        with pytest.raises(TypeError):
-            self.cls.orthographic(1, 2, 3, 4, 5, None)
+        orthographic = getattr(self.cls, name)
 
-        orthographic = self.cls.orthographic(-2, 2, -2, 2, 0.1, 100)
+        with pytest.raises(TypeError):
+            orthographic()
+        with pytest.raises(TypeError):
+            orthographic(1)
+        with pytest.raises(TypeError):
+            orthographic(1, 2)
+        with pytest.raises(TypeError):
+            orthographic(1, 2, 3)
+        with pytest.raises(TypeError):
+            orthographic(1, 2, 3, 4)
+        with pytest.raises(TypeError):
+            orthographic(1, 2, 3, 4, 5)
+        with pytest.raises(TypeError):
+            orthographic(1, 2, 3, 4, 5, 6, 7)
+        with pytest.raises(TypeError):
+            orthographic(None, 2, 3, 4, 5, 6)
+        with pytest.raises(TypeError):
+            orthographic(1, None, 3, 4, 5, 6)
+        with pytest.raises(TypeError):
+            orthographic(1, 2, None, 4, 5, 6)
+        with pytest.raises(TypeError):
+            orthographic(1, 2, 3, None, 5, 6)
+        with pytest.raises(TypeError):
+            orthographic(1, 2, 3, 4, None, 6)
+        with pytest.raises(TypeError):
+            orthographic(1, 2, 3, 4, 5, None)
+
+        orthographic = orthographic(-2, 2, -2, 2, 0.1, 100)
         assert isinstance(orthographic, self.cls)
         assert isclose(orthographic[0][0], 0.5)
         assert isclose(orthographic[0][1], 0)
@@ -988,6 +1038,58 @@ class MatrixTest:
         assert isclose(orthographic[3][0], 0)
         assert isclose(orthographic[3][1], 0)
         assert isclose(orthographic[3][2], -1.0020020008087158)
+        assert isclose(orthographic[3][3], 1)
+
+    def test_orthographic_rh_zo(self) -> None:
+        if self.type != float or self.row_size != 4 or self.column_size != 4:
+            with pytest.raises(AttributeError):
+                self.cls.orthographic_rh_zo
+            return
+
+        with pytest.raises(TypeError):
+            self.cls.orthographic_rh_zo()
+        with pytest.raises(TypeError):
+            self.cls.orthographic_rh_zo(1)
+        with pytest.raises(TypeError):
+            self.cls.orthographic_rh_zo(1, 2)
+        with pytest.raises(TypeError):
+            self.cls.orthographic_rh_zo(1, 2, 3)
+        with pytest.raises(TypeError):
+            self.cls.orthographic_rh_zo(1, 2, 3, 4)
+        with pytest.raises(TypeError):
+            self.cls.orthographic_rh_zo(1, 2, 3, 4, 5)
+        with pytest.raises(TypeError):
+            self.cls.orthographic_rh_zo(1, 2, 3, 4, 5, 6, 7)
+        with pytest.raises(TypeError):
+            self.cls.orthographic_rh_zo(None, 2, 3, 4, 5, 6)
+        with pytest.raises(TypeError):
+            self.cls.orthographic_rh_zo(1, None, 3, 4, 5, 6)
+        with pytest.raises(TypeError):
+            self.cls.orthographic_rh_zo(1, 2, None, 4, 5, 6)
+        with pytest.raises(TypeError):
+            self.cls.orthographic_rh_zo(1, 2, 3, None, 5, 6)
+        with pytest.raises(TypeError):
+            self.cls.orthographic_rh_zo(1, 2, 3, 4, None, 6)
+        with pytest.raises(TypeError):
+            self.cls.orthographic_rh_zo(1, 2, 3, 4, 5, None)
+
+        orthographic = self.cls.orthographic_rh_zo(-2, 2, -2, 2, 0.1, 100)
+        assert isinstance(orthographic, self.cls)
+        assert isclose(orthographic[0][0], 0.5)
+        assert isclose(orthographic[0][1], 0)
+        assert isclose(orthographic[0][2], 0)
+        assert isclose(orthographic[0][3], 0)
+        assert isclose(orthographic[1][0], 0)
+        assert isclose(orthographic[1][1], 0.5)
+        assert isclose(orthographic[1][2], 0)
+        assert isclose(orthographic[1][3], 0)
+        assert isclose(orthographic[2][0], 0)
+        assert isclose(orthographic[2][1], 0)
+        assert isclose(orthographic[2][2], -0.01001000963151455)
+        assert isclose(orthographic[2][3], 0)
+        assert isclose(orthographic[3][0], 0)
+        assert isclose(orthographic[3][1], 0)
+        assert isclose(orthographic[3][2], -0.0010010009864345193)
         assert isclose(orthographic[3][3], 1)
 
     def test_look_at(self) -> None:

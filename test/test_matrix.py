@@ -6,6 +6,7 @@ from math import isnan
 from math import radians
 from weakref import ref
 
+import pydantic
 import pytest
 
 from emath import DMatrix2
@@ -1167,6 +1168,24 @@ class MatrixTest:
 
     def test_array_get_component_type(self) -> None:
         assert self.array_cls.get_component_type() is self.cls
+
+    def test_pydantic(self) -> None:
+        class Model(pydantic.BaseModel):
+            mat: self.cls
+
+        model = Model(mat=self.cls(0))
+        serialized = model.model_dump()
+        deserialized = Model.model_validate(serialized)
+        assert deserialized.mat == model.mat
+
+    def test_array_pydantic(self) -> None:
+        class Model(pydantic.BaseModel):
+            arr: self.array_cls
+
+        model = Model(arr=self.array_cls(self.cls(0), self.cls(1)))
+        serialized = model.model_dump()
+        deserialized = Model.model_validate(serialized)
+        assert deserialized.arr == model.arr
 
 
 class TestFMatrix2x2(

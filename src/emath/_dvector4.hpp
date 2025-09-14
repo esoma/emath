@@ -1326,6 +1326,7 @@ DVector4_get_array_type(PyTypeObject *cls, void*)
 }
 
 
+
 static PyObject *
 DVector4_to_b(DVector4 *self, void *)
 {
@@ -1469,6 +1470,7 @@ DVector4_to_u64(DVector4 *self, void *)
     result->glm = U64Vector4Glm(self->glm);
     return (PyObject *)result;
 }
+
 
 
 static PyObject *
@@ -2011,6 +2013,28 @@ DVector4Array_from_buffer(PyTypeObject *cls, PyObject *buffer)
 
 
 static PyObject *
+DVector4Array_pydantic(PyTypeObject *cls, PyObject *args, PyObject *kwargs)
+{
+    static char *keywords[] = {"source_type", "handler", 0};
+    PyObject *py_source_type = 0;
+    PyObject *py_handler = 0;
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, "OO", keywords, &py_source_type, &py_handler))
+    {
+        return 0;
+    }
+
+    PyObject *emath_pydantic = PyImport_ImportModule("emath._pydantic");
+    if (!emath_pydantic){ return 0; }
+
+    PyObject *core_schema = PyObject_GetAttrString(emath_pydantic, "DVector4Array__get_pydantic_core_schema__");
+    Py_DECREF(emath_pydantic);
+    if (!core_schema){ return 0; }
+
+    return PyObject_CallFunction(core_schema, "OO", py_source_type, py_handler);
+}
+
+
+static PyObject *
 DVector4Array_get_component_type(PyTypeObject *cls, PyObject *const *args, Py_ssize_t nargs)
 {
     if (nargs != 0)
@@ -2029,6 +2053,7 @@ DVector4Array_get_component_type(PyTypeObject *cls, PyObject *const *args, Py_ss
 static PyMethodDef DVector4Array_PyMethodDef[] = {
     {"from_buffer", (PyCFunction)DVector4Array_from_buffer, METH_O | METH_CLASS, 0},
     {"get_component_type", (PyCFunction)DVector4Array_get_component_type, METH_FASTCALL | METH_CLASS, 0},
+    {"__get_pydantic_core_schema__", (PyCFunction)DVector4Array_pydantic, METH_VARARGS | METH_KEYWORDS | METH_CLASS, 0},
     {0, 0, 0, 0}
 };
 

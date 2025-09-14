@@ -986,6 +986,28 @@ FMatrix2x4_get_array_type(PyTypeObject *cls, void*)
 }
 
 
+static PyObject *
+FMatrix2x4_pydantic(PyTypeObject *cls, PyObject *args, PyObject *kwargs)
+{
+    static char *keywords[] = {"source_type", "handler", 0};
+    PyObject *py_source_type = 0;
+    PyObject *py_handler = 0;
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, "OO", keywords, &py_source_type, &py_handler))
+    {
+        return 0;
+    }
+
+    PyObject *emath_pydantic = PyImport_ImportModule("emath._pydantic");
+    if (!emath_pydantic){ return 0; }
+
+    PyObject *core_schema = PyObject_GetAttrString(emath_pydantic, "FMatrix2x4__get_pydantic_core_schema__");
+    Py_DECREF(emath_pydantic);
+    if (!core_schema){ return 0; }
+
+    return PyObject_CallFunction(core_schema, "OO", py_source_type, py_handler);
+}
+
+
 static PyMethodDef FMatrix2x4_PyMethodDef[] = {
 
 
@@ -1000,6 +1022,7 @@ static PyMethodDef FMatrix2x4_PyMethodDef[] = {
     {"get_size", (PyCFunction)FMatrix2x4_get_size, METH_NOARGS | METH_STATIC, 0},
     {"get_array_type", (PyCFunction)FMatrix2x4_get_array_type, METH_NOARGS | METH_STATIC, 0},
     {"from_buffer", (PyCFunction)FMatrix2x4_from_buffer, METH_O | METH_CLASS, 0},
+    {"__get_pydantic_core_schema__", (PyCFunction)FMatrix2x4_pydantic, METH_VARARGS | METH_KEYWORDS | METH_CLASS, 0},
     {0, 0, 0, 0}
 };
 
@@ -1455,6 +1478,28 @@ FMatrix2x4Array_from_buffer(PyTypeObject *cls, PyObject *buffer)
 
 
 static PyObject *
+FMatrix2x4Array_pydantic(PyTypeObject *cls, PyObject *args, PyObject *kwargs)
+{
+    static char *keywords[] = {"source_type", "handler", 0};
+    PyObject *py_source_type = 0;
+    PyObject *py_handler = 0;
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, "OO", keywords, &py_source_type, &py_handler))
+    {
+        return 0;
+    }
+
+    PyObject *emath_pydantic = PyImport_ImportModule("emath._pydantic");
+    if (!emath_pydantic){ return 0; }
+
+    PyObject *core_schema = PyObject_GetAttrString(emath_pydantic, "FMatrix2x4Array__get_pydantic_core_schema__");
+    Py_DECREF(emath_pydantic);
+    if (!core_schema){ return 0; }
+
+    return PyObject_CallFunction(core_schema, "OO", py_source_type, py_handler);
+}
+
+
+static PyObject *
 FMatrix2x4Array_get_component_type(PyTypeObject *cls, PyObject *const *args, Py_ssize_t nargs)
 {
     if (nargs != 0)
@@ -1473,6 +1518,7 @@ FMatrix2x4Array_get_component_type(PyTypeObject *cls, PyObject *const *args, Py_
 static PyMethodDef FMatrix2x4Array_PyMethodDef[] = {
     {"from_buffer", (PyCFunction)FMatrix2x4Array_from_buffer, METH_O | METH_CLASS, 0},
     {"get_component_type", (PyCFunction)FMatrix2x4Array_get_component_type, METH_FASTCALL | METH_CLASS, 0},
+    {"__get_pydantic_core_schema__", (PyCFunction)FMatrix2x4Array_pydantic, METH_VARARGS | METH_KEYWORDS | METH_CLASS, 0},
     {0, 0, 0, 0}
 };
 

@@ -5,6 +5,8 @@ import struct
 from math import isclose as _isclose
 from weakref import ref
 
+import pydantic
+
 # pytest
 import pytest
 
@@ -218,6 +220,15 @@ class PodTest:
 
     def test_array_get_component_type(self) -> None:
         assert self.array_cls.get_component_type() is self.type
+
+    def test_array_pydantic(self) -> None:
+        class Model(pydantic.BaseModel):
+            arr: self.array_cls
+
+        model = Model(arr=self.array_cls(self.type(0), self.type(1)))
+        serialized = model.model_dump()
+        deserialized = Model.model_validate(serialized)
+        assert deserialized.arr == model.arr
 
 
 class TestB(PodTest, array_cls=BArray, type=bool, struct_format="?"):

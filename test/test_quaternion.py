@@ -10,6 +10,8 @@ from math import sqrt
 from typing import Final
 from weakref import ref
 
+import pydantic
+
 # pytest
 import pytest
 
@@ -735,6 +737,24 @@ class QuaternionTest:
 
     def test_array_get_component_type(self) -> None:
         assert self.array_cls.get_component_type() is self.cls
+
+    def test_pydantic(self) -> None:
+        class Model(pydantic.BaseModel):
+            quat: self.cls
+
+        model = Model(quat=self.cls(0))
+        serialized = model.model_dump()
+        deserialized = Model.model_validate(serialized)
+        assert deserialized.quat == model.quat
+
+    def test_array_pydantic(self) -> None:
+        class Model(pydantic.BaseModel):
+            arr: self.array_cls
+
+        model = Model(arr=self.array_cls(self.cls(0), self.cls(1)))
+        serialized = model.model_dump()
+        deserialized = Model.model_validate(serialized)
+        assert deserialized.arr == model.arr
 
 
 class TestFQuaternion(QuaternionTest, cls=FQuaternion, struct_format="f"):

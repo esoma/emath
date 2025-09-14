@@ -1299,6 +1299,15 @@ class VectorTest:
         deserialized = Model.model_validate(serialized)
         assert deserialized.vec == model.vec
 
+    def test_array_pydantic(self) -> None:
+        class Model(pydantic.BaseModel):
+            arr: self.array_cls
+
+        model = Model(arr=self.array_cls(self.cls(0), self.cls(1)))
+        serialized = model.model_dump()
+        deserialized = Model.model_validate(serialized)
+        assert deserialized.arr == model.arr
+
 
 class TestBVector1(VectorTest, cls=BVector1, component_count=1, type=bool, struct_format="?"):
     pass

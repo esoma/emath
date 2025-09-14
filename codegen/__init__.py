@@ -19,6 +19,7 @@ def generate_math_files(build_dir: Path, include_dir: Path, doc_dir: Path) -> No
     generate_modulestate_file(build_dir, vector_types + matrix_types + quaternion_types, pod_types)
     generate_math_file(build_dir, vector_types, matrix_types, quaternion_types, pod_types)
     generate_api_file(include_dir, vector_types, matrix_types, quaternion_types, pod_types)
+    generate_pydantic_file(build_dir, vector_types, matrix_types, quaternion_types, pod_types)
     generate_typestubs(build_dir, vector_types, matrix_types, quaternion_types, pod_types)
     generate_test_api_file(build_dir, vector_types, matrix_types, quaternion_types, pod_types)
     generate_api_doc_file(doc_dir, vector_types, matrix_types, quaternion_types, pod_types)
@@ -100,6 +101,26 @@ def generate_api_file(
 ) -> None:
     template = get_template("emath.h")
     with open(include_dir / f"emath.h", "w") as f:
+        f.write(
+            template.render(
+                vector_types=vector_types,
+                matrix_types=matrix_types,
+                quaternion_types=quaternion_types,
+                pod_types=pod_types,
+                when=datetime.utcnow(),
+            )
+        )
+
+
+def generate_pydantic_file(
+    build_dir: Path,
+    vector_types: Sequence[str],
+    matrix_types: Sequence[str],
+    quaternion_types: Sequence[str],
+    pod_types: Sequence[str],
+) -> None:
+    template = get_template("_pydantic.py")
+    with open(build_dir / f"_pydantic.py", "w") as f:
         f.write(
             template.render(
                 vector_types=vector_types,

@@ -9,6 +9,7 @@ from math import sqrt
 from typing import Final
 from weakref import ref
 
+import pydantic
 import pytest
 
 from emath import BVector1
@@ -1288,6 +1289,15 @@ class VectorTest:
 
             to_prefix = getattr(self.cls(1), f"to_{other_prefix.lower()}")
             assert to_prefix() == other_type(1)
+
+    def test_pydantic(self) -> None:
+        class Model(pydantic.BaseModel):
+            vec: self.cls
+
+        model = Model(vec=self.cls(0))
+        serialized = model.model_dump()
+        deserialized = Model.model_validate(serialized)
+        assert deserialized.vec == model.vec
 
 
 class TestBVector1(VectorTest, cls=BVector1, component_count=1, type=bool, struct_format="?"):

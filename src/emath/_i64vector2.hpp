@@ -1177,6 +1177,27 @@ I64Vector2_to_u64(I64Vector2 *self, void *)
 }
 
 
+static PyObject *
+I64Vector2_pydantic(PyTypeObject *cls, PyObject *args, PyObject *kwargs)
+{
+    static char *keywords[] = {"source_type", "handler", 0};
+    PyObject *py_source_type = 0;
+    PyObject *py_handler = 0;
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, "OO", keywords, &py_source_type, &py_handler))
+    {
+        return 0;
+    }
+
+    PyObject *emath_pydantic = PyImport_ImportModule("emath._pydantic");
+    if (!emath_pydantic){ return 0; }
+
+    PyObject *core_schema = PyObject_GetAttrString(emath_pydantic, "I64Vector2__get_pydantic_core_schema__");
+    Py_DECREF(emath_pydantic);
+    if (!core_schema){ return 0; }
+
+    return PyObject_CallFunction(core_schema, "OO", py_source_type, py_handler);
+}
+
 
 static PyMethodDef I64Vector2_PyMethodDef[] = {
 
@@ -1212,6 +1233,7 @@ static PyMethodDef I64Vector2_PyMethodDef[] = {
 
         {"to_u64", (PyCFunction)I64Vector2_to_u64, METH_NOARGS, 0},
 
+    {"__get_pydantic_core_schema__", (PyCFunction)I64Vector2_pydantic, METH_VARARGS | METH_KEYWORDS | METH_CLASS, 0},
     {0, 0, 0, 0}
 };
 

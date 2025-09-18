@@ -43,6 +43,14 @@ Python API
 
         Slice the array, generating a new one.
 
+    .. py:method:: count(value: U16Vector4) -> int
+
+        Return the number of occurrences of the given vector in the array.
+
+    .. py:method:: index(value: U16Vector4, start: int = 0, stop: int | None = None) -> int
+
+        Return the first index of the given vector. Raise :code:`ValueError` if not present.
+
 
     .. py:method:: __eq__(other: Any) -> bool
 

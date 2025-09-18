@@ -81,9 +81,28 @@ class QuaternionTest:
         for i in range(10):
             array = self.array_cls(*(self.cls(j) for j in range(i)))
             assert len(array) == i
+            assert array.count() == i
             for j, quat in enumerate(array):
                 assert isinstance(quat, self.cls)
                 assert quat == self.cls(j)
+
+    def test_array_index(self) -> None:
+        empty_array = self.array_cls()
+        with pytest.raises(ValueError) as excinfo:
+            empty_array.index(self.cls(0))
+        assert str(excinfo.value) == "value is not in array"
+
+        array = self.array_cls(self.cls(0), self.cls(1), self.cls(0), self.cls(1))
+        assert array.index(self.cls(0)) == 0
+        assert array.index(self.cls(1)) == 1
+        assert array.index(self.cls(0), 1) == 2
+        assert array.index(self.cls(0), 1, 3) == 2
+        assert array.index(self.cls(1), 2) == 3
+        assert array.index(self.cls(1), 2, 4) == 3
+        assert array.index(self.cls(0), start=-2) == 2
+        assert array.index(self.cls(1), start=-2) == 3
+        assert array.index(self.cls(0), start=-2, stop=-1) == 2
+        assert array.index(self.cls(1), start=-2, stop=4) == 3
 
     def test_invalid_arg_count(self) -> None:
         with pytest.raises(TypeError) as excinfo:

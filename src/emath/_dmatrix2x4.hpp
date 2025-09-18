@@ -1515,7 +1515,69 @@ DMatrix2x4Array_get_component_type(PyTypeObject *cls, PyObject *const *args, Py_
 }
 
 
+static PyObject *
+DMatrix2x4Array_count(DMatrix2x4Array *self, PyObject *unused)
+{
+    return PyLong_FromSize_t(self->length);
+}
+
+
+static PyObject *
+DMatrix2x4Array_index(DMatrix2x4Array *self, PyObject *args, PyObject *kwargs)
+{
+    static char *keywords[] = {"value", "start", "stop", 0};
+
+    auto module_state = get_module_state();
+    if (!module_state){ return 0; }
+    auto element_cls = module_state->DMatrix2x4_PyTypeObject;
+
+    PyObject *value = 0;
+    Py_ssize_t start = 0;
+    Py_ssize_t stop = (Py_ssize_t)self->length;
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, "O|nn:index", keywords, &value, &start, &stop))
+    {
+        return 0;
+    }
+
+    if (Py_TYPE(value) != element_cls)
+    {
+        PyErr_Format(
+            PyExc_TypeError,
+            "invalid type %R, expected %R",
+            value,
+            element_cls
+        );
+        return 0;
+    }
+    auto needle = *(((DMatrix2x4*)value)->glm);
+
+    if (start < 0)
+    {
+        start = (Py_ssize_t)self->length + start;
+    }
+    if (stop < 0)
+    {
+        stop = (Py_ssize_t)self->length + stop;
+    }
+    if (start < 0){ start = 0; }
+    if (stop > (Py_ssize_t)self->length){ stop = (Py_ssize_t)self->length; }
+
+    for (Py_ssize_t i = start; i < stop; i++)
+    {
+        if (self->glm[i] == needle)
+        {
+            return PyLong_FromSsize_t(i);
+        }
+    }
+
+    PyErr_SetString(PyExc_ValueError, "value is not in array");
+    return 0;
+}
+
+
 static PyMethodDef DMatrix2x4Array_PyMethodDef[] = {
+    {"count", (PyCFunction)DMatrix2x4Array_count, METH_NOARGS, 0},
+    {"index", (PyCFunction)DMatrix2x4Array_index, METH_VARARGS | METH_KEYWORDS, 0},
     {"from_buffer", (PyCFunction)DMatrix2x4Array_from_buffer, METH_O | METH_CLASS, 0},
     {"get_component_type", (PyCFunction)DMatrix2x4Array_get_component_type, METH_FASTCALL | METH_CLASS, 0},
     {"__get_pydantic_core_schema__", (PyCFunction)DMatrix2x4Array_pydantic, METH_VARARGS | METH_KEYWORDS | METH_CLASS, 0},

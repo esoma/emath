@@ -386,9 +386,28 @@ IArray_from_buffer(PyTypeObject *cls, PyObject *buffer)
 
 
 static PyObject *
-IArray_count(IArray *self, PyObject *unused)
+IArray_count(IArray *self, PyObject *value)
 {
-    return PyLong_FromSize_t(self->length);
+    int needle = pyobject_to_c_int(value);
+    if (PyErr_Occurred())
+    {
+        PyErr_Format(
+            PyExc_TypeError,
+            "invalid type %R, expected int",
+            value
+        );
+        return 0;
+    }
+
+    size_t count = 0;
+    for (size_t i = 0; i < self->length; i++)
+    {
+        if (self->pod[i] == needle)
+        {
+            count++;
+        }
+    }
+    return PyLong_FromSize_t(count);
 }
 
 
@@ -477,7 +496,7 @@ IArray_get_component_type(PyTypeObject *cls, PyObject *const *args, Py_ssize_t n
 
 
 static PyMethodDef IArray_PyMethodDef[] = {
-    {"count", (PyCFunction)IArray_count, METH_NOARGS, 0},
+    {"count", (PyCFunction)IArray_count, METH_O, 0},
     {"index", (PyCFunction)IArray_index, METH_VARARGS | METH_KEYWORDS, 0},
     {"from_buffer", (PyCFunction)IArray_from_buffer, METH_O | METH_CLASS, 0},
     {"get_component_type", (PyCFunction)IArray_get_component_type, METH_FASTCALL | METH_CLASS, 0},

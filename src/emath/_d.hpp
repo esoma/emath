@@ -386,9 +386,28 @@ DArray_from_buffer(PyTypeObject *cls, PyObject *buffer)
 
 
 static PyObject *
-DArray_count(DArray *self, PyObject *unused)
+DArray_count(DArray *self, PyObject *value)
 {
-    return PyLong_FromSize_t(self->length);
+    double needle = pyobject_to_c_double(value);
+    if (PyErr_Occurred())
+    {
+        PyErr_Format(
+            PyExc_TypeError,
+            "invalid type %R, expected double",
+            value
+        );
+        return 0;
+    }
+
+    size_t count = 0;
+    for (size_t i = 0; i < self->length; i++)
+    {
+        if (self->pod[i] == needle)
+        {
+            count++;
+        }
+    }
+    return PyLong_FromSize_t(count);
 }
 
 
@@ -477,7 +496,7 @@ DArray_get_component_type(PyTypeObject *cls, PyObject *const *args, Py_ssize_t n
 
 
 static PyMethodDef DArray_PyMethodDef[] = {
-    {"count", (PyCFunction)DArray_count, METH_NOARGS, 0},
+    {"count", (PyCFunction)DArray_count, METH_O, 0},
     {"index", (PyCFunction)DArray_index, METH_VARARGS | METH_KEYWORDS, 0},
     {"from_buffer", (PyCFunction)DArray_from_buffer, METH_O | METH_CLASS, 0},
     {"get_component_type", (PyCFunction)DArray_get_component_type, METH_FASTCALL | METH_CLASS, 0},

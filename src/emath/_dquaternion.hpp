@@ -1266,9 +1266,33 @@ DQuaternionArray_get_component_type(PyTypeObject *cls, PyObject *const *args, Py
 
 
 static PyObject *
-DQuaternionArray_count(DQuaternionArray *self, PyObject *unused)
+DQuaternionArray_count(DQuaternionArray *self, PyObject *value)
 {
-    return PyLong_FromSize_t(self->length);
+    auto module_state = get_module_state();
+    if (!module_state){ return 0; }
+    auto element_cls = module_state->DQuaternion_PyTypeObject;
+
+    if (Py_TYPE(value) != element_cls)
+    {
+        PyErr_Format(
+            PyExc_TypeError,
+            "invalid type %R, expected %R",
+            value,
+            element_cls
+        );
+        return 0;
+    }
+    auto needle = *(((DQuaternion*)value)->glm);
+
+    size_t count = 0;
+    for (size_t i = 0; i < self->length; i++)
+    {
+        if (self->glm[i] == needle)
+        {
+            count++;
+        }
+    }
+    return PyLong_FromSize_t(count);
 }
 
 
@@ -1325,7 +1349,7 @@ DQuaternionArray_index(DQuaternionArray *self, PyObject *args, PyObject *kwargs)
 }
 
 static PyMethodDef DQuaternionArray_PyMethodDef[] = {
-    {"count", (PyCFunction)DQuaternionArray_count, METH_NOARGS, 0},
+    {"count", (PyCFunction)DQuaternionArray_count, METH_O, 0},
     {"index", (PyCFunction)DQuaternionArray_index, METH_VARARGS | METH_KEYWORDS, 0},
     {"from_buffer", (PyCFunction)DQuaternionArray_from_buffer, METH_O | METH_CLASS, 0},
     {"get_component_type", (PyCFunction)DQuaternionArray_get_component_type, METH_FASTCALL | METH_CLASS, 0},

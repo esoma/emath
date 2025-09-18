@@ -1603,9 +1603,33 @@ DMatrix3x3Array_get_component_type(PyTypeObject *cls, PyObject *const *args, Py_
 
 
 static PyObject *
-DMatrix3x3Array_count(DMatrix3x3Array *self, PyObject *unused)
+DMatrix3x3Array_count(DMatrix3x3Array *self, PyObject *value)
 {
-    return PyLong_FromSize_t(self->length);
+    auto module_state = get_module_state();
+    if (!module_state){ return 0; }
+    auto element_cls = module_state->DMatrix3x3_PyTypeObject;
+
+    if (Py_TYPE(value) != element_cls)
+    {
+        PyErr_Format(
+            PyExc_TypeError,
+            "invalid type %R, expected %R",
+            value,
+            element_cls
+        );
+        return 0;
+    }
+    auto needle = *(((DMatrix3x3*)value)->glm);
+
+    size_t count = 0;
+    for (size_t i = 0; i < self->length; i++)
+    {
+        if (self->glm[i] == needle)
+        {
+            count++;
+        }
+    }
+    return PyLong_FromSize_t(count);
 }
 
 
@@ -1663,7 +1687,7 @@ DMatrix3x3Array_index(DMatrix3x3Array *self, PyObject *args, PyObject *kwargs)
 
 
 static PyMethodDef DMatrix3x3Array_PyMethodDef[] = {
-    {"count", (PyCFunction)DMatrix3x3Array_count, METH_NOARGS, 0},
+    {"count", (PyCFunction)DMatrix3x3Array_count, METH_O, 0},
     {"index", (PyCFunction)DMatrix3x3Array_index, METH_VARARGS | METH_KEYWORDS, 0},
     {"from_buffer", (PyCFunction)DMatrix3x3Array_from_buffer, METH_O | METH_CLASS, 0},
     {"get_component_type", (PyCFunction)DMatrix3x3Array_get_component_type, METH_FASTCALL | METH_CLASS, 0},

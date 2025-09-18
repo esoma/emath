@@ -386,9 +386,28 @@ I8Array_from_buffer(PyTypeObject *cls, PyObject *buffer)
 
 
 static PyObject *
-I8Array_count(I8Array *self, PyObject *unused)
+I8Array_count(I8Array *self, PyObject *value)
 {
-    return PyLong_FromSize_t(self->length);
+    int8_t needle = pyobject_to_c_int8_t(value);
+    if (PyErr_Occurred())
+    {
+        PyErr_Format(
+            PyExc_TypeError,
+            "invalid type %R, expected int8_t",
+            value
+        );
+        return 0;
+    }
+
+    size_t count = 0;
+    for (size_t i = 0; i < self->length; i++)
+    {
+        if (self->pod[i] == needle)
+        {
+            count++;
+        }
+    }
+    return PyLong_FromSize_t(count);
 }
 
 
@@ -477,7 +496,7 @@ I8Array_get_component_type(PyTypeObject *cls, PyObject *const *args, Py_ssize_t 
 
 
 static PyMethodDef I8Array_PyMethodDef[] = {
-    {"count", (PyCFunction)I8Array_count, METH_NOARGS, 0},
+    {"count", (PyCFunction)I8Array_count, METH_O, 0},
     {"index", (PyCFunction)I8Array_index, METH_VARARGS | METH_KEYWORDS, 0},
     {"from_buffer", (PyCFunction)I8Array_from_buffer, METH_O | METH_CLASS, 0},
     {"get_component_type", (PyCFunction)I8Array_get_component_type, METH_FASTCALL | METH_CLASS, 0},

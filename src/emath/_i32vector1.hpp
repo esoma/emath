@@ -1636,9 +1636,33 @@ I32Vector1Array_get_component_type(PyTypeObject *cls, PyObject *const *args, Py_
 
 
 static PyObject *
-I32Vector1Array_count(I32Vector1Array *self, PyObject *unused)
+I32Vector1Array_count(I32Vector1Array *self, PyObject *value)
 {
-    return PyLong_FromSize_t(self->length);
+    auto module_state = get_module_state();
+    if (!module_state){ return 0; }
+    auto element_cls = module_state->I32Vector1_PyTypeObject;
+
+    if (Py_TYPE(value) != element_cls)
+    {
+        PyErr_Format(
+            PyExc_TypeError,
+            "invalid type %R, expected %R",
+            value,
+            element_cls
+        );
+        return 0;
+    }
+    auto needle = ((I32Vector1*)value)->glm;
+
+    size_t count = 0;
+    for (size_t i = 0; i < self->length; i++)
+    {
+        if (self->glm[i] == needle)
+        {
+            count++;
+        }
+    }
+    return PyLong_FromSize_t(count);
 }
 
 
@@ -1696,7 +1720,7 @@ I32Vector1Array_index(I32Vector1Array *self, PyObject *args, PyObject *kwargs)
 
 
 static PyMethodDef I32Vector1Array_PyMethodDef[] = {
-    {"count", (PyCFunction)I32Vector1Array_count, METH_NOARGS, 0},
+    {"count", (PyCFunction)I32Vector1Array_count, METH_O, 0},
     {"index", (PyCFunction)I32Vector1Array_index, METH_VARARGS | METH_KEYWORDS, 0},
     {"from_buffer", (PyCFunction)I32Vector1Array_from_buffer, METH_O | METH_CLASS, 0},
     {"get_component_type", (PyCFunction)I32Vector1Array_get_component_type, METH_FASTCALL | METH_CLASS, 0},

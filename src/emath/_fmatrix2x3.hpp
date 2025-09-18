@@ -1458,9 +1458,33 @@ FMatrix2x3Array_get_component_type(PyTypeObject *cls, PyObject *const *args, Py_
 
 
 static PyObject *
-FMatrix2x3Array_count(FMatrix2x3Array *self, PyObject *unused)
+FMatrix2x3Array_count(FMatrix2x3Array *self, PyObject *value)
 {
-    return PyLong_FromSize_t(self->length);
+    auto module_state = get_module_state();
+    if (!module_state){ return 0; }
+    auto element_cls = module_state->FMatrix2x3_PyTypeObject;
+
+    if (Py_TYPE(value) != element_cls)
+    {
+        PyErr_Format(
+            PyExc_TypeError,
+            "invalid type %R, expected %R",
+            value,
+            element_cls
+        );
+        return 0;
+    }
+    auto needle = *(((FMatrix2x3*)value)->glm);
+
+    size_t count = 0;
+    for (size_t i = 0; i < self->length; i++)
+    {
+        if (self->glm[i] == needle)
+        {
+            count++;
+        }
+    }
+    return PyLong_FromSize_t(count);
 }
 
 
@@ -1518,7 +1542,7 @@ FMatrix2x3Array_index(FMatrix2x3Array *self, PyObject *args, PyObject *kwargs)
 
 
 static PyMethodDef FMatrix2x3Array_PyMethodDef[] = {
-    {"count", (PyCFunction)FMatrix2x3Array_count, METH_NOARGS, 0},
+    {"count", (PyCFunction)FMatrix2x3Array_count, METH_O, 0},
     {"index", (PyCFunction)FMatrix2x3Array_index, METH_VARARGS | METH_KEYWORDS, 0},
     {"from_buffer", (PyCFunction)FMatrix2x3Array_from_buffer, METH_O | METH_CLASS, 0},
     {"get_component_type", (PyCFunction)FMatrix2x3Array_get_component_type, METH_FASTCALL | METH_CLASS, 0},

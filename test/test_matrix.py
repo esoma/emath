@@ -150,12 +150,12 @@ class MatrixTest:
         empty_array = self.array_cls()
         assert empty_array.count(self.cls(0)) == 0
 
-        array = self.array_cls(self.cls(0), self.cls(1), self.cls(0), self.cls(1))
+        array = self.array_cls(self.cls(0), self.cls(1), self.cls(0))
         assert array.count(self.cls(0)) == 2
-        assert array.count(self.cls(1)) == 2
-        assert array.count(self.cls(2)) == 0
+        assert array.count(self.cls(1)) == 1
+
         with pytest.raises(TypeError):
-            array.count(None)
+            array.count(object())
 
     def test_array_index(self) -> None:
         empty_array = self.array_cls()

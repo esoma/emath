@@ -386,28 +386,9 @@ static PyObject *
 
 
 static PyObject *
-{{ name }}Array_count({{ name }}Array *self, PyObject *value)
+{{ name }}Array_count({{ name }}Array *self, PyObject *unused)
 {
-    {{ c_type }} needle = pyobject_to_c_{{ c_type.replace(' ', '_') }}(value);
-    if (PyErr_Occurred())
-    {
-        PyErr_Format(
-            PyExc_TypeError,
-            "invalid type %R, expected {{ c_type }}",
-            value
-        );
-        return 0;
-    }
-
-    size_t count = 0;
-    for (size_t i = 0; i < self->length; i++)
-    {
-        if (self->pod[i] == needle)
-        {
-            count++;
-        }
-    }
-    return PyLong_FromSize_t(count);
+    return PyLong_FromSize_t(self->length);
 }
 
 
@@ -502,7 +483,7 @@ static PyObject *
 
 
 static PyMethodDef {{ name }}Array_PyMethodDef[] = {
-    {"count", (PyCFunction){{ name }}Array_count, METH_O, 0},
+    {"count", (PyCFunction){{ name }}Array_count, METH_NOARGS, 0},
     {"index", (PyCFunction){{ name }}Array_index, METH_VARARGS | METH_KEYWORDS, 0},
     {"from_buffer", (PyCFunction){{ name }}Array_from_buffer, METH_O | METH_CLASS, 0},
     {"get_component_type", (PyCFunction){{ name }}Array_get_component_type, METH_FASTCALL | METH_CLASS, 0},

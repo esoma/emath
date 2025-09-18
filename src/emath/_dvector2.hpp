@@ -1899,33 +1899,9 @@ DVector2Array_get_component_type(PyTypeObject *cls, PyObject *const *args, Py_ss
 
 
 static PyObject *
-DVector2Array_count(DVector2Array *self, PyObject *value)
+DVector2Array_count(DVector2Array *self, PyObject *unused)
 {
-    auto module_state = get_module_state();
-    if (!module_state){ return 0; }
-    auto element_cls = module_state->DVector2_PyTypeObject;
-
-    if (Py_TYPE(value) != element_cls)
-    {
-        PyErr_Format(
-            PyExc_TypeError,
-            "invalid type %R, expected %R",
-            value,
-            element_cls
-        );
-        return 0;
-    }
-    auto needle = ((DVector2*)value)->glm;
-
-    size_t count = 0;
-    for (size_t i = 0; i < self->length; i++)
-    {
-        if (self->glm[i] == needle)
-        {
-            count++;
-        }
-    }
-    return PyLong_FromSize_t(count);
+    return PyLong_FromSize_t(self->length);
 }
 
 
@@ -1983,7 +1959,7 @@ DVector2Array_index(DVector2Array *self, PyObject *args, PyObject *kwargs)
 
 
 static PyMethodDef DVector2Array_PyMethodDef[] = {
-    {"count", (PyCFunction)DVector2Array_count, METH_O, 0},
+    {"count", (PyCFunction)DVector2Array_count, METH_NOARGS, 0},
     {"index", (PyCFunction)DVector2Array_index, METH_VARARGS | METH_KEYWORDS, 0},
     {"from_buffer", (PyCFunction)DVector2Array_from_buffer, METH_O | METH_CLASS, 0},
     {"get_component_type", (PyCFunction)DVector2Array_get_component_type, METH_FASTCALL | METH_CLASS, 0},

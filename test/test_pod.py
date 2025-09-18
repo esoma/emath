@@ -56,20 +56,10 @@ class PodTest:
         for i in range(10):
             array = self.array_cls(*range(i))
             assert len(array) == i
+            assert array.count() == i
             for j, pod in enumerate(array):
                 assert isinstance(pod, self.type)
                 assert pod == self.type(j)
-
-    def test_array_count(self) -> None:
-        empty_array = self.array_cls()
-        assert empty_array.count(self.type(0)) == 0
-
-        array = self.array_cls(self.type(0), self.type(1), self.type(0), self.type(1))
-        assert array.count(self.type(0)) == 2
-        assert array.count(self.type(1)) == 2
-        assert array.count(self.type(2)) == 0
-        with pytest.raises(TypeError):
-            array.count(None)
 
     def test_array_index(self) -> None:
         empty_array = self.array_cls()

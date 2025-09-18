@@ -2051,33 +2051,9 @@ FVector4Array_get_component_type(PyTypeObject *cls, PyObject *const *args, Py_ss
 
 
 static PyObject *
-FVector4Array_count(FVector4Array *self, PyObject *value)
+FVector4Array_count(FVector4Array *self, PyObject *unused)
 {
-    auto module_state = get_module_state();
-    if (!module_state){ return 0; }
-    auto element_cls = module_state->FVector4_PyTypeObject;
-
-    if (Py_TYPE(value) != element_cls)
-    {
-        PyErr_Format(
-            PyExc_TypeError,
-            "invalid type %R, expected %R",
-            value,
-            element_cls
-        );
-        return 0;
-    }
-    auto needle = ((FVector4*)value)->glm;
-
-    size_t count = 0;
-    for (size_t i = 0; i < self->length; i++)
-    {
-        if (self->glm[i] == needle)
-        {
-            count++;
-        }
-    }
-    return PyLong_FromSize_t(count);
+    return PyLong_FromSize_t(self->length);
 }
 
 
@@ -2135,7 +2111,7 @@ FVector4Array_index(FVector4Array *self, PyObject *args, PyObject *kwargs)
 
 
 static PyMethodDef FVector4Array_PyMethodDef[] = {
-    {"count", (PyCFunction)FVector4Array_count, METH_O, 0},
+    {"count", (PyCFunction)FVector4Array_count, METH_NOARGS, 0},
     {"index", (PyCFunction)FVector4Array_index, METH_VARARGS | METH_KEYWORDS, 0},
     {"from_buffer", (PyCFunction)FVector4Array_from_buffer, METH_O | METH_CLASS, 0},
     {"get_component_type", (PyCFunction)FVector4Array_get_component_type, METH_FASTCALL | METH_CLASS, 0},

@@ -386,60 +386,6 @@ I8Array_from_buffer(PyTypeObject *cls, PyObject *buffer)
 
 
 static PyObject *
-I8Array_count(I8Array *self, PyObject *unused)
-{
-    return PyLong_FromSize_t(self->length);
-}
-
-
-static PyObject *
-I8Array_index(I8Array *self, PyObject *args, PyObject *kwargs)
-{
-    static char *keywords[] = {"value", "start", "stop", 0};
-
-    PyObject *value = 0;
-    Py_ssize_t start = 0;
-    Py_ssize_t stop = (Py_ssize_t)self->length;
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, "O|nn:index", keywords, &value, &start, &stop))
-    {
-        return 0;
-    }
-
-    int8_t needle = pyobject_to_c_int8_t(value);
-    if (PyErr_Occurred())
-    {
-        PyErr_Format(
-            PyExc_TypeError,
-            "invalid type %R, expected int8_t",
-            value
-        );
-        return 0;
-    }
-
-    if (start < 0)
-    {
-        start = (Py_ssize_t)self->length + start;
-    }
-    if (stop < 0)
-    {
-        stop = (Py_ssize_t)self->length + stop;
-    }
-    if (start < 0){ start = 0; }
-    if (stop > (Py_ssize_t)self->length){ stop = (Py_ssize_t)self->length; }
-
-    for (Py_ssize_t i = start; i < stop; i++)
-    {
-        if (self->pod[i] == needle)
-        {
-            return PyLong_FromSsize_t(i);
-        }
-    }
-
-    PyErr_SetString(PyExc_ValueError, "value is not in array");
-    return 0;
-}
-
-static PyObject *
 I8Array_pydantic(PyTypeObject *cls, PyObject *args, PyObject *kwargs)
 {
     static char *keywords[] = {"source_type", "handler", 0};
@@ -477,8 +423,6 @@ I8Array_get_component_type(PyTypeObject *cls, PyObject *const *args, Py_ssize_t 
 
 
 static PyMethodDef I8Array_PyMethodDef[] = {
-    {"count", (PyCFunction)I8Array_count, METH_NOARGS, 0},
-    {"index", (PyCFunction)I8Array_index, METH_VARARGS | METH_KEYWORDS, 0},
     {"from_buffer", (PyCFunction)I8Array_from_buffer, METH_O | METH_CLASS, 0},
     {"get_component_type", (PyCFunction)I8Array_get_component_type, METH_FASTCALL | METH_CLASS, 0},
     {"__get_pydantic_core_schema__", (PyCFunction)I8Array_pydantic, METH_VARARGS | METH_KEYWORDS | METH_CLASS, 0},

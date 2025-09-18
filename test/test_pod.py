@@ -56,28 +56,9 @@ class PodTest:
         for i in range(10):
             array = self.array_cls(*range(i))
             assert len(array) == i
-            assert array.count() == i
             for j, pod in enumerate(array):
                 assert isinstance(pod, self.type)
                 assert pod == self.type(j)
-
-    def test_array_index(self) -> None:
-        empty_array = self.array_cls()
-        with pytest.raises(ValueError) as excinfo:
-            empty_array.index(self.type(0))
-        assert str(excinfo.value) == "value is not in array"
-
-        array = self.array_cls(self.type(0), self.type(1), self.type(0), self.type(1))
-        assert array.index(self.type(0)) == 0
-        assert array.index(self.type(1)) == 1
-        assert array.index(self.type(0), 1) == 2
-        assert array.index(self.type(0), 1, 3) == 2
-        assert array.index(self.type(1), 2) == 3
-        assert array.index(self.type(1), 2, 4) == 3
-        assert array.index(self.type(0), start=-2) == 2
-        assert array.index(self.type(1), start=-2) == 3
-        assert array.index(self.type(0), start=-2, stop=-1) == 2
-        assert array.index(self.type(1), start=-2, stop=4) == 3
 
     def test_array_init_invalid_type(self):
         if self.type is bool:

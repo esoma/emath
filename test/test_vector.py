@@ -1233,6 +1233,28 @@ class VectorTest:
             with pytest.raises(BufferError):
                 self.array_cls.from_buffer(b"\x00")
 
+    @pytest.mark.parametrize("padding_size", [1, 4])
+    @pytest.mark.parametrize("dangling_padding", [False, True])
+    def test_from_array_buffer_stride(self, padding_size, dangling_padding) -> None:
+        element_size = self.cls.get_size()
+        stride = element_size + padding_size
+
+        a = self.array_cls(self.cls(1), self.cls(*range(self.component_count)))
+        ba = bytearray()
+        ba.extend(bytes(a[0]))
+        ba.extend(b"\x00" * padding_size)
+        ba.extend(bytes(a[1]))
+        if dangling_padding:
+            ba.extend(b"\x00" * padding_size)
+        result = self.array_cls.from_buffer(ba, stride=stride)
+        assert isinstance(result, self.array_cls)
+        assert result == a
+
+        if dangling_padding and element_size != 1:
+            ba.extend(b"\x00")
+            with pytest.raises(BufferError):
+                self.array_cls.from_buffer(ba, stride=stride)
+
     def test_min(self) -> None:
         assert self.cls(1).min(0) == self.cls(0)
         assert self.cls(1).min(1) == self.cls(1)

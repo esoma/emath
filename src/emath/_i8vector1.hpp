@@ -1562,19 +1562,64 @@ static PyGetSetDef I8Vector1Array_PyGetSetDef[] = {
 
 
 static PyObject *
-I8Vector1Array_from_buffer(PyTypeObject *cls, PyObject *buffer)
+I8Vector1Array_from_buffer(PyTypeObject *cls, PyObject *args, PyObject *kwargs)
 {
+    static char *keywords[] = {"buffer", "stride", 0};
+    PyObject *buffer = 0;
+    PyObject *py_stride = 0;
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, "O|O", keywords, &buffer, &py_stride))
+    {
+        return 0;
+    }
+
     static Py_ssize_t expected_size = sizeof(int8_t);
+    static Py_ssize_t element_size = sizeof(int8_t) * 1;
+
+    Py_ssize_t stride = element_size;
+    if (py_stride != 0)
+    {
+        if (!PyLong_Check(py_stride))
+        {
+            PyErr_SetString(PyExc_TypeError, "stride must be an integer");
+            return 0;
+        }
+        stride = PyLong_AsSsize_t(py_stride);
+        if (stride == -1 && PyErr_Occurred())
+        {
+            return 0;
+        }
+        if (stride < 1)
+        {
+            stride = element_size;
+        }
+    }
+
     Py_buffer view;
     if (PyObject_GetBuffer(buffer, &view, PyBUF_SIMPLE) == -1){ return 0; }
     auto view_length = view.len;
-    if (view_length % (sizeof(int8_t) * 1))
+
+    Py_ssize_t array_length;
+    if (stride == element_size)
     {
-        PyBuffer_Release(&view);
-        PyErr_Format(PyExc_BufferError, "expected buffer evenly divisible by %zd, got %zd", sizeof(int8_t), view_length);
-        return 0;
+        if (view_length % element_size)
+        {
+            PyBuffer_Release(&view);
+            PyErr_Format(PyExc_BufferError, "expected buffer evenly divisible by %zd, got %zd", element_size, view_length);
+            return 0;
+        }
+        array_length = view_length / element_size;
     }
-    auto array_length = view_length / (sizeof(int8_t) * 1);
+    else
+    {
+        Py_ssize_t remainder = view_length % stride;
+        if (remainder != 0 && remainder != element_size)
+        {
+            PyBuffer_Release(&view);
+            PyErr_Format(PyExc_BufferError, "expected buffer evenly divisible by %zd, got %zd", element_size, view_length);
+            return 0;
+        }
+        array_length = view_length / stride + (view_length % stride) / element_size;
+    }
 
     auto *result = (I8Vector1Array *)cls->tp_alloc(cls, 0);
     if (!result)
@@ -1586,7 +1631,19 @@ I8Vector1Array_from_buffer(PyTypeObject *cls, PyObject *buffer)
     if (array_length > 0)
     {
         result->glm = new I8Vector1Glm[array_length];
-        std::memcpy(result->glm, view.buf, view_length);
+        if (stride == element_size)
+        {
+            std::memcpy(result->glm, view.buf, view_length);
+        }
+        else
+        {
+            char *src = (char *)view.buf;
+            I8Vector1Glm *dst = result->glm;
+            for (Py_ssize_t i = 0; i < array_length; ++i)
+            {
+                std::memcpy(dst + i, src + i * stride, element_size);
+            }
+        }
     }
     else
     {
@@ -1636,7 +1693,7 @@ I8Vector1Array_get_component_type(PyTypeObject *cls, PyObject *const *args, Py_s
 
 
 static PyMethodDef I8Vector1Array_PyMethodDef[] = {
-    {"from_buffer", (PyCFunction)I8Vector1Array_from_buffer, METH_O | METH_CLASS, 0},
+    {"from_buffer", (PyCFunction)I8Vector1Array_from_buffer, METH_VARARGS | METH_KEYWORDS | METH_CLASS, 0},
     {"get_component_type", (PyCFunction)I8Vector1Array_get_component_type, METH_FASTCALL | METH_CLASS, 0},
     {"__get_pydantic_core_schema__", (PyCFunction)I8Vector1Array_pydantic, METH_VARARGS | METH_KEYWORDS | METH_CLASS, 0},
     {0, 0, 0, 0}

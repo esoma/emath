@@ -218,6 +218,28 @@ class PodTest:
             with pytest.raises(BufferError):
                 self.array_cls.from_buffer(b"\x00")
 
+    @pytest.mark.parametrize("padding_size", [1, 4])
+    @pytest.mark.parametrize("dangling_padding", [False, True])
+    def test_from_array_buffer_stride(self, padding_size, dangling_padding) -> None:
+        element_size = struct.calcsize(self.struct_byte_order + self.struct_format)
+        stride = element_size + padding_size
+
+        a = self.array_cls(1, 2)
+        ba = bytearray()
+        ba.extend(struct.pack(self.struct_byte_order + self.struct_format, a[0]))
+        ba.extend(b"\x00" * padding_size)
+        ba.extend(struct.pack(self.struct_byte_order + self.struct_format, a[1]))
+        if dangling_padding:
+            ba.extend(b"\x00" * padding_size)
+        result = self.array_cls.from_buffer(ba, stride=stride)
+        assert isinstance(result, self.array_cls)
+        assert result == a
+
+        if dangling_padding and element_size != 1:
+            ba.extend(b"\x00")
+            with pytest.raises(BufferError):
+                self.array_cls.from_buffer(ba, stride=stride)
+
     def test_array_get_component_type(self) -> None:
         assert self.array_cls.get_component_type() is self.type
 
